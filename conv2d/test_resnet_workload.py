@@ -1,5 +1,3 @@
-import logging
-import math
 import tvm
 import re
 from tvm import relay
@@ -11,8 +9,6 @@ from tvm.contrib.cutlass import (
     build_cutlass_kernels,
     build_cutlass_kernels_vm,
 )
-
-logging.basicConfig(level=logging.INFO)
 
 
 def has_cublas():
@@ -50,22 +46,6 @@ def get_output(rt_mod, names, inputs):
 def get_output_vm(vm, names, inputs):
     params = dict(zip(names, inputs))
     return vm.invoke("main", **params).numpy()
-
-
-def get_conv2d_nchw(d_shape, w_shape, out_dtype="float16"):
-    data = relay.var("data", shape=d_shape, dtype="float16")
-    weight = relay.var("weight", shape=w_shape, dtype="float16")
-    out_channel = w_shape[0]
-    return tvm.IRModule.from_expr(
-        relay.nn.conv2d(
-            data=data,
-            weight=weight,
-            kernel_size=(3, 3),
-            channels=out_channel,
-            padding=(1, 1),
-            out_dtype=out_dtype,
-        )
-    )
 
 
 def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so"):
@@ -170,20 +150,49 @@ def get_workloads():
                     "s": groups[6],
                     "pad_h": groups[7],
                     "pad_w": groups[8],
-                    "strided_h": groups[9],
-                    "strided_w": groups[10],
+                    "stride_h": groups[9],
+                    "stride_w": groups[10],
                 }
             )
 
     return workloads
 
 
-def test_conv2d():
-    d_shape = (8, 128, 224, 224)
-    w_shape = (128, 128, 3, 3)
+def get_conv2d_nchw(
+    d_shape, w_shape, pad_h, pad_w, stride_h, stride_w, out_dtype="float16"
+):
+    data = relay.var("data", shape=d_shape, dtype="float16")
+    weight = relay.var("weight", shape=w_shape, dtype="float16")
+    out_channel = w_shape[0]
+    return tvm.IRModule.from_expr(
+        relay.nn.conv2d(
+            data=data,
+            weight=weight,
+            kernel_size=(w_shape[2], w_shape[3]),
+            channels=out_channel,
+            padding=(pad_h, pad_w),
+            strides=(stride_h, stride_w),
+            out_dtype=out_dtype,
+        )
+    )
 
-    for out_dtype in ["float16", "float32"]:
-        mod_nchw = get_conv2d_nchw(d_shape, w_shape, out_dtype)
+
+def test_conv2d():
+    out_dtype = "float16"
+
+    for workload in get_workloads():
+        print(workload, end=",")
+        d_shape = (workload["n"], workload["c"], workload["h"], workload["w"])
+        w_shape = (workload["k"], workload["c"], workload["r"], workload["s"])
+        mod_nchw = get_conv2d_nchw(
+            d_shape,
+            w_shape,
+            workload["pad_h"],
+            workload["pad_w"],
+            workload["stride_h"],
+            workload["stride_w"],
+            out_dtype,
+        )
 
         verify_conv2d(
             mod_nchw,
@@ -193,24 +202,8 @@ def test_conv2d():
             sm=80,
             atol=1e-5,
             rtol=1e-5,
-            run_benchmark=True,
+            run_benchmark=False,
         )
 
-        return
 
-    dyn_batch_shape = (relay.Any(),) + d_shape[1:]
-    mod_dyn = get_conv2d_nchw(dyn_batch_shape, w_shape)
-
-    verify_conv2d(
-        mod_dyn,
-        mod_nchw,
-        d_shape,
-        w_shape,
-        sm=80,
-        atol=1e-5,
-        rtol=1e-5,
-        run_benchmark=False,
-    )
-
-
-# test_conv2d()
+test_conv2d()
