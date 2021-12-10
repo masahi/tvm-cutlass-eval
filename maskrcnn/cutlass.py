@@ -19,8 +19,7 @@ def profile_and_build_vm(
     mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
 ):
     mod = partition_for_cutlass(mod)
-    mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "HWIO"]})
-    # print(mod)
+    print(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir)
     with tvm.transform.PassContext(opt_level=3):
         vm_exec = relay.vm.compile(mod, target="cuda", params=params)
@@ -57,18 +56,29 @@ def get_input(in_size):
 
 img = get_input(in_size)
 
-with open("models/maskrcnn_fp16.json", "r") as fi:
-    mod = tvm.ir.load_json(fi.read())
-with open("models/maskrcnn_fp16.params", "rb") as fi:
-    params = relay.load_param_dict(fi.read())
+do_compile = False
 
-nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
-# print(nhwc_mod)
+if do_compile:
+    with open("models/maskrcnn_fp16.json", "r") as fi:
+        mod = tvm.ir.load_json(fi.read())
+    with open("models/maskrcnn_fp16.params", "rb") as fi:
+        params = relay.load_param_dict(fi.read())
 
-sm = 80
-rt_mod, dev, num_partition = profile_and_build_vm(
-    nhwc_mod, params, sm
-)
+    nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
+    # print(nhwc_mod)
+
+    sm = 80
+    rt_mod, dev, num_partition = profile_and_build_vm(
+        nhwc_mod, params, sm
+    )
+else:
+    lib_path = "tmp/compile.so"
+    vmcode_path = "tmp/vmcode.ro"
+    lib = tvm.runtime.load_module(lib_path)
+    code = bytearray(open(vmcode_path, "rb").read())
+    vm_exec = tvm.runtime.vm.Executable.load_exec(code, lib)
+    dev = tvm.device("cuda", 0)
+    rt_mod = VirtualMachine(vm_exec, dev)
 
 out = get_output_vm(rt_mod, ["input0"], [img])
-print(rt_mod.benchmark(dev, number=1, repeat=50))
+print(rt_mod.benchmark(dev, number=1, repeat=100))
