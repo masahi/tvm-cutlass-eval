@@ -1,4 +1,3 @@
-n,h,w,c,k,r,s,p,q,pad_h,pad_w,stride_h,stride_w,Operation,Runtime
 256,56,56,64,256,1,1,56,56,0,0,1,1,cutlass_tensorop_h1688fprop_optimized_64x64_32x2_nhwc_align8,1.27324
 256,56,56,64,64,1,1,56,56,0,0,1,1,cutlass_tensorop_h16816fprop_optimized_128x64_32x6_nhwc_align8,0.503762
 256,56,56,64,64,3,3,56,56,1,1,1,1,cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8,0.994296
