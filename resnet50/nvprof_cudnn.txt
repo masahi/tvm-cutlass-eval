@@ -1,0 +1,32 @@
+Time(%)  Total Time (ns)  Instances   Average   Minimum  Maximum                                                  Name
+ -------  ---------------  ---------  ---------  -------  -------  ----------------------------------------------------------------------------------------------------
+    12.6       55,533,408      1,224   45,370.4   28,288   69,217  void cutlass_cudnn::Kernel<cutlass_tensorop_h16816fprop_optimized_256x128_32x3>(cutlass_tensorop_h1…
+    10.0       43,955,543      1,122   39,176.1   25,312   53,760  void cutlass_cudnn::Kernel<cutlass_tensorop_h16816fprop_optimized_64x128_32x6>(cutlass_tensorop_h16…
+     8.6       38,093,939      1,020   37,347.0   30,080   57,536  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x32_stage4_warpsize2x2…
+     8.5       37,504,372        102  367,689.9  348,353  392,641  void implicit_convolve_hhgemm<__half, 0, 6, 6, 5, 4, 4, false, 1, true>(int, int, int, __half const…
+     8.4       36,806,787        306  120,283.6  116,224  125,281  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_kernel0
+     8.3       36,738,691        714   51,454.7   48,160   60,352  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x…
+     5.9       26,181,609        714   36,668.9   19,359   60,705  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x…
+     5.8       25,641,781        408   62,847.5   59,552   65,505  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_1_kernel0
+     4.6       20,111,936        612   32,862.6   31,200   35,393  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_2_kernel0
+     3.8       16,931,474        306   55,331.6   52,576   61,504  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage4_warpsize2x2x1…
+     2.4       10,677,053        102  104,677.0  102,048  109,568  tvmgen_default_fused_nn_conv2d_add_nn_relu_kernel0
+     2.4       10,540,075        102  103,334.1  100,928  106,977  tvmgen_default_fused_nn_conv2d_add_kernel0
+     1.9        8,525,794        306   27,862.1   26,976   31,232  tvmgen_default_fused_nn_conv2d_add_nn_relu_2_kernel0
+     1.5        6,582,780        102   64,537.1   62,816   67,232  tvmgen_default_fused_nn_dense_kernel0
+     1.3        5,782,837        204   28,347.2   26,753   35,679  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage4_warpsize2x2x1…
+     1.3        5,756,312        204   28,217.2   27,392   32,320  tvmgen_default_fused_nn_conv2d_add_nn_relu_3_kernel0
+     1.2        5,485,936        102   53,783.7   52,416   55,744  tvmgen_default_fused_nn_conv2d_add_nn_relu_4_kernel0
+     1.2        5,406,477        102   53,004.7   51,680   54,977  tvmgen_default_fused_nn_conv2d_add_1_kernel0
+     1.1        4,826,639        102   47,320.0   46,464   48,448  tvmgen_default_fused_nn_max_pool2d_kernel0
+     0.8        3,490,513        510    6,844.1    6,304    7,872  tvmgen_default_fused_nn_conv2d_add_nn_relu_10_kernel0
+     0.8        3,375,790        306   11,032.0   10,560   11,808  tvmgen_default_fused_nn_conv2d_add_nn_relu_6_kernel0
+     0.8        3,331,380        204   16,330.3   15,616   17,120  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_3_kernel0
+     0.7        3,210,108        510    6,294.3    5,952    7,040  tvmgen_default_fused_nn_conv2d_add_nn_relu_11_kernel0
+     0.7        3,207,821        306   10,483.1   10,048   14,720  tvmgen_default_fused_nn_conv2d_add_nn_relu_7_kernel0
+     0.6        2,848,847        102   27,929.9   27,199   28,960  tvmgen_default_fused_nn_conv2d_add_nn_relu_1_kernel0
+     0.6        2,754,056        102   27,000.5   26,176   28,192  tvmgen_default_fused_nn_conv2d_add_2_kernel0
+     0.6        2,641,446        102   25,896.5   24,800   27,136  tvmgen_default_fused_nn_conv2d_add_nn_relu_8_kernel0
+     0.5        2,212,460        102   21,690.8   20,768   22,848  tvmgen_default_fused_nn_adaptive_avg_pool2d_kernel0
+     0.5        2,010,241        102   19,708.2   19,136   20,448  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_cast_kernel0
+[0] 0:emacs- 1:htop  2:[tmux]* 3:bash  4:bash                                                                                                 "masa-desktop" 15:58 11-12月-21
