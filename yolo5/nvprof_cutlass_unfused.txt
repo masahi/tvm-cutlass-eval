@@ -1,0 +1,259 @@
+WARNING: python and any of its children processes will be profiled.
+
+Collecting data...
+[[     32.402      187.04      156.05      429.46]
+ [     423.17      186.46      511.93      417.83]
+ [     140.22      192.03      215.53      408.12]
+ [     4.2875      109.33      512.99      352.37]
+ [   0.026764      259.33      44.823      412.37]
+ [     86.192      224.22      94.933      244.52]
+ [     180.44       228.2      189.85      247.92]
+ [     173.14      274.34      215.56      368.71]
+ [     172.33      274.94      215.97      369.81]
+ [     140.51      191.73       215.9      407.57]
+ [    0.19123      341.07      21.159      413.14]
+ [    0.16619      120.54      20.987         154]
+ [      86.19      223.86      94.623      244.56]
+ [    0.50903      261.63      46.466      411.41]
+ [     327.58      194.94      353.65      243.19]
+ [    0.15288       120.9      21.197      154.11]
+ [     192.61      270.11      214.27      338.06]
+ [     175.72      229.05      186.87      248.05]
+ [     5.8488      112.16      510.75      350.06]
+ [     506.27      172.16      512.01      187.91]
+ [     84.297      226.94      99.166      288.91]
+ [    0.20345      332.17      20.622      413.38]
+ [    0.25529      171.43       44.82      362.57]
+ [      28.77       346.8      49.305      386.87]
+ [     307.15      196.78       349.4      249.54]
+ [    0.49072      257.51      46.059      412.01]
+ [     421.11      3.9776      470.16      41.122]
+ [     311.73     0.31129      329.14      18.964]
+ [     85.971      225.12      97.291      258.24]
+ [    0.64062      170.52      24.184      229.08]
+ [    0.69624       219.9      44.104      390.55]
+ [     173.55       271.8      215.97      369.45]
+ [     208.52      85.253      226.01      113.05]
+ [    0.35835      312.72      38.992      358.03]
+ [     420.19        6.07      470.84      41.518]
+ [     420.57      14.772       442.3      37.978]
+ [     2.5368      264.05      43.757       341.2]
+ [    0.83213      170.86       24.18      229.14]
+ [    0.21973      202.45       5.724      265.37]
+ [     28.813      346.93      49.274      386.63]
+ [     507.81       203.7      511.97      218.68]
+ [    0.31259      171.12      23.712      268.37]
+ [     420.82      14.644       441.9      37.569]
+ [     143.59       287.5      191.41      338.69]
+ [     140.51      191.73       215.9      407.57]
+ [    0.14382      259.25      44.506       412.3]
+ [     356.53      11.308      371.36      24.529]
+ [    0.20059      276.15      29.349       381.9]
+ [     76.675      335.84      96.675      387.34]
+ [     420.63      5.3266      468.75      40.148]
+ [     6.1556       105.2      506.52      188.15]
+ [     157.69      270.88      193.94       324.8]]
+[[     32.392      187.12      156.12      429.37]
+ [      423.3      186.98      511.84      417.16]
+ [     140.26      191.89      215.48       408.3]
+ [     3.8727      109.62      513.35      352.06]
+ [   0.040759      259.25      44.851      412.38]
+ [     86.191      224.24      94.943      244.52]
+ [     180.44      228.19      189.86      247.92]
+ [     173.14      274.34      215.57      368.72]
+ [     172.39      274.87      215.95      369.86]
+ [     140.48      191.64      215.95      407.65]
+ [    0.17117      341.03      21.168      413.16]
+ [     86.187      223.84      94.617      244.58]
+ [    0.16761      120.52      20.988      154.01]
+ [    0.49905      261.61      46.487      411.39]
+ [     327.65      195.15       353.6       242.8]
+ [     0.1587      120.89       21.18      154.12]
+ [     192.61      270.11      214.26      338.06]
+ [     5.3045      111.87      511.23      350.29]
+ [     175.72      229.04      186.86      248.05]
+ [     506.26      172.17      512.01      187.92]
+ [     84.288      226.96      99.153       288.9]
+ [    0.18565      332.25      20.642      413.33]
+ [    0.28359      171.31      44.803      362.71]
+ [     307.13      196.68      349.46       249.6]
+ [     28.779       346.8        49.3      386.88]
+ [    0.46166      257.55      46.085         412]
+ [     421.12      3.9897      470.14      41.076]
+ [     311.71     0.31575      329.15       18.96]
+ [    0.66613      170.52      24.186      229.08]
+ [     85.979      225.12       97.28      258.26]
+ [     173.63      271.68      215.87      369.57]
+ [    0.69164      220.57      44.074      389.82]
+ [     208.52      85.246      226.04      113.04]
+ [    0.35709      312.68      38.981      358.06]
+ [     420.19      6.0352      470.83      41.504]
+ [     420.57      14.784      442.32      37.982]
+ [     141.61      241.53      193.93      381.17]
+ [     2.5265      264.11      43.751      341.07]
+ [    0.81155      170.84      24.204      229.15]
+ [    0.22467       202.5      5.7227      265.35]
+ [     28.807      346.94      49.278      386.64]
+ [    0.29506      171.17      23.726      268.33]
+ [     143.61       287.6      191.35      338.58]
+ [     507.82      203.67      511.97       218.7]
+ [     420.81      14.646      441.93      37.588]
+ [     140.48      191.64      215.95      407.65]
+ [   0.079834      259.41      44.551      412.12]
+ [     356.49        11.3      371.38      24.533]
+ [    0.22693      276.07      29.297      382.01]
+ [     76.673      335.83      96.661      387.33]
+ [     420.62      5.2649      468.76      40.168]
+ [     6.4596      105.13      506.16      188.13]
+ [     157.74      270.85      193.84      324.85]]
+Execution time summary:
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
+  34.2883      34.2134      35.6503      33.9729       0.3376   
+               
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/_jit_internal.py:505: LightningDeprecationWarning: The `LightningModule.loaded_optimizer_states_dict` property is deprecated in v1.4 and will be removed in v1.6.
+  item = getattr(mod, name)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/_jit_internal.py:505: LightningDeprecationWarning: The `LightningModule.model_size` property was deprecated in v1.5 and will be removed in v1.7. Please use the `pytorch_lightning.utilities.memory.get_model_size_mb`.
+  item = getattr(mod, name)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/tensor.py:590: RuntimeWarning: Iterating over a tensor might cause the trace to be incorrect. Passing a tensor of different shape won't change the number of iterations executed (and might lead to errors or silently give incorrect results).
+  warnings.warn('Iterating over a tensor might cause the trace to be incorrect. '
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/anchor_utils.py:31: TracerWarning: torch.as_tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  stride = torch.as_tensor([stride], dtype=dtype, device=device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/anchor_utils.py:50: TracerWarning: torch.as_tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  anchor_grid = torch.as_tensor(anchor_grid, dtype=dtype, device=device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/anchor_utils.py:79: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  shifts = shifts - torch.tensor(0.5, dtype=shifts.dtype, device=device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/box_head.py:368: TracerWarning: Converting a tensor to a Python index might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  for idx in range(batch_size):  # image idx, image inference
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:312: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  torch.tensor(s, dtype=torch.float32, device=boxes.device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:312: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  torch.tensor(s, dtype=torch.float32, device=boxes.device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:313: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  / torch.tensor(s_orig, dtype=torch.float32, device=boxes.device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:313: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  / torch.tensor(s_orig, dtype=torch.float32, device=boxes.device)
+Processing events...
+Saving temporary "/tmp/nsys-report-2e1f-a3b6-dd2a-d1bd.qdstrm" file to disk...
+
+Creating final output files...
+Processing [0%                                                                ]Processing [4%                                                                ]Processing [===8%                                                             ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [===9%                                                             ]Processing [===8%                                                             ]Processing [==7%                                                              ]Processing [===9%                                                             ]Processing [====12%                                                           ]Processing [======14%                                                         ]Processing [=======16%                                                        ]Processing [=========19%                                                      ]Processing [==========21%                                                     ]Processing [============24%                                                   ]Processing [==============26%                                                 ]Processing [================29%                                               ]Processing [=================31%                                              ]Processing [==================33%                                             ]Processing [====================36%                                           ]Processing [======================38%                                         ]Processing [========================41%                                       ]Processing [=========================43%                                      ]Processing [==========================45%                                     ]Processing [============================48%                                   ]Processing [==============================50%                                 ]Processing [===============================53%                                ]Processing [=================================55%                              ]Processing [==================================57%                             ]Processing [====================================60%                           ]Processing [=====================================62%                          ]Processing [=======================================65%                        ]Processing [=========================================67%                      ]Processing [==========================================69%                     ]Processing [============================================72%                   ]Processing [=============================================74%                  ]Processing [===============================================77%                ]Processing [=================================================79%              ]Processing [==============================================================100%]
+Saved report file to "/tmp/nsys-report-2e1f-a3b6-dd2a-d1bd.qdrep"
+Exporting 73735 events: [1%                                                   ]Exporting 73735 events: [2%                                                   ]Exporting 73735 events: [3%                                                   ]Exporting 73735 events: [4%                                                   ]Exporting 73735 events: [5%                                                   ]Exporting 73735 events: [=6%                                                  ]Exporting 73735 events: [=7%                                                  ]Exporting 73735 events: [==8%                                                 ]Exporting 73735 events: [==9%                                                 ]Exporting 73735 events: [==10%                                                ]Exporting 73735 events: [==11%                                                ]Exporting 73735 events: [===12%                                               ]Exporting 73735 events: [===13%                                               ]Exporting 73735 events: [====14%                                              ]Exporting 73735 events: [====15%                                              ]Exporting 73735 events: [=====16%                                             ]Exporting 73735 events: [======17%                                            ]Exporting 73735 events: [======18%                                            ]Exporting 73735 events: [=======19%                                           ]Exporting 73735 events: [=======20%                                           ]Exporting 73735 events: [========21%                                          ]Exporting 73735 events: [========22%                                          ]Exporting 73735 events: [=========23%                                         ]Exporting 73735 events: [=========24%                                         ]Exporting 73735 events: [==========25%                                        ]Exporting 73735 events: [==========26%                                        ]Exporting 73735 events: [===========27%                                       ]Exporting 73735 events: [===========28%                                       ]Exporting 73735 events: [============29%                                      ]Exporting 73735 events: [============30%                                      ]Exporting 73735 events: [=============31%                                     ]Exporting 73735 events: [=============32%                                     ]Exporting 73735 events: [==============33%                                    ]Exporting 73735 events: [===============34%                                   ]Exporting 73735 events: [===============35%                                   ]Exporting 73735 events: [================36%                                  ]Exporting 73735 events: [================37%                                  ]Exporting 73735 events: [=================38%                                 ]Exporting 73735 events: [=================39%                                 ]Exporting 73735 events: [==================40%                                ]Exporting 73735 events: [==================41%                                ]Exporting 73735 events: [===================42%                               ]Exporting 73735 events: [===================43%                               ]Exporting 73735 events: [====================44%                              ]Exporting 73735 events: [====================45%                              ]Exporting 73735 events: [=====================46%                             ]Exporting 73735 events: [=====================47%                             ]Exporting 73735 events: [======================48%                            ]Exporting 73735 events: [======================49%                            ]Exporting 73735 events: [=======================50%                           ]Exporting 73735 events: [========================51%                          ]Exporting 73735 events: [========================52%                          ]Exporting 73735 events: [=========================53%                         ]Exporting 73735 events: [=========================54%                         ]Exporting 73735 events: [==========================55%                        ]Exporting 73735 events: [==========================56%                        ]Exporting 73735 events: [===========================57%                       ]Exporting 73735 events: [===========================58%                       ]Exporting 73735 events: [============================59%                      ]Exporting 73735 events: [============================60%                      ]Exporting 73735 events: [=============================61%                     ]Exporting 73735 events: [=============================62%                     ]Exporting 73735 events: [==============================63%                    ]Exporting 73735 events: [==============================64%                    ]Exporting 73735 events: [===============================65%                   ]Exporting 73735 events: [===============================66%                   ]Exporting 73735 events: [================================67%                  ]Exporting 73735 events: [=================================68%                 ]Exporting 73735 events: [=================================69%                 ]Exporting 73735 events: [==================================70%                ]Exporting 73735 events: [==================================71%                ]Exporting 73735 events: [===================================72%               ]Exporting 73735 events: [===================================73%               ]Exporting 73735 events: [====================================74%              ]Exporting 73735 events: [====================================75%              ]Exporting 73735 events: [=====================================76%             ]Exporting 73735 events: [=====================================77%             ]Exporting 73735 events: [======================================78%            ]Exporting 73735 events: [======================================79%            ]Exporting 73735 events: [=======================================80%           ]Exporting 73735 events: [=======================================81%           ]Exporting 73735 events: [========================================82%          ]Exporting 73735 events: [========================================83%          ]Exporting 73735 events: [=========================================84%         ]Exporting 73735 events: [==========================================85%        ]Exporting 73735 events: [==========================================86%        ]Exporting 73735 events: [===========================================87%       ]Exporting 73735 events: [===========================================88%       ]Exporting 73735 events: [============================================89%      ]Exporting 73735 events: [============================================90%      ]Exporting 73735 events: [=============================================91%     ]Exporting 73735 events: [=============================================92%     ]Exporting 73735 events: [==============================================93%    ]Exporting 73735 events: [==============================================94%    ]Exporting 73735 events: [===============================================95%   ]Exporting 73735 events: [===============================================96%   ]Exporting 73735 events: [================================================97%  ]Exporting 73735 events: [================================================98%  ]Exporting 73735 events: [=================================================99% ]Exporting 73735 events: [=================================================100%]
+
+Exported successfully to
+/tmp/nsys-report-2e1f-a3b6-dd2a-d1bd.sqlite
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls    Average    Minimum    Maximum            Name         
+ -------  ---------------  ---------  -----------  -------  -----------  ---------------------
+    89.1    3,251,894,055      1,142  2,847,543.0    2,398   32,091,329  cudaMemcpy           
+     8.1      296,887,705        569    521,771.0    6,777  291,850,703  cudaMemGetInfo       
+     1.1       41,051,460     18,666      2,199.3    1,625       42,687  cuLaunchKernel       
+     1.0       37,620,748     10,608      3,546.5    3,202       17,382  cudaLaunchKernel     
+     0.6       22,900,771     11,177      2,048.9      110    5,449,790  cudaMalloc           
+     0.0          431,014          5     86,202.8    7,001      221,359  cudaFree             
+     0.0          398,479          1    398,479.0  398,479      398,479  cuModuleLoadData     
+     0.0          291,570        202      1,443.4      516        4,013  cudaStreamSynchronize
+     0.0           48,859        365        133.9       78          543  cuGetProcAddress     
+     0.0            1,106          1      1,106.0    1,106        1,106  cuInit               
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances    Average    Minimum   Maximum                                                   Name                                                
+ -------  ---------------  ---------  -----------  -------  ---------  ----------------------------------------------------------------------------------------------------
+    56.1    1,873,313,899     10,200    183,658.2   48,961    676,838  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+    15.4      513,824,324        408  1,259,373.3   91,969  4,790,161  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     2.9       98,532,962      1,326     74,308.4   71,968     89,057  vm_mod_fused_multiply_add_sigmoid_multiply_4_kernel0                                                
+     2.7       90,410,445      2,346     38,538.1   36,704     47,104  vm_mod_fused_multiply_add_sigmoid_multiply_6_kernel0                                                
+     2.2       72,559,303      2,142     33,874.6   10,720    230,274  vm_mod_fused_argwhere_kernel6                                                                       
+     1.7       57,829,005        408    141,737.8  140,033    171,234  vm_mod_fused_multiply_add_sigmoid_multiply_2_kernel0                                                
+     1.7       56,681,724        204    277,851.6  275,298    328,195  vm_mod_fused_multiply_add_sigmoid_multiply_1_kernel0                                                
+     1.7       56,170,460        102    550,690.8  545,925    606,343  vm_mod_fused_multiply_add_sigmoid_multiply_kernel0                                                  
+     1.6       52,892,632        510    103,711.0  101,537    128,897  vm_mod_fused_multiply_add_sigmoid_multiply_add_1_kernel0                                            
+     1.3       43,488,744        306    142,120.1  140,354    171,554  vm_mod_fused_multiply_add_sigmoid_multiply_3_kernel0                                                
+     1.3       43,168,706        816     52,902.8   51,616     65,729  vm_mod_fused_multiply_add_sigmoid_multiply_add_2_kernel0                                            
+     1.2       40,658,788        204    199,307.8  196,834    235,938  vm_mod_fused_multiply_add_sigmoid_multiply_add_kernel0                                              
+     1.0       34,929,099        102    342,442.1  339,971    393,828  vm_mod_fused_multiply_add_sigmoid_multiply_add_multiply_add_sigmoid_multiply_concatenat_18015165136…
+     0.9       30,242,556        408     74,123.9   71,264     88,353  vm_mod_fused_multiply_add_sigmoid_multiply_5_kernel0                                                
+     0.8       26,646,222        102    261,237.5  258,627    284,483  vm_mod_fused_image_resize2d_concatenate_1_kernel0                                                   
+     0.7       24,277,189      2,142     11,333.9    1,887     53,088  vm_mod_fused_argwhere_kernel4                                                                       
+     0.7       23,622,866      1,224     19,299.7   18,144     29,824  vm_mod_fused_multiply_add_sigmoid_multiply_8_kernel0                                                
+     0.6       21,495,428        306     70,246.5   68,192     75,617  vm_mod_fused_nn_max_pool2d_kernel0                                                                  
+     0.5       17,731,091        102    173,834.2  172,481    195,427  vm_mod_fused_multiply_add_sigmoid_multiply_add_multiply_add_sigmoid_multiply_concatenat_18015165136…
+     0.5       17,642,130        102    172,962.1  169,538    183,234  vm_mod_fused_cast_split_squeeze_expand_dims_image_resize2d_take_squeeze_expand_dims_ima_59092353211…
+     0.5       16,160,715        204     79,219.2   77,441     90,177  vm_mod_fused_multiply_add_sigmoid_multiply_multiply_add_sigmoid_multiply_concatenate_kernel0        
+     0.5       15,356,513        102    150,554.0  149,185    164,481  vm_mod_fused_multiply_add_sigmoid_multiply_multiply_add_sigmoid_multiply_concatenate_1_kernel0      
+     0.5       15,343,465        408     37,606.5   35,489     47,456  vm_mod_fused_multiply_add_sigmoid_multiply_7_kernel0                                                
+     0.4       13,502,405        102    132,376.5  130,785    143,426  vm_mod_fused_image_resize2d_concatenate_kernel0                                                     
+     0.3       11,373,684        102    111,506.7  109,409    117,889  vm_mod_fused_vision_non_max_suppression_kernel6                                                     
+     0.3        9,350,308        102     91,669.7   90,497    105,570  vm_mod_fused_multiply_add_sigmoid_multiply_add_multiply_add_sigmoid_multiply_concatenat_18015165136…
+     0.2        7,737,792        102     75,860.7   75,009     84,353  vm_mod_fused_multiply_add_sigmoid_multiply_concatenate_kernel0                                      
+     0.2        7,318,194        102     71,747.0   70,753     84,769  vm_mod_fused_concatenate_kernel0                                                                    
+     0.2        5,068,891        204     24,847.5   24,001     34,784  vm_mod_fused_multiply_add_sigmoid_multiply_add_3_kernel0                                            
+     0.1        4,838,439        102     47,435.7   46,624     52,641  vm_mod_fused_multiply_add_sigmoid_multiply_add_multiply_add_sigmoid_multiply_concatenat_18015165136…
+     0.1        4,478,098        102     43,902.9   43,169     55,296  vm_mod_fused_argwhere_kernel3                                                                       
+     0.1        4,305,445        102     42,210.2   41,760     43,265  vm_mod_fused_multiply_add_sigmoid_multiply_multiply_add_sigmoid_multiply_concatenate_2_kernel0      
+     0.1        3,979,748        102     39,017.1   38,337     40,385  vm_mod_fused_multiply_add_sigmoid_multiply_concatenate_1_kernel0                                    
+     0.1        3,357,160        102     32,913.3   32,352     39,008  vm_mod_fused_add_layout_transform_reshape_transpose_reshape_add_layout_transform_reshap_23624004019…
+     0.1        3,090,433        102     30,298.4   29,761     31,712  vm_mod_fused_argwhere_kernel7                                                                       
+     0.1        2,960,286        306      9,674.1    6,208     18,143  vm_mod_fused_vision_non_max_suppression_kernel3                                                     
+     0.1        2,516,695        102     24,673.5   23,777     31,200  vm_mod_fused_argwhere_kernel2                                                                       
+     0.1        2,162,481        102     21,200.8   20,576     31,488  vm_mod_fused_strided_slice_strided_slice_multiply_kernel0                                           
+     0.0        1,497,933        102     14,685.6   14,368     15,360  vm_mod_fused_greater_kernel0                                                                        
+     0.0        1,140,841        102     11,184.7   10,784     11,808  vm_mod_fused_argwhere_kernel0                                                                       
+     0.0        1,138,033        102     11,157.2   10,944     11,808  vm_mod_fused_vision_non_max_suppression_kernel2                                                     
+     0.0        1,098,404        102     10,768.7   10,432     14,625  vm_mod_fused_argwhere_kernel1                                                                       
+     0.0          471,360        102      4,621.2    4,352     12,384  vm_mod_fused_strided_slice_strided_slice_multiply_cast_add_multiply_strided_slice_multi_16882570841…
+     0.0          387,294        102      3,797.0    3,648      4,032  vm_mod_fused_vision_non_max_suppression_kernel5                                                     
+     0.0          340,002        102      3,333.4    3,232      3,648  vm_mod_fused_max_kernel0                                                                            
+     0.0          318,021        102      3,117.9    3,008      3,488  vm_mod_fused_min_kernel0                                                                            
+     0.0          275,236        102      2,698.4    2,528      3,072  vm_mod_fused_cast_adv_index_kernel0                                                                 
+     0.0          258,081        102      2,530.2    2,303     10,048  vm_mod_fused_slice_like_where_greater_equal_where_kernel0                                           
+     0.0          243,036        102      2,382.7    2,272      2,784  vm_mod_fused_split_kernel0                                                                          
+     0.0          235,614        102      2,309.9    2,240      2,624  vm_mod_fused_adv_index_split_squeeze_multiply_squeeze_multiply_squeeze_multiply_squeeze_10028450566…
+     0.0          230,783        102      2,262.6    2,144      2,432  vm_mod_fused_dyn_strided_slice_kernel0                                                              
+     0.0          230,755        102      2,262.3    2,016     12,480  vm_mod_fused_adv_index_1_kernel0                                                                    
+     0.0          229,667        102      2,251.6    2,144      2,593  vm_mod_fused_expand_dims_cast_add_multiply_expand_dims_add_concatenate_expand_dims_kernel0          
+     0.0          226,409        102      2,219.7    2,047     10,016  vm_mod_fused_adv_index_kernel0                                                                      
+     0.0          224,163        102      2,197.7    2,048      2,464  vm_mod_fused_vision_non_max_suppression_kernel0                                                     
+     0.0          217,568        102      2,133.0    2,016      2,527  vm_mod_fused_cast_kernel0                                                                           
+     0.0          217,474        102      2,132.1    2,048      2,432  vm_mod_fused_squeeze_2_kernel0                                                                      
+     0.0          216,639        102      2,123.9    2,048      2,464  vm_mod_fused_subtract_add_kernel0                                                                   
+     0.0          213,859        102      2,096.7    1,952      2,369  vm_mod_fused_vision_non_max_suppression_kernel1                                                     
+     0.0          212,040        102      2,078.8    2,015      2,400  vm_mod_fused_arange_kernel0                                                                         
+     0.0          210,564        102      2,064.4    1,920      2,368  vm_mod_fused_vision_non_max_suppression_kernel4                                                     
+     0.0          210,463        102      2,063.4    1,983      2,368  vm_mod_fused_squeeze_1_kernel0                                                                      
+     0.0          209,795        102      2,056.8    1,984      2,368  vm_mod_fused_squeeze_cast_1_kernel0                                                                 
+     0.0          209,222        102      2,051.2    1,952      2,304  vm_mod_fused_squeeze_cast_kernel0                                                                   
+     0.0          203,527        102      1,995.4    1,920      2,272  vm_mod_fused_split_kernel1                                                                          
+     0.0          199,046        102      1,951.4    1,856      2,336  vm_mod_fused_strided_slice_kernel0                                                                  
+     0.0          187,073        102      1,834.0    1,728      2,176  vm_mod_fused_shape_of_kernel0                                                                       
+     0.0          186,856        102      1,831.9    1,792      2,144  vm_mod_fused_ndarray_size_equal_kernel0                                                             
+     0.0          186,210        102      1,825.6    1,760      2,176  vm_mod_fused_shape_of_1_kernel0                                                                     
+     0.0          185,981        102      1,823.3    1,729      2,240  vm_mod_fused_argwhere_kernel5                                                                       
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Operations  Average   Minimum   Maximum       Operation     
+ -------  ---------------  ----------  --------  -------  ---------  ------------------
+    58.0       11,168,682         817  13,670.4    1,056    121,794  [CUDA memcpy DtoH]
+    42.0        8,077,584         325  24,854.1      799  2,156,502  [CUDA memcpy HtoD]
+
+
+
+CUDA Memory Operation Statistics (by size in KiB):
+
+    Total     Operations  Average  Minimum   Maximum        Operation     
+ -----------  ----------  -------  -------  ----------  ------------------
+ 200,815.803         817  245.797    0.001   1,968.750  [CUDA memcpy DtoH]
+ 116,012.972         325  356.963    0.001  24,576.000  [CUDA memcpy HtoD]
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report7.qdrep"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report7.sqlite"
+
+

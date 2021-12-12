@@ -12,6 +12,16 @@ from tvm.relay.transform import ToMixedPrecision
 from tvm.contrib.download import download_testdata
 
 
+class TraceWrapper(torch.nn.Module):
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+
+    def forward(self, inp):
+        out = self.model(inp)
+        return out["out"]
+
+
 def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", precompiled=False, use_cudnn=False):
     dev = tvm.device("cuda", 0)
     if precompiled:
@@ -26,6 +36,8 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         return rt_mod, dev, 1
     else:
         mod = partition_for_cutlass(mod)
+        print(mod)
+        mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "default"]})
         mod, num_cutlass_partition = tune_cutlass_kernels(
             mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
         )
@@ -41,44 +53,57 @@ def convert_conv2d_layout(mod, desired_layouts):
         seq = tvm.transform.Sequential([relay.transform.ConvertLayout(desired_layouts)])
         return seq(mod)
 
-img_url = "https://github.com/dmlc/mxnet.js/blob/main/data/cat.png?raw=true"
-img_path = download_testdata(img_url, "cat.png", module="data")
-img = Image.open(img_path).resize((224, 224))
 
-my_preprocess = transforms.Compose(
-    [
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ]
-)
-img = my_preprocess(img)
-img = np.expand_dims(img, 0)
+def get_input(in_size):
+    from tvm.contrib.download import download
+    import cv2
 
-batch_size = 8
-img = np.tile(img, (batch_size, 1, 1, 1))
+    img_path = "test_street_small.jpg"
+    img_url = (
+        "https://raw.githubusercontent.com/dmlc/web-data/"
+        "master/gluoncv/detection/street_small.jpg"
+    )
+    download(img_url, img_path)
 
-sm  = 80
-model = torchvision.models.resnet50(pretrained=True).eval()
-input_name = "input0"
-input_data = torch.from_numpy(img)
-scripted_model = torch.jit.trace(model, input_data).eval()
+    img = cv2.imread(img_path).astype("float32")
+    img = cv2.resize(img, (in_size, in_size))
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = np.transpose(img / 255.0, [2, 0, 1])
+    img = np.expand_dims(img, axis=0)
+    return img
+
+
+deeplabv3 = torchvision.models.segmentation.deeplabv3_mobilenet_v3_large(pretrained=True)
+model = TraceWrapper(deeplabv3.eval())
+
+in_size = 512
+img = np.tile(get_input(in_size), (8, 1, 1, 1))
+
+inp = torch.from_numpy(img)
 
 with torch.no_grad():
-    torch_res = scripted_model(input_data).numpy()
+    trace = torch.jit.trace(model, inp)
+    torch_res = model(inp)
 
-shape_list = [(input_name, img.shape)]
-mod, params = relay.frontend.from_pytorch(scripted_model, shape_list)
+# batch_size = 8
+# img = np.tile(img, (batch_size, 1, 1, 1))
+input_name = "input"
+mod, params = relay.frontend.from_pytorch(trace, [(input_name, inp.shape)])
+
 mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
 mod = ToMixedPrecision("float16")(mod)
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50.so", precompiled=True)
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_cudnn.so", precompiled=True, use_cudnn=True)
-assert num_partition > 0
 
-rt_mod.set_input(input_name, img)
+sm  = 80
+# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_unfused.so", precompiled=True)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=True, use_cudnn=True)
+# assert num_partition > 0
+
+rt_mod.set_input(input_name, inp.numpy())
 rt_mod.run()
 tvm_res = rt_mod.get_output(0).numpy()
+print(tvm_res[0])
+print(torch_res.numpy()[0])
+# np.save("cutlass_res.npy", tvm_res)
 
 print("Evaluate inference time cost...")
 print(rt_mod.benchmark(dev, number=1, repeat=100))

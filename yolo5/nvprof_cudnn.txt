@@ -1,0 +1,183 @@
+WARNING: python and any of its children processes will be profiled.
+
+Collecting data...
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/_jit_internal.py:505: LightningDeprecationWarning: The `LightningModule.loaded_optimizer_states_dict` property is deprecated in v1.4 and will be removed in v1.6.
+  item = getattr(mod, name)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/_jit_internal.py:505: LightningDeprecationWarning: The `LightningModule.model_size` property was deprecated in v1.5 and will be removed in v1.7. Please use the `pytorch_lightning.utilities.memory.get_model_size_mb`.
+  item = getattr(mod, name)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/tensor.py:590: RuntimeWarning: Iterating over a tensor might cause the trace to be incorrect. Passing a tensor of different shape won't change the number of iterations executed (and might lead to errors or silently give incorrect results).
+  warnings.warn('Iterating over a tensor might cause the trace to be incorrect. '
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/anchor_utils.py:31: TracerWarning: torch.as_tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  stride = torch.as_tensor([stride], dtype=dtype, device=device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/anchor_utils.py:50: TracerWarning: torch.as_tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  anchor_grid = torch.as_tensor(anchor_grid, dtype=dtype, device=device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/anchor_utils.py:79: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  shifts = shifts - torch.tensor(0.5, dtype=shifts.dtype, device=device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/box_head.py:368: TracerWarning: Converting a tensor to a Python index might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  for idx in range(batch_size):  # image idx, image inference
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:312: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  torch.tensor(s, dtype=torch.float32, device=boxes.device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:312: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  torch.tensor(s, dtype=torch.float32, device=boxes.device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:313: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  / torch.tensor(s_orig, dtype=torch.float32, device=boxes.device)
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:313: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  / torch.tensor(s_orig, dtype=torch.float32, device=boxes.device)
+(52, 4)
+Execution time summary:
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
+  36.5833      36.5258      38.7493      36.3501       0.3023   
+               
+Processing events...
+Saving temporary "/tmp/nsys-report-94b8-f8b5-c266-9027.qdstrm" file to disk...
+
+Creating final output files...
+Processing [0%                                                                ]Processing [1%                                                                ]Processing [0%                                                                ]Processing [3%                                                                ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [2%                                                                ]Processing [3%                                                                ]Processing [2%                                                                ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [===8%                                                             ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [===9%                                                             ]Processing [====11%                                                           ]Processing [======14%                                                         ]Processing [=======16%                                                        ]Processing [=========19%                                                      ]Processing [==========21%                                                     ]Processing [============23%                                                   ]Processing [==============26%                                                 ]Processing [===============28%                                                ]Processing [=================31%                                              ]Processing [==================33%                                             ]Processing [====================35%                                           ]Processing [======================38%                                         ]Processing [=======================40%                                        ]Processing [=========================43%                                      ]Processing [==========================45%                                     ]Processing [============================47%                                   ]Processing [==============================50%                                 ]Processing [===============================52%                                ]Processing [=================================55%                              ]Processing [==================================57%                             ]Processing [====================================60%                           ]Processing [=====================================62%                          ]Processing [=======================================64%                        ]Processing [=========================================67%                      ]Processing [==========================================69%                     ]Processing [============================================72%                   ]Processing [=============================================74%                  ]Processing [===============================================76%                ]Processing [==============================================================100%]
+Saved report file to "/tmp/nsys-report-94b8-f8b5-c266-9027.qdrep"
+Exporting 70409 events: [1%                                                   ]Exporting 70409 events: [2%                                                   ]Exporting 70409 events: [3%                                                   ]Exporting 70409 events: [4%                                                   ]Exporting 70409 events: [5%                                                   ]Exporting 70409 events: [=6%                                                  ]Exporting 70409 events: [=7%                                                  ]Exporting 70409 events: [==8%                                                 ]Exporting 70409 events: [==9%                                                 ]Exporting 70409 events: [==10%                                                ]Exporting 70409 events: [==11%                                                ]Exporting 70409 events: [===12%                                               ]Exporting 70409 events: [===13%                                               ]Exporting 70409 events: [====14%                                              ]Exporting 70409 events: [====15%                                              ]Exporting 70409 events: [=====16%                                             ]Exporting 70409 events: [======17%                                            ]Exporting 70409 events: [======18%                                            ]Exporting 70409 events: [=======19%                                           ]Exporting 70409 events: [=======20%                                           ]Exporting 70409 events: [========21%                                          ]Exporting 70409 events: [========22%                                          ]Exporting 70409 events: [=========23%                                         ]Exporting 70409 events: [=========24%                                         ]Exporting 70409 events: [==========25%                                        ]Exporting 70409 events: [==========26%                                        ]Exporting 70409 events: [===========27%                                       ]Exporting 70409 events: [===========28%                                       ]Exporting 70409 events: [============29%                                      ]Exporting 70409 events: [============30%                                      ]Exporting 70409 events: [=============31%                                     ]Exporting 70409 events: [=============32%                                     ]Exporting 70409 events: [==============33%                                    ]Exporting 70409 events: [===============34%                                   ]Exporting 70409 events: [===============35%                                   ]Exporting 70409 events: [================36%                                  ]Exporting 70409 events: [================37%                                  ]Exporting 70409 events: [=================38%                                 ]Exporting 70409 events: [=================39%                                 ]Exporting 70409 events: [==================40%                                ]Exporting 70409 events: [==================41%                                ]Exporting 70409 events: [===================42%                               ]Exporting 70409 events: [===================43%                               ]Exporting 70409 events: [====================44%                              ]Exporting 70409 events: [====================45%                              ]Exporting 70409 events: [=====================46%                             ]Exporting 70409 events: [=====================47%                             ]Exporting 70409 events: [======================48%                            ]Exporting 70409 events: [======================49%                            ]Exporting 70409 events: [=======================50%                           ]Exporting 70409 events: [========================51%                          ]Exporting 70409 events: [========================52%                          ]Exporting 70409 events: [=========================53%                         ]Exporting 70409 events: [=========================54%                         ]Exporting 70409 events: [==========================55%                        ]Exporting 70409 events: [==========================56%                        ]Exporting 70409 events: [===========================57%                       ]Exporting 70409 events: [===========================58%                       ]Exporting 70409 events: [============================59%                      ]Exporting 70409 events: [============================60%                      ]Exporting 70409 events: [=============================61%                     ]Exporting 70409 events: [=============================62%                     ]Exporting 70409 events: [==============================63%                    ]Exporting 70409 events: [==============================64%                    ]Exporting 70409 events: [===============================65%                   ]Exporting 70409 events: [===============================66%                   ]Exporting 70409 events: [================================67%                  ]Exporting 70409 events: [=================================68%                 ]Exporting 70409 events: [=================================69%                 ]Exporting 70409 events: [==================================70%                ]Exporting 70409 events: [==================================71%                ]Exporting 70409 events: [===================================72%               ]Exporting 70409 events: [===================================73%               ]Exporting 70409 events: [====================================74%              ]Exporting 70409 events: [====================================75%              ]Exporting 70409 events: [=====================================76%             ]Exporting 70409 events: [=====================================77%             ]Exporting 70409 events: [======================================78%            ]Exporting 70409 events: [======================================79%            ]Exporting 70409 events: [=======================================80%           ]Exporting 70409 events: [=======================================81%           ]Exporting 70409 events: [========================================82%          ]Exporting 70409 events: [========================================83%          ]Exporting 70409 events: [=========================================84%         ]Exporting 70409 events: [==========================================85%        ]Exporting 70409 events: [==========================================86%        ]Exporting 70409 events: [===========================================87%       ]Exporting 70409 events: [===========================================88%       ]Exporting 70409 events: [============================================89%      ]Exporting 70409 events: [============================================90%      ]Exporting 70409 events: [=============================================91%     ]Exporting 70409 events: [=============================================92%     ]Exporting 70409 events: [==============================================93%    ]Exporting 70409 events: [==============================================94%    ]Exporting 70409 events: [===============================================95%   ]Exporting 70409 events: [===============================================96%   ]Exporting 70409 events: [================================================97%  ]Exporting 70409 events: [================================================98%  ]Exporting 70409 events: [=================================================99% ]Exporting 70409 events: [=================================================100%]
+
+Exported successfully to
+/tmp/nsys-report-94b8-f8b5-c266-9027.sqlite
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls    Average     Minimum    Maximum                Name            
+ -------  ---------------  ---------  ------------  -------  -----------  ----------------------------
+    69.7    2,586,084,031      1,041   2,484,230.6    2,486   26,202,874  cudaMemcpy                  
+    13.2      489,901,283          8  61,237,660.4      811  489,894,478  cudaStreamCreateWithFlags   
+     7.6      281,524,157        386     729,337.2    6,974  277,361,295  cudaMemGetInfo              
+     6.3      233,541,367        523     446,541.8    1,263    5,915,529  cuModuleUnload              
+     1.5       55,756,947     11,424       4,880.7    2,202       17,458  cudaLaunchKernel            
+     1.2       45,531,710     20,808       2,188.2    1,554       14,708  cuLaunchKernel              
+     0.3       11,708,874        393      29,793.6    1,897      138,089  cudaMalloc                  
+     0.1        3,208,042        514       6,241.3    2,274       22,786  cudaMemsetAsync             
+     0.0        1,712,270          9     190,252.2      247    1,119,469  cudaFree                    
+     0.0          481,649          1     481,649.0  481,649      481,649  cudaHostAlloc               
+     0.0          450,933          1     450,933.0  450,933      450,933  cuModuleLoadData            
+     0.0          257,959        202       1,277.0      527        2,564  cudaStreamSynchronize       
+     0.0          145,334          4      36,333.5      871      142,091  cudaStreamCreateWithPriority
+     0.0          105,156        746         141.0       75        1,887  cuGetProcAddress            
+     0.0            9,645         30         321.5      252        1,000  cudaEventCreateWithFlags    
+     0.0            3,157          1       3,157.0    3,157        3,157  cudaEventRecord             
+     0.0            2,853          2       1,426.5    1,419        1,434  cuInit                      
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances   Average   Minimum   Maximum                                                   Name                                                
+ -------  ---------------  ---------  ---------  -------  ---------  ----------------------------------------------------------------------------------------------------
+    31.2    1,109,551,203      5,202  213,293.2   57,087  3,312,679  void cutlass_cudnn::Kernel<cutlass_tensorop_h16816fprop_optimized_256x128_32x3>(cutlass_tensorop_h1…
+    13.8      490,553,344      1,938  253,123.5  219,644    590,070  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x…
+     7.5      265,115,602      2,142  123,770.1   37,375    433,977  void cutlass_cudnn::Kernel<cutlass_tensorop_h16816fprop_optimized_64x128_32x6>(cutlass_tensorop_h16…
+     3.1      109,478,115        918  119,257.2  117,950    125,822  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_7_kernel0                                               
+     2.7       95,850,802        102  939,713.7  928,336  1,170,348  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_kernel0                                                 
+     2.6       92,964,194      1,530   60,760.9   59,935     64,415  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_11_kernel0                                              
+     2.5       87,532,896        816  107,270.7   67,518    270,171  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x32_stage4_warpsize2x2…
+     2.3       81,805,099        510  160,402.2  133,469    202,333  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x…
+     2.2       78,253,355        612  127,865.0  125,054    135,870  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_add_1_kernel0                                           
+     2.2       76,538,584        306  250,126.1  246,652    263,836  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_add_kernel0                                             
+     2.0       72,271,306        306  236,180.7  233,692    248,124  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_3_kernel0                                               
+     2.0       71,585,604      2,142   33,420.0   10,624    229,852  vm_mod_fused_argwhere_kernel6                                                                       
+     1.7       60,255,859        918   65,638.2   63,967     71,967  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_add_2_kernel0                                           
+     1.4       48,126,635        204  235,914.9  233,596    249,691  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_2_kernel0                                               
+     1.4       48,009,416        204  235,340.3  233,308    247,900  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_8_kernel0                                               
+     1.3       47,932,105        102  469,922.6  465,400    493,047  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_1_kernel0                                               
+     1.3       47,889,318        102  469,503.1  465,431    492,472  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_4_kernel0                                               
+     1.2       42,965,365        510   84,245.8    2,624    224,764  void nhwcAddPaddingKernel<__half, __half, float, true, (cudnnKernelDataType_t)0>(int, int, int, int…
+     1.0       37,216,229        612   60,810.8   60,223     64,255  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_19_kernel0                                              
+     1.0       36,446,015        306  119,104.6  118,142    125,534  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_12_kernel0                                              
+     1.0       36,375,888        306  118,875.5  117,950    125,886  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_21_kernel0                                              
+     0.9       31,594,027        204  154,872.7  153,118    156,701  vm_mod_fused_concatenate_1_kernel0                                                                  
+     0.9       31,393,516        102  307,779.6  306,075    316,411  vm_mod_fused_image_resize2d_concatenate_1_kernel0                                                   
+     0.9       31,064,611        510   60,911.0   60,287     65,599  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_10_kernel0                                              
+     0.8       29,266,594        102  286,927.4  285,467    290,203  vm_mod_fused_concatenate_kernel0                                                                    
+     0.8       27,234,253        408   66,750.6   65,950     68,479  vm_mod_fused_concatenate_2_kernel0                                                                  
+     0.7       24,313,283        204  119,182.8  118,046    125,406  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_6_kernel0                                               
+     0.7       24,246,910        204  118,857.4  117,919    125,726  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_20_kernel0                                              
+     0.7       24,063,874        102  235,920.3  233,724    247,963  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_5_kernel0                                               
+     0.7       24,040,467      2,142   11,223.4    1,824     44,191  vm_mod_fused_argwhere_kernel4                                                                       
+     0.6       21,965,995        102  215,352.9  213,852    226,333  vm_mod_fused_nn_conv2d_add_kernel0                                                                  
+     0.6       21,476,372        306   70,184.2   69,151     74,110  vm_mod_fused_nn_max_pool2d_kernel0                                                                  
+     0.5       19,449,971        612   31,781.0   31,231     35,840  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_15_kernel0                                              
+     0.5       19,257,088        612   31,465.8   31,071     35,136  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_14_kernel0                                              
+     0.5       18,695,748        102  183,291.6  180,989    194,268  vm_mod_fused_cast_split_squeeze_expand_dims_image_resize2d_take_nn_pad_squeeze_expand_d_15133491396…
+     0.4       15,801,166        102  154,913.4  153,341    159,709  vm_mod_fused_image_resize2d_concatenate_kernel0                                                     
+     0.4       12,535,564        204   61,448.8   60,671     64,959  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_16_kernel0                                              
+     0.3       12,390,695        306   40,492.5   39,840     41,663  vm_mod_fused_concatenate_3_kernel0                                                                  
+     0.3       12,361,770        204   60,596.9   59,999     69,438  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_18_kernel0                                              
+     0.3       12,107,024        102  118,696.3  117,566    124,894  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_9_kernel0                                               
+     0.3       11,159,166        102  109,403.6  108,126    117,854  vm_mod_fused_vision_non_max_suppression_kernel6                                                     
+     0.3       10,057,326        306   32,867.1   32,223     36,256  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_add_3_kernel0                                           
+     0.3        9,476,694        306   30,969.6   30,528     32,959  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_24_kernel0                                              
+     0.2        7,967,223        102   78,110.0   77,535     79,743  vm_mod_fused_concatenate_4_kernel0                                                                  
+     0.2        7,964,697        306   26,028.4   23,071     29,568  void tensorTransformGeneric<__half, __half, float, true, false, false, (cudnnKernelDataType_t)0>(cu…
+     0.2        6,237,722        102   61,154.1   60,543     64,063  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_13_kernel0                                              
+     0.2        6,184,662        102   60,633.9   60,127     63,935  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_17_kernel0                                              
+     0.2        6,140,795        102   60,203.9   59,679     63,551  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_22_kernel0                                              
+     0.2        5,726,655        102   56,143.7   55,647     59,231  vm_mod_fused_nn_conv2d_add_1_kernel0                                                                
+     0.1        4,449,659        102   43,624.1   43,263     44,159  vm_mod_fused_argwhere_kernel3                                                                       
+     0.1        3,609,950        102   35,391.7   34,911     37,087  vm_mod_fused_layout_transform_reshape_transpose_reshape_layout_transform_reshape_transp_14924555946…
+     0.1        3,180,292        102   31,179.3   30,784     35,199  vm_mod_fused_nn_conv2d_add_sigmoid_multiply_23_kernel0                                              
+     0.1        3,050,476        102   29,906.6   29,536     31,680  vm_mod_fused_argwhere_kernel7                                                                       
+     0.1        2,890,051        306    9,444.6    6,144     14,592  vm_mod_fused_vision_non_max_suppression_kernel3                                                     
+     0.1        2,499,893        102   24,508.8   23,616     25,568  vm_mod_fused_argwhere_kernel2                                                                       
+     0.1        2,235,707        102   21,918.7   21,664     22,400  vm_mod_fused_strided_slice_strided_slice_multiply_kernel0                                           
+     0.1        1,850,179        102   18,139.0   17,696     19,392  vm_mod_fused_greater_kernel0                                                                        
+     0.0        1,175,338        102   11,522.9   11,295     12,384  vm_mod_fused_nn_conv2d_add_2_kernel0                                                                
+     0.0        1,114,383        102   10,925.3   10,752     11,808  vm_mod_fused_vision_non_max_suppression_kernel2                                                     
+     0.0        1,092,844        102   10,714.2   10,368     11,360  vm_mod_fused_argwhere_kernel0                                                                       
+     0.0        1,075,210        102   10,541.3   10,335     11,552  vm_mod_fused_argwhere_kernel1                                                                       
+     0.0          468,026        102    4,588.5    4,384      5,184  vm_mod_fused_strided_slice_strided_slice_multiply_cast_add_multiply_strided_slice_multi_16882570841…
+     0.0          383,643        102    3,761.2    3,616      4,096  vm_mod_fused_vision_non_max_suppression_kernel5                                                     
+     0.0          339,509        102    3,328.5    3,200      3,584  vm_mod_fused_max_kernel0                                                                            
+     0.0          311,356        102    3,052.5    2,880      3,392  vm_mod_fused_min_kernel0                                                                            
+     0.0          268,576        102    2,633.1    2,463      2,848  vm_mod_fused_cast_adv_index_kernel0                                                                 
+     0.0          241,275        102    2,365.4    2,272      2,720  vm_mod_fused_slice_like_where_greater_equal_where_kernel0                                           
+     0.0          239,774        102    2,350.7    2,240      2,848  vm_mod_fused_split_kernel0                                                                          
+     0.0          233,243        102    2,286.7    2,144      2,656  vm_mod_fused_adv_index_split_squeeze_multiply_squeeze_multiply_squeeze_multiply_squeeze_10028450566…
+     0.0          224,118        102    2,197.2    2,080      2,368  vm_mod_fused_dyn_strided_slice_kernel0                                                              
+     0.0          222,492        102    2,181.3    2,048      2,368  vm_mod_fused_expand_dims_cast_add_multiply_expand_dims_add_concatenate_expand_dims_kernel0          
+     0.0          216,991        102    2,127.4    1,983      2,528  vm_mod_fused_adv_index_1_kernel0                                                                    
+     0.0          215,199        102    2,109.8    1,984      2,496  vm_mod_fused_vision_non_max_suppression_kernel0                                                     
+     0.0          214,364        102    2,101.6    1,984      2,432  vm_mod_fused_adv_index_kernel0                                                                      
+     0.0          214,107        102    2,099.1    1,952      2,368  vm_mod_fused_squeeze_2_kernel0                                                                      
+     0.0          212,408        102    2,082.4    1,952      2,368  vm_mod_fused_cast_kernel0                                                                           
+     0.0          210,170        102    2,060.5    1,951      2,400  vm_mod_fused_vision_non_max_suppression_kernel4                                                     
+     0.0          209,277        102    2,051.7    1,920      2,432  vm_mod_fused_arange_kernel0                                                                         
+     0.0          209,142        102    2,050.4    1,919      2,464  vm_mod_fused_subtract_add_kernel0                                                                   
+     0.0          208,414        102    2,043.3    1,919      2,208  vm_mod_fused_vision_non_max_suppression_kernel1                                                     
+     0.0          206,045        102    2,020.0    1,856      2,272  vm_mod_fused_squeeze_cast_kernel0                                                                   
+     0.0          205,918        102    2,018.8    1,856      2,336  vm_mod_fused_squeeze_1_kernel0                                                                      
+     0.0          205,694        102    2,016.6    1,824      2,240  vm_mod_fused_squeeze_cast_1_kernel0                                                                 
+     0.0          200,183        102    1,962.6    1,856      2,208  vm_mod_fused_split_kernel1                                                                          
+     0.0          197,753        102    1,938.8    1,760      2,304  vm_mod_fused_strided_slice_kernel0                                                                  
+     0.0          184,571        102    1,809.5    1,664      2,112  vm_mod_fused_shape_of_kernel0                                                                       
+     0.0          183,929        102    1,803.2    1,664      2,112  vm_mod_fused_shape_of_1_kernel0                                                                     
+     0.0          183,296        102    1,797.0    1,664      1,952  vm_mod_fused_ndarray_size_equal_kernel0                                                             
+     0.0          183,227        102    1,796.3    1,664      2,240  vm_mod_fused_argwhere_kernel5                                                                       
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Operations  Average   Minimum   Maximum       Operation     
+ -------  ---------------  ----------  --------  -------  ---------  ------------------
+    44.4       13,831,944         514  26,910.4    2,303    125,630  [CUDA memset]     
+    31.1        9,708,695         817  11,883.3      991     99,998  [CUDA memcpy DtoH]
+    24.5        7,628,010         224  34,053.6      799  2,028,701  [CUDA memcpy HtoD]
+
+
+
+CUDA Memory Operation Statistics (by size in KiB):
+
+     Total      Operations   Average    Minimum   Maximum        Operation     
+ -------------  ----------  ----------  -------  ----------  ------------------
+ 5,317,498.500         514  10,345.328    8.625  51,200.000  [CUDA memset]     
+   200,815.803         817     245.797    0.001   1,968.750  [CUDA memcpy DtoH]
+   115,954.347         224     517.653    0.001  24,576.000  [CUDA memcpy HtoD]
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report6.qdrep"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report6.sqlite"
+
+

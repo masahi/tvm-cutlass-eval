@@ -2,7 +2,7 @@
 import torch
 import torchvision
 import os
-
+import tvm.testing
 import tvm
 from tvm import relay, auto_scheduler
 from tvm.runtime import profiler_vm
@@ -72,6 +72,12 @@ def get_input(in_size):
 
 num_iters = 50
 
+def convert_conv2d_layout(mod, desired_layouts):
+    with tvm.transform.PassContext(opt_level=3):
+        seq = tvm.transform.Sequential([relay.transform.ConvertLayout(desired_layouts)])
+        return seq(mod)
+
+
 model_func = torchvision.models.detection.maskrcnn_resnet50_fpn
 model = TraceWrapper(model_func(pretrained=True, rpn_pre_nms_top_n_test=1000))
 
@@ -80,7 +86,7 @@ img = get_input(in_size)
 inp = torch.from_numpy(img)
 
 with torch.no_grad():
-    out = model(inp)
+    pt_res = model(inp)
     script_module = do_trace(model, inp)
 
 input_name = "input0"
@@ -90,13 +96,38 @@ mod, params = relay.frontend.from_pytorch(script_module, shape_list)
 mod = rewrite_nms_to_batched_nms(mod)
 mod = rewrite_batched_nms_with_max_out_size(mod)
 mod = rewrite_scatter_to_gather(mod, 4)
+mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
+
+# target = "llvm -mcpu=cascadelake"
+# with tvm.transform.PassContext(opt_level=3):
+#     # mod = ToMixedPrecision("float16")(mod)
+#     vm_exec = relay.vm.compile(mod, target=target, params=params)
+
+# dev = tvm.device(target, 0)
+# vm = VirtualMachine(vm_exec, dev)
+# vm.set_input("main", **{input_name: img})
+# tvm_res = vm.run()
+
+# tvm.testing.assert_allclose(
+#     pt_res[0].cpu().numpy(), tvm_res[0].numpy(), rtol=1e-5, atol=1e-5
+# )
+# # Scores
+# tvm.testing.assert_allclose(
+#     pt_res[1].cpu().numpy(), tvm_res[1].numpy(), rtol=1e-5, atol=1e-5
+# )
+# # Class ids
+# np.testing.assert_equal(pt_res[2].cpu().numpy(), tvm_res[2].numpy())
+
+# score_threshold = 0.9
+# print("Num boxes:", pt_res[0].cpu().numpy().shape[0])
+# print("Num valid boxes:", np.sum(pt_res[1].cpu().numpy() >= score_threshold))
 
 with tvm.transform.PassContext(opt_level=3):
     mod = ToMixedPrecision("float16")(mod)
 
     os.makedirs("models", exist_ok=True)
 
-    with open("models/maskrcnn_fp16.json", "w") as fo:
+    with open("models/maskrcnn_fp32accum.json", "w") as fo:
         fo.write(tvm.ir.save_json(mod))
-    with open("models/maskrcnn_fp16.params", "wb") as fo:
+    with open("models/maskrcnn_fp32accum.params", "wb") as fo:
         fo.write(relay.save_param_dict(params))

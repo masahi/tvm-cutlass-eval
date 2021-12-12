@@ -1,0 +1,214 @@
+WARNING: python and any of its children processes will be profiled.
+
+Collecting data...
+[[-15.74     -0.9097   -6.35    ... -10.52     -4.38     10.27   ]
+ [-16.56      0.12463  -7.78    ... -12.555    -6.65     10.484  ]
+ [-16.44      0.3518   -8.484   ... -10.61     -5.23     10.57   ]
+ ...
+ [-15.85     -0.7246   -7.656   ... -10.51     -4.49     10.414  ]
+ [-17.23     -0.2068   -9.13    ... -12.37     -5.816    11.29   ]
+ [-16.25     -0.03033  -7.59    ... -11.44     -5.516    10.49   ]]
+[[-15.742134    -0.9126793   -6.363649   ... -10.521972    -4.392173
+   10.27651   ]
+ [-16.560234     0.12080017  -7.780143   ... -12.5498705   -6.6446705
+   10.484852  ]
+ [-16.470716     0.340938    -8.507292   ... -10.6158      -5.2146125
+   10.568363  ]
+ ...
+ [-15.852091    -0.7240639   -7.659542   ... -10.497701    -4.487609
+   10.421337  ]
+ [-17.237997    -0.21152696  -9.150121   ... -12.343368    -5.8058763
+   11.297569  ]
+ [-16.27453     -0.03410997  -7.5881696  ... -11.4555235   -5.507355
+   10.494841  ]]
+Evaluate inference time cost...
+Execution time summary:
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
+  71.2038      71.1284      73.6424      70.8588       0.2984   
+               
+Using cache found in /home/masa/.cache/torch/hub/facebookresearch_detr_master
+/home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/tensor.py:590: RuntimeWarning: Iterating over a tensor might cause the trace to be incorrect. Passing a tensor of different shape won't change the number of iterations executed (and might lead to errors or silently give incorrect results).
+  warnings.warn('Iterating over a tensor might cause the trace to be incorrect. '
+Processing events...
+Saving temporary "/tmp/nsys-report-dbe8-06c9-297d-2690.qdstrm" file to disk...
+
+Creating final output files...
+Processing [0%                                                                ]Processing [1%                                                                ]Processing [0%                                                                ]Processing [3%                                                                ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [4%                                                                ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [===8%                                                             ]Processing [==7%                                                              ]Processing [====11%                                                           ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [===8%                                                             ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [===8%                                                             ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [====11%                                                           ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [====11%                                                           ]Processing [===10%                                                            ]Processing [===9%                                                             ]Processing [====11%                                                           ]Processing [===10%                                                            ]Processing [====11%                                                           ]Processing [=====13%                                                          ]Processing [======14%                                                         ]Processing [======15%                                                         ]Processing [=======16%                                                        ]Processing [========17%                                                       ]Processing [========18%                                                       ]Processing [==========20%                                                     ]Processing [==========21%                                                     ]Processing [===========22%                                                    ]Processing [============23%                                                   ]Processing [============24%                                                   ]Processing [=============25%                                                  ]Processing [==============27%                                                 ]Processing [===============28%                                                ]Processing [================29%                                               ]Processing [================30%                                               ]Processing [=================31%                                              ]Processing [==================32%                                             ]Processing [===================34%                                            ]Processing [====================35%                                           ]Processing [====================36%                                           ]Processing [=====================37%                                          ]Processing [======================38%                                         ]Processing [======================39%                                         ]Processing [========================41%                                       ]Processing [========================42%                                       ]Processing [=========================43%                                      ]Processing [==========================44%                                     ]Processing [==========================45%                                     ]Processing [===========================46%                                    ]Processing [============================48%                                   ]Processing [=============================49%                                  ]Processing [==============================50%                                 ]Processing [==============================51%                                 ]Processing [===============================52%                                ]Processing [===============================53%                                ]Processing [=================================55%                              ]Processing [=================================56%                              ]Processing [==================================57%                             ]Processing [===================================58%                            ]Processing [===================================59%                            ]Processing [====================================60%                           ]Processing [=====================================62%                          ]Processing [======================================63%                         ]Processing [=======================================64%                        ]Processing [=======================================65%                        ]Processing [========================================66%                       ]Processing [=========================================67%                      ]Processing [==========================================69%                     ]Processing [===========================================70%                    ]Processing [===========================================71%                    ]Processing [============================================72%                   ]Processing [=============================================73%                  ]Processing [=============================================74%                  ]Processing [==============================================75%                 ]Processing [==============================================================100%]
+Saved report file to "/tmp/nsys-report-dbe8-06c9-297d-2690.qdrep"
+Exporting 146184 events: [1%                                                  ]Exporting 146184 events: [2%                                                  ]Exporting 146184 events: [3%                                                  ]Exporting 146184 events: [4%                                                  ]Exporting 146184 events: [5%                                                  ]Exporting 146184 events: [=6%                                                 ]Exporting 146184 events: [=7%                                                 ]Exporting 146184 events: [==8%                                                ]Exporting 146184 events: [==9%                                                ]Exporting 146184 events: [==10%                                               ]Exporting 146184 events: [==11%                                               ]Exporting 146184 events: [===12%                                              ]Exporting 146184 events: [===13%                                              ]Exporting 146184 events: [====14%                                             ]Exporting 146184 events: [====15%                                             ]Exporting 146184 events: [=====16%                                            ]Exporting 146184 events: [=====17%                                            ]Exporting 146184 events: [======18%                                           ]Exporting 146184 events: [======19%                                           ]Exporting 146184 events: [=======20%                                          ]Exporting 146184 events: [=======21%                                          ]Exporting 146184 events: [========22%                                         ]Exporting 146184 events: [========23%                                         ]Exporting 146184 events: [=========24%                                        ]Exporting 146184 events: [==========25%                                       ]Exporting 146184 events: [==========26%                                       ]Exporting 146184 events: [===========27%                                      ]Exporting 146184 events: [===========28%                                      ]Exporting 146184 events: [============29%                                     ]Exporting 146184 events: [============30%                                     ]Exporting 146184 events: [=============31%                                    ]Exporting 146184 events: [=============32%                                    ]Exporting 146184 events: [==============33%                                   ]Exporting 146184 events: [==============34%                                   ]Exporting 146184 events: [===============35%                                  ]Exporting 146184 events: [===============36%                                  ]Exporting 146184 events: [================37%                                 ]Exporting 146184 events: [================38%                                 ]Exporting 146184 events: [=================39%                                ]Exporting 146184 events: [=================40%                                ]Exporting 146184 events: [==================41%                               ]Exporting 146184 events: [==================42%                               ]Exporting 146184 events: [===================43%                              ]Exporting 146184 events: [===================44%                              ]Exporting 146184 events: [====================45%                             ]Exporting 146184 events: [====================46%                             ]Exporting 146184 events: [=====================47%                            ]Exporting 146184 events: [=====================48%                            ]Exporting 146184 events: [======================49%                           ]Exporting 146184 events: [=======================50%                          ]Exporting 146184 events: [=======================51%                          ]Exporting 146184 events: [========================52%                         ]Exporting 146184 events: [========================53%                         ]Exporting 146184 events: [=========================54%                        ]Exporting 146184 events: [=========================55%                        ]Exporting 146184 events: [==========================56%                       ]Exporting 146184 events: [==========================57%                       ]Exporting 146184 events: [===========================58%                      ]Exporting 146184 events: [===========================59%                      ]Exporting 146184 events: [============================60%                     ]Exporting 146184 events: [============================61%                     ]Exporting 146184 events: [=============================62%                    ]Exporting 146184 events: [=============================63%                    ]Exporting 146184 events: [==============================64%                   ]Exporting 146184 events: [==============================65%                   ]Exporting 146184 events: [===============================66%                  ]Exporting 146184 events: [===============================67%                  ]Exporting 146184 events: [================================68%                 ]Exporting 146184 events: [================================69%                 ]Exporting 146184 events: [=================================70%                ]Exporting 146184 events: [=================================71%                ]Exporting 146184 events: [==================================72%               ]Exporting 146184 events: [==================================73%               ]Exporting 146184 events: [===================================74%              ]Exporting 146184 events: [====================================75%             ]Exporting 146184 events: [====================================76%             ]Exporting 146184 events: [=====================================77%            ]Exporting 146184 events: [=====================================78%            ]Exporting 146184 events: [======================================79%           ]Exporting 146184 events: [======================================80%           ]Exporting 146184 events: [=======================================81%          ]Exporting 146184 events: [=======================================82%          ]Exporting 146184 events: [========================================83%         ]Exporting 146184 events: [========================================84%         ]Exporting 146184 events: [=========================================85%        ]Exporting 146184 events: [=========================================86%        ]Exporting 146184 events: [==========================================87%       ]Exporting 146184 events: [==========================================88%       ]Exporting 146184 events: [===========================================89%      ]Exporting 146184 events: [===========================================90%      ]Exporting 146184 events: [============================================91%     ]Exporting 146184 events: [============================================92%     ]Exporting 146184 events: [=============================================93%    ]Exporting 146184 events: [=============================================94%    ]Exporting 146184 events: [==============================================95%   ]Exporting 146184 events: [==============================================96%   ]Exporting 146184 events: [===============================================97%  ]Exporting 146184 events: [===============================================98%  ]Exporting 146184 events: [================================================99% ]Exporting 146184 events: [================================================100%]
+
+Exported successfully to
+/tmp/nsys-report-dbe8-06c9-297d-2690.sqlite
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls    Average     Minimum    Maximum                Name            
+ -------  ---------------  ---------  ------------  -------  -----------  ----------------------------
+    74.6    6,521,317,152        203  32,124,715.0      669   67,048,689  cudaStreamSynchronize       
+     8.5      740,757,299     15,300      48,415.5    2,120  688,681,061  cudaLaunchKernel            
+     5.7      499,459,534        456   1,095,306.0      241  363,153,741  cudaFree                    
+     5.4      475,320,317          8  59,415,039.6      851  475,313,580  cudaStreamCreateWithFlags   
+     2.7      240,055,073        524     458,120.4    1,528    5,504,730  cuModuleUnload              
+     1.3      113,533,091     55,284       2,053.6    1,635       30,058  cuLaunchKernel              
+     1.1       94,745,789        448     211,486.1    6,744   91,518,880  cudaMemGetInfo              
+     0.5       44,404,630        414     107,257.6    4,544   29,688,565  cudaMemcpy                  
+     0.1        5,828,818        458      12,726.7    1,189    2,095,195  cudaMalloc                  
+     0.0          602,844          1     602,844.0  602,844      602,844  cuModuleLoadData            
+     0.0          466,114          1     466,114.0  466,114      466,114  cudaHostAlloc               
+     0.0          204,322      1,476         138.4       72        2,338  cuGetProcAddress            
+     0.0           94,423          4      23,605.8      791       91,423  cudaStreamCreateWithPriority
+     0.0           27,741          4       6,935.3    3,135       17,187  cudaMemsetAsync             
+     0.0           17,495          4       4,373.8      613       14,156  cudaDeviceSynchronize       
+     0.0           16,308         48         339.8      249        1,140  cudaEventCreateWithFlags    
+     0.0            7,350         18         408.3      222        2,559  cudaEventDestroy            
+     0.0            4,665          4       1,166.3    1,026        1,472  cuInit                      
+     0.0            3,299          1       3,299.0    3,299        3,299  cudaEventRecord             
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances    Average     Minimum    Maximum                                                   Name                                                
+ -------  ---------------  ---------  -----------  ---------  ---------  ----------------------------------------------------------------------------------------------------
+     9.0      650,431,370      2,244    289,853.6    169,167    537,808  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x32_stage4_warpsize2x2…
+     5.9      423,312,512        306  1,383,374.2  1,364,696  1,446,111  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_kernel0                                              
+     5.3      380,641,776        612    621,963.7    608,597    634,328  tvmgen_default_fused_nn_softmax_cast_kernel2                                                        
+     5.2      378,299,649        102  3,708,820.1  3,662,338  4,008,161  void implicit_convolve_hhgemm<__half, 0, 6, 6, 5, 4, 4, false, 1, true>(int, int, int, __half const…
+     5.1      366,568,302        612    598,967.8    583,603    852,171  tvmgen_default_fused_nn_softmax_cast_kernel0                                                        
+     4.7      338,317,684      1,326    255,141.5    124,843    332,573  void cutlass_cudnn::Kernel<cutlass_tensorop_h16816fprop_optimized_64x128_32x6>(cutlass_tensorop_h16…
+     4.2      303,337,759        816    371,737.4    321,564    451,240  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x…
+     3.9      282,627,708        408    692,715.0    684,508    726,912  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_1_kernel0                                            
+     3.9      280,665,073        612    458,603.1    457,193    461,832  tvmgen_default_fused_nn_softmax_cast_kernel3                                                        
+     3.9      278,510,327        612    455,082.2    452,392    460,009  tvmgen_default_fused_nn_softmax_cast_kernel1                                                        
+     3.2      230,787,572        714    323,231.9    171,791    598,709  void cutlass_cudnn::Kernel<cutlass_tensorop_h16816fprop_optimized_256x128_32x3>(cutlass_tensorop_h1…
+     3.2      230,697,834        612    376,957.2    374,657    381,698  tvmgen_default_fused_strided_slice_reshape_cast_where_reshape_kernel0                               
+     3.0      213,082,746        612    348,174.4    344,126    365,408  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_2_kernel0                                            
+     2.9      209,010,118        612    341,519.8    338,846    709,247  tvmgen_default_fused_nn_softmax_cast_kernel4                                                        
+     2.3      168,282,894        612    274,972.0    271,255    296,890  tvmgen_default_fused_nn_batch_matmul_kernel0                                                        
+     2.0      147,102,338        612    240,363.3    237,397    250,454  tvmgen_default_fused_nn_batch_matmul_1_kernel0                                                      
+     2.0      142,577,095        612    232,969.1    231,669    236,149  tvmgen_default_fused_nn_pad_kernel0                                                                 
+     1.7      123,158,265        102  1,207,434.0  1,198,282  1,268,144  tvmgen_default_fused_nn_conv2d_add_nn_relu_kernel0                                                  
+     1.7      121,567,475        102  1,191,838.0  1,182,792  1,267,440  tvmgen_default_fused_nn_conv2d_add_kernel0                                                          
+     1.6      115,822,669        306    378,505.5    193,970    472,073  sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize256x64x32_stage3_warpsize4x1x…
+     1.4       97,653,488        612    159,564.5    156,078    172,207  tvmgen_default_fused_nn_softmax_cast_1_kernel2                                                      
+     1.3       96,962,415        612    158,435.3    155,566    170,703  tvmgen_default_fused_nn_softmax_cast_1_kernel0                                                      
+     1.3       93,336,181        306    305,020.2    302,330    320,220  tvmgen_default_fused_nn_conv2d_add_nn_relu_2_kernel0                                                
+     1.1       82,208,774      1,224     67,164.0     24,418    118,154  ampere_h16816gemm_128x128_ldg8_stages_32x5_tn                                                       
+     0.9       64,147,099      3,876     16,549.8     14,945     22,786  ampere_h16816gemm_256x128_ldg8_stages_32x3_tn                                                       
+     0.9       62,164,669        204    304,728.8    301,946    320,028  tvmgen_default_fused_nn_conv2d_add_nn_relu_3_kernel0                                                
+     0.9       62,111,963        102    608,940.8    604,598    638,072  tvmgen_default_fused_nn_conv2d_add_nn_relu_4_kernel0                                                
+     0.8       61,000,567        102    598,044.8    593,716    626,839  tvmgen_default_fused_nn_conv2d_add_1_kernel0                                                        
+     0.8       60,603,360        612     99,025.1     97,545    101,769  tvmgen_default_fused_reshape_add_nn_relu_reshape_kernel0                                            
+     0.8       57,239,250        612     93,528.2     91,048    102,601  ampere_h16816gemm_64x128_ldg8_stages_64x3_tn                                                        
+     0.8       54,158,348        306    176,988.1    174,703    186,640  tvmgen_default_fused_nn_conv2d_add_add_nn_relu_3_kernel0                                            
+     0.7       53,199,745        102    521,566.1    518,318    538,991  tvmgen_default_fused_nn_max_pool2d_kernel0                                                          
+     0.7       47,100,032        306    153,921.7    152,461    161,710  tvmgen_default_fused_nn_conv2d_add_nn_relu_7_kernel0                                                
+     0.6       46,912,283        306    153,308.1    151,885    161,070  tvmgen_default_fused_nn_conv2d_add_nn_relu_6_kernel0                                                
+     0.6       46,068,478        612     75,275.3     74,119     78,279  tvmgen_default_fused_nn_softmax_cast_1_kernel3                                                      
+     0.6       44,398,079        612     72,545.9     71,526     75,367  tvmgen_default_fused_nn_softmax_cast_1_kernel1                                                      
+     0.6       41,182,244        612     67,291.2     66,438     70,758  tvmgen_default_fused_strided_slice_reshape_cast_where_reshape_1_kernel0                             
+     0.6       39,811,870        510     78,062.5     77,063     82,824  tvmgen_default_fused_nn_conv2d_add_nn_relu_11_kernel0                                               
+     0.6       39,745,433        510     77,932.2     76,966     82,087  tvmgen_default_fused_nn_conv2d_add_nn_relu_10_kernel0                                               
+     0.5       37,441,885        612     61,179.6     60,166     71,046  tvmgen_default_fused_nn_batch_matmul_3_kernel0                                                      
+     0.5       36,956,646        612     60,386.7     59,493     63,366  tvmgen_default_fused_nn_softmax_cast_1_kernel4                                                      
+     0.4       31,134,613        102    305,241.3    302,938    320,572  tvmgen_default_fused_nn_conv2d_add_nn_relu_8_kernel0                                                
+     0.4       31,055,249        102    304,463.2    302,139    319,900  tvmgen_default_fused_nn_conv2d_add_nn_relu_1_kernel0                                                
+     0.4       30,973,383        102    303,660.6    301,242    318,620  tvmgen_default_fused_nn_conv2d_add_2_kernel0                                                        
+     0.4       30,122,241        612     49,219.3     48,452     53,764  tvmgen_default_fused_nn_batch_matmul_2_kernel0                                                      
+     0.4       29,919,464      1,224     24,444.0     23,842     33,539  tvmgen_default_fused_reshape_add_reshape_transpose_nn_pad_kernel0                                   
+     0.4       28,289,715      3,162      8,946.8      8,448     16,609  ampere_h16816gemm_64x64_sliced1x2_ldg8_stages_64x5_tn                                               
+     0.3       24,440,522        612     39,935.5     38,691     45,379  tvmgen_default_fused_nn_pad_1_kernel0                                                               
+     0.3       24,083,334        510     47,222.2     46,659     51,013  tvmgen_default_fused_cumsum_1_kernel4                                                               
+     0.3       24,072,681        510     47,201.3     46,661     50,788  tvmgen_default_fused_cumsum_kernel5                                                                 
+     0.3       22,832,765        102    223,850.6    222,548    226,037  tvmgen_default_fused_cast_split_squeeze_squeeze_squeeze_squeeze_squeeze_squeeze_squeeze_squeeze_180…
+     0.3       21,817,948      1,224     17,825.1     16,801     27,171  tvmgen_default_fused_reshape_add_add_kernel0                                                        
+     0.2       17,510,096        714     24,523.9     23,298     26,914  tvmgen_default_fused_cast_add_reshape_cast_kernel0                                                  
+     0.2       17,423,747        510     34,164.2     33,410     37,347  tvmgen_default_fused_nn_softmax_cast_2_kernel2                                                      
+     0.2       16,866,578        510     33,071.7     32,707     35,811  tvmgen_default_fused_nn_softmax_cast_2_kernel0                                                      
+     0.2       15,715,522        102    154,073.7    152,941    161,647  tvmgen_default_fused_nn_conv2d_add_3_kernel0                                                        
+     0.2       15,639,522        102    153,328.6    152,397    160,975  tvmgen_default_fused_nn_conv2d_add_nn_relu_5_kernel0                                                
+     0.2       15,599,809        102    152,939.3    151,981    160,366  tvmgen_default_fused_nn_conv2d_add_nn_relu_12_kernel0                                               
+     0.2       14,081,733        612     23,009.4     22,562     26,754  ampere_h16816gemm_64x128_ldg8_stages_64x4_tn                                                        
+     0.2       11,447,829      1,224      9,352.8      8,929     13,857  tvmgen_default_fused_subtract_add_sqrt_divide_multiply_add_kernel0                                  
+     0.1        9,997,720        612     16,336.1     15,170     20,450  tvmgen_default_fused_reshape_add_nn_relu_reshape_1_kernel0                                          
+     0.1        8,233,881        204     40,362.2     39,908     42,692  tvmgen_default_fused_nn_conv2d_add_nn_relu_14_kernel0                                               
+     0.1        8,165,072        204     40,024.9     39,524     42,340  tvmgen_default_fused_nn_conv2d_add_nn_relu_15_kernel0                                               
+     0.1        7,999,183        612     13,070.6     12,641     20,898  tvmgen_default_fused_reshape_add_multiply_reshape_transpose_nn_pad_kernel0                          
+     0.1        7,900,212        102     77,453.1     76,807     81,127  tvmgen_default_fused_nn_conv2d_add_nn_relu_9_kernel0                                                
+     0.1        7,590,833        612     12,403.3     11,873     16,130  tvmgen_default_fused_reshape_add_reshape_transpose_nn_pad_1_kernel0                                 
+     0.1        7,318,444      1,224      5,979.1      5,664     10,401  tvmgen_default_fused_mean_kernel0                                                                   
+     0.1        6,753,683      1,224      5,517.7      5,344      6,113  tvmgen_default_fused_variance_kernel0                                                               
+     0.1        6,634,445      1,632      4,065.2      3,104     14,658  tvmgen_default_fused_reshape_add_add_1_kernel0                                                      
+     0.1        6,534,647      1,734      3,768.5      3,488      8,864  tvmgen_default_fused_subtract_add_sqrt_divide_multiply_add_1_kernel0                                
+     0.1        6,529,413        612     10,669.0     10,273     13,825  tvmgen_default_fused_transpose_reshape_kernel0                                                      
+     0.1        6,111,974        612      9,986.9      9,537     13,889  tvmgen_default_fused_reshape_add_reshape_transpose_kernel0                                          
+     0.1        5,828,379      2,346      2,484.4      2,304     12,128  tvmgen_default_fused_variance_1_kernel0                                                             
+     0.1        5,825,756      2,346      2,483.3      2,240      9,665  tvmgen_default_fused_mean_1_kernel0                                                                 
+     0.1        5,158,982        510     10,115.7      9,889     11,233  tvmgen_default_fused_nn_batch_matmul_5_kernel0                                                      
+     0.1        4,954,257        510      9,714.2      9,409     13,538  tvmgen_default_fused_nn_batch_matmul_4_kernel0                                                      
+     0.1        4,632,238        510      9,082.8      8,769     14,049  tvmgen_default_fused_nn_softmax_cast_2_kernel1                                                      
+     0.1        4,580,985      2,346      1,952.7      1,792     12,289  tvmgen_default_fused_variance_1_kernel1                                                             
+     0.1        4,556,237      2,346      1,942.1      1,792      6,465  tvmgen_default_fused_mean_1_kernel1                                                                 
+     0.1        4,203,067        102     41,206.5     40,899     43,332  tvmgen_default_fused_nn_conv2d_add_nn_relu_13_kernel0                                               
+     0.1        4,160,773        510      8,158.4      7,809     12,898  tvmgen_default_fused_nn_softmax_cast_2_kernel3                                                      
+     0.1        4,062,790        510      7,966.3      7,424     10,017  tvmgen_default_fused_strided_slice_cast_kernel0                                                     
+     0.1        4,031,248      1,020      3,952.2      3,617     12,738  tvmgen_default_fused_add_reshape_kernel0                                                            
+     0.1        3,699,002      1,122      3,296.8      2,817     11,873  tvmgen_default_fused_strided_slice_transpose_reshape_kernel0                                        
+     0.1        3,624,018        510      7,105.9      6,752      7,745  tvmgen_default_fused_nn_pad_2_kernel0                                                               
+     0.0        3,180,674        510      6,236.6      6,049     10,113  tvmgen_default_fused_reshape_add_reshape_transpose_nn_pad_3_kernel0                                 
+     0.0        2,889,152      1,224      2,360.4      2,240      5,537  tvmgen_default_fused_mean_kernel1                                                                   
+     0.0        2,883,023        510      5,653.0      5,472      9,792  tvmgen_default_fused_nn_softmax_cast_2_kernel4                                                      
+     0.0        2,520,506      1,224      2,059.2      1,920     13,986  tvmgen_default_fused_variance_kernel1                                                               
+     0.0        2,246,048        102     22,020.1     21,698     23,618  tvmgen_default_fused_subtract_add_sqrt_divide_multiply_add_subtract_add_sqrt_divide_multiply_ad_155…
+     0.0        2,197,291        510      4,308.4      4,064      6,081  tvmgen_default_fused_reshape_add_multiply_reshape_transpose_nn_pad_1_kernel0                        
+     0.0        2,186,903        102     21,440.2     21,090     23,138  tvmgen_default_fused_strided_slice_add_divide_multiply_expand_dims_divide_strided_slice_sin_str_158…
+     0.0        2,121,946        102     20,803.4     20,418     22,018  tvmgen_default_fused_nn_conv2d_add_4_kernel0                                                        
+     0.0        2,118,338        510      4,153.6      3,968      4,704  tvmgen_default_fused_reshape_add_multiply_reshape_transpose_nn_pad_2_kernel0                        
+     0.0        2,026,797        510      3,974.1      3,457      6,720  tvmgen_default_fused_cumsum_kernel3                                                                 
+     0.0        2,025,068        204      9,926.8      9,536     14,338  tvmgen_default_fused_reshape_add_nn_relu_reshape_2_kernel0                                          
+     0.0        2,007,147        510      3,935.6      3,776     11,777  tvmgen_default_fused_cumsum_1_kernel2                                                               
+     0.0        1,952,149        510      3,827.7      3,712      6,080  tvmgen_default_fused_reshape_add_reshape_transpose_nn_pad_2_kernel0                                 
+     0.0        1,218,346        102     11,944.6     11,618     13,249  ampere_h16816gemm_128x64_ldg8_stages_64x3_tn                                                        
+     0.0        1,139,235        102     11,169.0     10,849     11,585  tvmgen_default_fused_layout_transform_reshape_squeeze_transpose_kernel0                             
+     0.0          794,939        102      7,793.5      7,553     11,297  void cutlass::Kernel<cutlass_80_wmma_tensorop_h161616gemm_16x16_128x2_tn_align8>(cutlass_80_wmma_te…
+     0.0          392,736        102      3,850.4      3,712      4,416  tvmgen_default_fused_reshape_add_kernel0                                                            
+     0.0          374,531        102      3,671.9      3,520      4,256  tvmgen_default_fused_cumsum_kernel2                                                                 
+     0.0          364,797        102      3,576.4      3,488      3,841  tvmgen_default_fused_cumsum_1_kernel1                                                               
+     0.0          346,367        102      3,395.8      3,201      4,032  void cudnn::ops::nhwcToNchwKernel<__half, __half, float, true, false, (cudnnKernelDataType_t)0>(cud…
+     0.0          308,282        102      3,022.4      2,784      8,096  tvmgen_default_fused_strided_slice_reshape_add_sigmoid_take_kernel0                                 
+     0.0          293,726        102      2,879.7      2,752      5,280  tvmgen_default_fused_strided_slice_reshape_add_take_kernel0                                         
+     0.0          236,794        102      2,321.5      2,208      2,592  tvmgen_default_fused_zeros_cast_zeros_cast_zeros_cast_zeros_cast_zeros_cast_zeros_cast_zeros_ca_912…
+     0.0          233,945        102      2,293.6      2,176      2,432  tvmgen_default_fused_cast_logical_not_kernel0                                                       
+     0.0          225,167        102      2,207.5      2,080      2,528  tvmgen_default_fused_cumsum_kernel6                                                                 
+     0.0          210,095        102      2,059.8      1,921      2,305  tvmgen_default_fused_cumsum_kernel1                                                                 
+     0.0          210,095        102      2,059.8      1,920      2,305  tvmgen_default_fused_cumsum_kernel7                                                                 
+     0.0          210,038        102      2,059.2      1,984      2,369  tvmgen_default_fused_cumsum_1_kernel5                                                               
+     0.0          201,264        102      1,973.2      1,856      2,368  tvmgen_default_fused_cumsum_1_kernel0                                                               
+     0.0          200,947        102      1,970.1      1,856      2,272  tvmgen_default_fused_cumsum_kernel0                                                                 
+     0.0          189,099        102      1,853.9      1,823      2,144  tvmgen_default_fused_cumsum_kernel4                                                                 
+     0.0          188,014        102      1,843.3      1,760      2,144  tvmgen_default_fused_cumsum_1_kernel3                                                               
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Operations  Average   Minimum   Maximum       Operation     
+ -------  ---------------  ----------  --------  -------  ---------  ------------------
+    99.8        9,095,143         413  22,022.1      768  4,583,635  [CUDA memcpy HtoD]
+     0.1           10,081           4   2,520.3    2,401      2,784  [CUDA memset]     
+     0.1            8,225           1   8,225.0    8,225      8,225  [CUDA memcpy DtoH]
+
+
+
+CUDA Memory Operation Statistics (by size in KiB):
+
+    Total     Operations  Average  Minimum   Maximum        Operation     
+ -----------  ----------  -------  -------  ----------  ------------------
+      34.500           4    8.625    8.625       8.625  [CUDA memset]     
+     143.750           1  143.750  143.750     143.750  [CUDA memcpy DtoH]
+ 137,931.537         413  333.975    0.002  56,250.000  [CUDA memcpy HtoD]
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/detr/report7.qdrep"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/detr/report7.sqlite"
+
+

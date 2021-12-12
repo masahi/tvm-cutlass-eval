@@ -1,0 +1,132 @@
+WARNING: python and any of its children processes will be profiled.
+
+Collecting data...
+[20:15:00] ../src/relay/transforms/convert_layout.cc:99: Warning: Desired layout(s) not specified for op: image.resize2d
+[20:15:00] ../src/relay/transforms/convert_layout.cc:99: Warning: Desired layout(s) not specified for op: image.resize2d
+[20:15:08] ../src/relay/transforms/to_mixed_precision.cc:429: Warning: Op "image.resize2d" not registered FTVMMixedPrecisionConversionType appears 2 times in graph.
+[20:15:08] ../src/relay/transforms/to_mixed_precision.cc:429: Warning: Op "clip" not registered FTVMMixedPrecisionConversionType appears 28 times in graph.
+[20:15:08] ../src/relay/transforms/to_mixed_precision.cc:429: Warning: Op "layout_transform" not registered FTVMMixedPrecisionConversionType appears 89 times in graph.
+Evaluate inference time cost...
+Execution time summary:
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
+  12.2998      12.1965      12.8751      12.1503       0.2386   
+               
+Processing events...
+Saving temporary "/tmp/nsys-report-640e-b251-28e5-b225.qdstrm" file to disk...
+
+Creating final output files...
+Processing [0%                                                                ]Processing [1%                                                                ]Processing [2%                                                                ]Processing [0%                                                                ]Processing [=5%                                                               ]Processing [===10%                                                            ]Processing [===8%                                                             ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [2%                                                                ]Processing [==7%                                                              ]Processing [====12%                                                           ]Processing [========17%                                                       ]Processing [==========21%                                                     ]Processing [==============26%                                                 ]Processing [=================31%                                              ]Processing [====================35%                                           ]Processing [=======================40%                                        ]Processing [==========================44%                                     ]Processing [=============================49%                                  ]Processing [================================54%                               ]Processing [===================================58%                            ]Processing [======================================63%                         ]Processing [=========================================68%                      ]Processing [============================================72%                   ]Processing [===============================================77%                ]Processing [=================================================79%              ]Processing [==============================================================100%]
+Saved report file to "/tmp/nsys-report-640e-b251-28e5-b225.qdrep"
+Exporting 38036 events: [1%                                                   ]Exporting 38036 events: [2%                                                   ]Exporting 38036 events: [3%                                                   ]Exporting 38036 events: [4%                                                   ]Exporting 38036 events: [5%                                                   ]Exporting 38036 events: [=6%                                                  ]Exporting 38036 events: [=7%                                                  ]Exporting 38036 events: [==8%                                                 ]Exporting 38036 events: [==9%                                                 ]Exporting 38036 events: [==10%                                                ]Exporting 38036 events: [==11%                                                ]Exporting 38036 events: [===12%                                               ]Exporting 38036 events: [===13%                                               ]Exporting 38036 events: [====14%                                              ]Exporting 38036 events: [====15%                                              ]Exporting 38036 events: [=====16%                                             ]Exporting 38036 events: [======17%                                            ]Exporting 38036 events: [======18%                                            ]Exporting 38036 events: [=======19%                                           ]Exporting 38036 events: [=======20%                                           ]Exporting 38036 events: [========21%                                          ]Exporting 38036 events: [========22%                                          ]Exporting 38036 events: [=========23%                                         ]Exporting 38036 events: [=========24%                                         ]Exporting 38036 events: [==========25%                                        ]Exporting 38036 events: [==========26%                                        ]Exporting 38036 events: [===========27%                                       ]Exporting 38036 events: [===========28%                                       ]Exporting 38036 events: [============29%                                      ]Exporting 38036 events: [============30%                                      ]Exporting 38036 events: [=============31%                                     ]Exporting 38036 events: [=============32%                                     ]Exporting 38036 events: [==============33%                                    ]Exporting 38036 events: [===============34%                                   ]Exporting 38036 events: [===============35%                                   ]Exporting 38036 events: [================36%                                  ]Exporting 38036 events: [================37%                                  ]Exporting 38036 events: [=================38%                                 ]Exporting 38036 events: [=================39%                                 ]Exporting 38036 events: [==================40%                                ]Exporting 38036 events: [==================41%                                ]Exporting 38036 events: [===================42%                               ]Exporting 38036 events: [===================43%                               ]Exporting 38036 events: [====================44%                              ]Exporting 38036 events: [====================45%                              ]Exporting 38036 events: [=====================46%                             ]Exporting 38036 events: [=====================47%                             ]Exporting 38036 events: [======================48%                            ]Exporting 38036 events: [======================49%                            ]Exporting 38036 events: [=======================50%                           ]Exporting 38036 events: [========================51%                          ]Exporting 38036 events: [========================52%                          ]Exporting 38036 events: [=========================53%                         ]Exporting 38036 events: [=========================54%                         ]Exporting 38036 events: [==========================55%                        ]Exporting 38036 events: [==========================56%                        ]Exporting 38036 events: [===========================57%                       ]Exporting 38036 events: [===========================58%                       ]Exporting 38036 events: [============================59%                      ]Exporting 38036 events: [============================60%                      ]Exporting 38036 events: [=============================61%                     ]Exporting 38036 events: [=============================62%                     ]Exporting 38036 events: [==============================63%                    ]Exporting 38036 events: [==============================64%                    ]Exporting 38036 events: [===============================65%                   ]Exporting 38036 events: [===============================66%                   ]Exporting 38036 events: [================================67%                  ]Exporting 38036 events: [=================================68%                 ]Exporting 38036 events: [=================================69%                 ]Exporting 38036 events: [==================================70%                ]Exporting 38036 events: [==================================71%                ]Exporting 38036 events: [===================================72%               ]Exporting 38036 events: [===================================73%               ]Exporting 38036 events: [====================================74%              ]Exporting 38036 events: [====================================75%              ]Exporting 38036 events: [=====================================76%             ]Exporting 38036 events: [=====================================77%             ]Exporting 38036 events: [======================================78%            ]Exporting 38036 events: [======================================79%            ]Exporting 38036 events: [=======================================80%           ]Exporting 38036 events: [=======================================81%           ]Exporting 38036 events: [========================================82%          ]Exporting 38036 events: [========================================83%          ]Exporting 38036 events: [=========================================84%         ]Exporting 38036 events: [==========================================85%        ]Exporting 38036 events: [==========================================86%        ]Exporting 38036 events: [===========================================87%       ]Exporting 38036 events: [===========================================88%       ]Exporting 38036 events: [============================================89%      ]Exporting 38036 events: [============================================90%      ]Exporting 38036 events: [=============================================91%     ]Exporting 38036 events: [=============================================92%     ]Exporting 38036 events: [==============================================93%    ]Exporting 38036 events: [==============================================94%    ]Exporting 38036 events: [===============================================95%   ]Exporting 38036 events: [===============================================96%   ]Exporting 38036 events: [================================================97%  ]Exporting 38036 events: [================================================98%  ]Exporting 38036 events: [=================================================99% ]Exporting 38036 events: [=================================================100%]
+
+Exported successfully to
+/tmp/nsys-report-640e-b251-28e5-b225.sqlite
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls    Average     Minimum     Maximum             Name         
+ -------  ---------------  ---------  ------------  -------  -------------  ---------------------
+    74.6    3,719,706,137        239  15,563,624.0    6,713  3,718,018,587  cudaMemGetInfo       
+    23.9    1,189,696,682        203   5,860,574.8      649     12,347,676  cudaStreamSynchronize
+     0.5       24,209,190        228     106,180.7    2,438     18,837,023  cudaMemcpy           
+     0.4       18,670,122      5,610       3,328.0    3,107         15,391  cudaLaunchKernel     
+     0.4       18,656,480      9,588       1,945.8    1,654         20,548  cuLaunchKernel       
+     0.1        7,071,194          4   1,767,798.5   30,038      4,929,546  cudaFree             
+     0.1        5,438,216      5,849         929.8      109      3,011,583  cudaMalloc           
+     0.0          380,926          1     380,926.0  380,926        380,926  cuModuleLoadData     
+     0.0           47,736        365         130.8       75            612  cuGetProcAddress     
+     0.0              798          1         798.0      798            798  cuInit               
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances   Average   Minimum   Maximum                                                   Name                                                
+ -------  ---------------  ---------  ---------  -------  ---------  ----------------------------------------------------------------------------------------------------
+    35.9      446,313,561      5,406   82,558.9    5,536    665,080  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     8.0      100,083,424        204  490,605.0   29,280  1,012,053  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     7.2       90,071,946        204  441,529.1  433,276    472,059  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_6_kernel0                               
+     3.4       42,026,411        204  206,011.8  200,542    527,899  tvmgen_default_fused_nn_conv2d_add_nn_relu_4_kernel0                                                
+     3.3       40,974,135        102  401,707.2  394,395    427,291  tvmgen_default_fused_add_image_resize2d_layout_transform_kernel0                                    
+     2.9       35,797,161        306  116,984.2  115,199    119,230  tvmgen_default_fused_cast_4_kernel0                                                                 
+     2.8       35,263,242        306  115,239.4  112,958    122,942  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_4_kernel0                                          
+     2.7       34,064,193        102  333,962.7  332,380    336,412  tvmgen_default_fused_multiply_add_nn_relu_kernel0                                                   
+     2.3       29,020,412        102  284,513.8  279,165    304,988  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_5_kernel0                               
+     2.1       26,306,639        306   85,969.4   85,023     91,327  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_6_kernel0                                
+     2.1       25,690,240        102  251,865.1  247,325    269,085  tvmgen_default_fused_nn_conv2d_add_nn_relu_kernel0                                                  
+     1.7       20,974,260        102  205,630.0  205,310    206,174  tvmgen_default_fused_nn_conv2d_add_nn_relu_1_kernel0                                                
+     1.6       19,763,652        204   96,880.6   95,903     98,591  tvmgen_default_fused_multiply_add_nn_relu_1_kernel0                                                 
+     1.5       19,213,579        102  188,368.4  184,766    201,406  tvmgen_default_fused_nn_conv2d_add_nn_relu_2_kernel0                                                
+     1.4       16,818,207        204   82,442.2   81,440     84,638  tvmgen_default_fused_cast_3_kernel0                                                                 
+     1.3       16,777,128        204   82,240.8   81,279     84,063  tvmgen_default_fused_add_clip_divide_multiply_4_kernel0                                             
+     1.3       16,045,578        204   78,654.8   76,991     83,615  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_3_kernel0                                          
+     1.3       15,743,988        102  154,352.8  151,230    165,055  tvmgen_default_fused_nn_conv2d_add_nn_relu_3_kernel0                                                
+     1.0       12,721,966        102  124,725.2  123,871    125,727  tvmgen_default_fused_multiply_add_add_kernel0                                                       
+     1.0       12,511,292        204   61,329.9   60,480     65,216  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_5_kernel0                                
+     1.0       12,066,804        204   59,151.0   58,303     60,351  tvmgen_default_fused_cast_1_kernel0                                                                 
+     1.0       11,975,416        102  117,406.0  116,063    121,246  tvmgen_default_fused_multiply_add_nn_relu_multiply_add_nn_relu_multiply_add_nn_relu_multiply_ad_180…
+     0.9       11,486,401        204   56,305.9   55,712     57,472  tvmgen_default_fused_add_clip_divide_multiply_3_kernel0                                             
+     0.8        9,767,605        102   95,760.8   91,935     96,831  tvmgen_default_fused_cast_layout_transform_kernel0                                                  
+     0.8        9,605,171        102   94,168.3   92,319    100,639  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_4_kernel0                               
+     0.8        9,525,906        204   46,695.6   45,568     48,032  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_1_kernel0                                          
+     0.7        8,765,052        102   85,931.9   85,183     88,287  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_1_kernel0                                
+     0.7        8,759,136        102   85,873.9   84,831     87,423  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_kernel0                                  
+     0.7        8,389,279        204   41,123.9   39,903     43,103  tvmgen_default_fused_multiply_add_nn_relu_2_kernel0                                                 
+     0.6        8,084,709        204   39,630.9   38,975     40,608  tvmgen_default_fused_add_clip_divide_multiply_1_kernel0                                             
+     0.5        6,708,981        102   65,774.3   64,351     70,431  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_3_kernel0                               
+     0.5        6,038,593        102   59,201.9   58,335     63,007  tvmgen_default_fused_cast_2_kernel0                                                                 
+     0.5        6,025,445        102   59,073.0   57,952     62,655  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_2_kernel0                                          
+     0.5        5,670,407        204   27,796.1   27,200     30,143  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_2_kernel0                               
+     0.4        5,210,219        102   51,080.6   50,687     53,599  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_kernel0                                 
+     0.4        4,756,937        102   46,636.6   46,144     47,616  tvmgen_default_fused_multiply_add_add_1_kernel0                                                     
+     0.4        4,408,403        102   43,219.6   42,720     44,832  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_4_kernel0                                
+     0.3        4,273,197        204   20,947.0   19,615     25,216  tvmgen_default_fused_multiply_add_nn_relu_3_kernel0                                                 
+     0.3        4,034,583        102   39,554.7   39,008     40,383  tvmgen_default_fused_add_clip_divide_multiply_2_kernel0                                             
+     0.3        3,987,246        204   19,545.3   18,848     22,495  tvmgen_default_fused_multiply_add_add_2_kernel0                                                     
+     0.3        3,830,769        204   18,778.3   18,176     19,328  tvmgen_default_fused_multiply_add_add_5_kernel0                                                     
+     0.3        3,755,664        204   18,410.1   17,920     19,552  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_3_kernel0                                
+     0.3        3,743,451        102   36,700.5   35,232     39,712  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_kernel0                                            
+     0.3        3,436,023        306   11,228.8   10,815     13,024  tvmgen_default_fused_multiply_add_add_3_kernel0                                                     
+     0.3        3,423,284        102   33,561.6   32,799     34,240  tvmgen_default_fused_cast_kernel0                                                                   
+     0.3        3,263,095        102   31,991.1   31,295     34,304  tvmgen_default_fused_nn_conv2d_add_add_clip_divide_multiply_1_kernel0                               
+     0.3        3,239,740        102   31,762.2   31,072     32,480  tvmgen_default_fused_multiply_add_kernel0                                                           
+     0.2        2,362,492        102   23,161.7   22,367     24,063  tvmgen_default_fused_add_clip_divide_multiply_kernel0                                               
+     0.2        2,119,561        102   20,780.0   20,288     23,295  tvmgen_default_fused_multiply_add_add_clip_divide_multiply_2_kernel0                                
+     0.1        1,428,110        102   14,001.1   13,695     14,880  tvmgen_default_fused_multiply_add_add_4_kernel0                                                     
+     0.1        1,294,261        102   12,688.8   12,288     13,152  tvmgen_default_fused_multiply_add_1_kernel0                                                         
+     0.1        1,286,572        102   12,613.5   12,193     13,281  tvmgen_default_fused_multiply_add_4_kernel0                                                         
+     0.1          853,589        102    8,368.5    7,968      9,088  tvmgen_default_fused_multiply_add_3_kernel0                                                         
+     0.1          824,147        306    2,693.3    2,528      3,104  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_4_kernel1                                          
+     0.1          736,381        102    7,219.4    6,976      7,745  tvmgen_default_fused_multiply_add_2_kernel0                                                         
+     0.0          548,120        204    2,686.9    2,527      3,104  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_3_kernel1                                          
+     0.0          511,221        204    2,506.0    2,336      2,880  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_1_kernel1                                          
+     0.0          443,200        204    2,172.5    2,016      2,624  tvmgen_default_fused_add_nn_relu_4_kernel0                                                          
+     0.0          442,210        204    2,167.7    1,984      5,280  tvmgen_default_fused_add_nn_relu_3_kernel0                                                          
+     0.0          416,869        204    2,043.5    1,888      2,432  tvmgen_default_fused_add_nn_relu_1_kernel0                                                          
+     0.0          274,718        102    2,693.3    2,528      3,040  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_2_kernel1                                          
+     0.0          251,293        102    2,463.7    2,304      2,784  tvmgen_default_fused_nn_adaptive_avg_pool2d_cast_kernel1                                            
+     0.0          220,259        102    2,159.4    2,016      2,464  tvmgen_default_fused_add_nn_relu_2_kernel0                                                          
+     0.0          217,110        102    2,128.5    1,952      5,920  tvmgen_default_fused_add_nn_relu_kernel0                                                            
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Operations    Average      Minimum     Maximum        Operation     
+ -------  ---------------  ----------  ------------  ----------  ----------  ------------------
+    79.7       13,806,853           1  13,806,853.0  13,806,853  13,806,853  [CUDA memcpy DtoH]
+    20.3        3,520,058         227      15,506.9         799   1,993,129  [CUDA memcpy HtoD]
+
+
+
+CUDA Memory Operation Statistics (by size in KiB):
+
+   Total     Operations   Average     Minimum     Maximum        Operation     
+ ----------  ----------  ----------  ----------  ----------  ------------------
+ 86,016.000           1  86,016.000  86,016.000  86,016.000  [CUDA memcpy DtoH]
+ 46,100.432         227     203.086       0.002  24,576.000  [CUDA memcpy HtoD]
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/deeplabv3/report3.qdrep"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/deeplabv3/report3.sqlite"
+
+
