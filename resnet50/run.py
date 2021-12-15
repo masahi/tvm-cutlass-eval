@@ -27,7 +27,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
         return rt_mod, dev, 1
     else:
-        mod = partition_for_cutlass(mod)
+        mod = partition_for_cutlass(mod, params)
         print(mod)
         mod, num_cutlass_partition = tune_cutlass_kernels(
             mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
@@ -76,13 +76,16 @@ mod, params = relay.frontend.from_pytorch(scripted_model, shape_list)
 
 mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
 mod = ToMixedPrecision("float16")(mod)
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_unfused.so", precompiled=True)
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_cudnn.so", precompiled=False, use_cudnn=True)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_unfused.so", precompiled=True)
+# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_cudnn.so", precompiled=False, use_cudnn=True)
 assert num_partition > 0
 
 rt_mod.set_input(input_name, img)
 rt_mod.run()
 tvm_res = rt_mod.get_output(0).numpy()
+print(tvm_res[0][:10])
+print(torch_res[0][:10])
+
 
 print("Evaluate inference time cost...")
 print(rt_mod.benchmark(dev, number=1, repeat=100))

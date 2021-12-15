@@ -1,0 +1,96 @@
+WARNING: python and any of its children processes will be profiled.
+
+Collecting data...
+[16:02:34] ../src/relay/transforms/convert_layout.cc:99: Warning: Desired layout(s) not specified for op: nn.max_pool2d
+[16:02:37] ../src/relay/transforms/to_mixed_precision.cc:429: Warning: Op "layout_transform" not registered FTVMMixedPrecisionConversionType appears 55 times in graph.
+[-0.52   -1.091  -2.697  -2.98   -2.324  -1.146  -2.34   -0.9097  1.992
+ -0.651 ]
+[-0.5264306  -1.093511   -2.7060077  -2.9867873  -2.3253431  -1.1526252
+ -2.3376493  -0.9055071   2.001894   -0.66251874]
+Evaluate inference time cost...
+Execution time summary:
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
+   3.1971       3.1442       3.3246       3.1179       0.0848   
+               
+Processing events...
+Saving temporary "/tmp/nsys-report-fa27-c336-0435-f1be.qdstrm" file to disk...
+
+Creating final output files...
+Processing [0%                                                                ]Processing [2%                                                                ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [====11%                                                           ]Processing [=========19%                                                      ]Processing [===============28%                                                ]Processing [====================36%                                           ]Processing [==========================44%                                     ]Processing [===============================52%                                ]Processing [====================================60%                           ]Processing [=========================================68%                      ]Processing [===============================================76%                ]Processing [===================================================82%            ]Processing [==============================================================100%]
+Saved report file to "/tmp/nsys-report-fa27-c336-0435-f1be.qdrep"
+Exporting 22528 events: [1%                                                   ]Exporting 22528 events: [2%                                                   ]Exporting 22528 events: [3%                                                   ]Exporting 22528 events: [4%                                                   ]Exporting 22528 events: [5%                                                   ]Exporting 22528 events: [=6%                                                  ]Exporting 22528 events: [=7%                                                  ]Exporting 22528 events: [==8%                                                 ]Exporting 22528 events: [==9%                                                 ]Exporting 22528 events: [==10%                                                ]Exporting 22528 events: [==11%                                                ]Exporting 22528 events: [===12%                                               ]Exporting 22528 events: [===13%                                               ]Exporting 22528 events: [====14%                                              ]Exporting 22528 events: [====15%                                              ]Exporting 22528 events: [=====16%                                             ]Exporting 22528 events: [======17%                                            ]Exporting 22528 events: [======18%                                            ]Exporting 22528 events: [=======19%                                           ]Exporting 22528 events: [=======20%                                           ]Exporting 22528 events: [========21%                                          ]Exporting 22528 events: [========22%                                          ]Exporting 22528 events: [=========23%                                         ]Exporting 22528 events: [=========24%                                         ]Exporting 22528 events: [==========25%                                        ]Exporting 22528 events: [==========26%                                        ]Exporting 22528 events: [===========27%                                       ]Exporting 22528 events: [===========28%                                       ]Exporting 22528 events: [============29%                                      ]Exporting 22528 events: [============30%                                      ]Exporting 22528 events: [=============31%                                     ]Exporting 22528 events: [=============32%                                     ]Exporting 22528 events: [==============33%                                    ]Exporting 22528 events: [===============34%                                   ]Exporting 22528 events: [===============35%                                   ]Exporting 22528 events: [================36%                                  ]Exporting 22528 events: [================37%                                  ]Exporting 22528 events: [=================38%                                 ]Exporting 22528 events: [=================39%                                 ]Exporting 22528 events: [==================40%                                ]Exporting 22528 events: [==================41%                                ]Exporting 22528 events: [===================42%                               ]Exporting 22528 events: [===================43%                               ]Exporting 22528 events: [====================44%                              ]Exporting 22528 events: [====================45%                              ]Exporting 22528 events: [=====================46%                             ]Exporting 22528 events: [=====================47%                             ]Exporting 22528 events: [======================48%                            ]Exporting 22528 events: [======================49%                            ]Exporting 22528 events: [=======================50%                           ]Exporting 22528 events: [========================51%                          ]Exporting 22528 events: [========================52%                          ]Exporting 22528 events: [=========================53%                         ]Exporting 22528 events: [=========================54%                         ]Exporting 22528 events: [==========================55%                        ]Exporting 22528 events: [==========================56%                        ]Exporting 22528 events: [===========================57%                       ]Exporting 22528 events: [===========================58%                       ]Exporting 22528 events: [============================59%                      ]Exporting 22528 events: [============================60%                      ]Exporting 22528 events: [=============================61%                     ]Exporting 22528 events: [=============================62%                     ]Exporting 22528 events: [==============================63%                    ]Exporting 22528 events: [==============================64%                    ]Exporting 22528 events: [===============================65%                   ]Exporting 22528 events: [===============================66%                   ]Exporting 22528 events: [================================67%                  ]Exporting 22528 events: [=================================68%                 ]Exporting 22528 events: [=================================69%                 ]Exporting 22528 events: [==================================70%                ]Exporting 22528 events: [==================================71%                ]Exporting 22528 events: [===================================72%               ]Exporting 22528 events: [===================================73%               ]Exporting 22528 events: [====================================74%              ]Exporting 22528 events: [====================================75%              ]Exporting 22528 events: [=====================================76%             ]Exporting 22528 events: [=====================================77%             ]Exporting 22528 events: [======================================78%            ]Exporting 22528 events: [======================================79%            ]Exporting 22528 events: [=======================================80%           ]Exporting 22528 events: [=======================================81%           ]Exporting 22528 events: [========================================82%          ]Exporting 22528 events: [========================================83%          ]Exporting 22528 events: [=========================================84%         ]Exporting 22528 events: [==========================================85%        ]Exporting 22528 events: [==========================================86%        ]Exporting 22528 events: [===========================================87%       ]Exporting 22528 events: [===========================================88%       ]Exporting 22528 events: [============================================89%      ]Exporting 22528 events: [============================================90%      ]Exporting 22528 events: [=============================================91%     ]Exporting 22528 events: [=============================================92%     ]Exporting 22528 events: [==============================================93%    ]Exporting 22528 events: [==============================================94%    ]Exporting 22528 events: [===============================================95%   ]Exporting 22528 events: [===============================================96%   ]Exporting 22528 events: [================================================97%  ]Exporting 22528 events: [================================================98%  ]Exporting 22528 events: [=================================================99% ]Exporting 22528 events: [=================================================100%]
+
+Exported successfully to
+/tmp/nsys-report-fa27-c336-0435-f1be.sqlite
+
+
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls    Average    Minimum    Maximum            Name         
+ -------  ---------------  ---------  -----------  -------  -----------  ---------------------
+    67.5      293,210,421        203  1,444,386.3      520    3,029,924  cudaStreamSynchronize
+    23.4      101,673,122        116    876,492.4    6,327  100,860,240  cudaMemGetInfo       
+     4.3       18,600,250      5,508      3,377.0    3,016       24,105  cudaLaunchKernel     
+     1.9        8,184,108        110     74,401.0    4,459    2,552,838  cudaMemcpy           
+     1.1        4,643,944      5,624        825.7       96    2,687,172  cudaMalloc           
+     1.0        4,168,862      2,142      1,946.2    1,693       13,914  cuLaunchKernel       
+     0.7        3,114,488        116     26,849.0    1,157      346,949  cudaFree             
+     0.1          584,963         55     10,635.7    5,700      108,856  cuModuleUnload       
+     0.0           84,600          1     84,600.0   84,600       84,600  cuModuleLoadData     
+     0.0           47,978        365        131.4       70          653  cuGetProcAddress     
+     0.0            1,090          1      1,090.0    1,090        1,090  cuInit               
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances   Average   Minimum  Maximum                                                  Name                                                
+ -------  ---------------  ---------  ---------  -------  -------  ----------------------------------------------------------------------------------------------------
+    18.1       58,076,164        102  569,374.2  547,588  606,724  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     9.3       29,887,995        306   97,673.2   95,968  101,184  tvmgen_default_fused_add_nn_relu_kernel0                                                            
+     8.7       27,727,896        612   45,307.0   42,752   50,945  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     7.5       24,002,637        612   39,220.0   22,240   53,696  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     7.0       22,282,032        510   43,690.3   37,313   54,112  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     6.9       22,268,915        510   43,664.5   37,344   49,184  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     6.3       20,185,967        408   49,475.4   48,512   52,256  tvmgen_default_fused_add_nn_relu_1_kernel0                                                          
+     5.1       16,485,958        714   23,089.6   19,392   42,112  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     4.6       14,785,253        612   24,158.9   23,105   27,936  tvmgen_default_fused_add_nn_relu_2_kernel0                                                          
+     4.0       12,717,259        510   24,935.8   23,712   27,072  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     3.9       12,441,838        306   40,659.6   38,464   43,777  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     3.4       10,830,376        408   26,545.0   24,609   28,928  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     2.9        9,196,508        204   45,080.9   43,488   48,640  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     2.7        8,664,058        306   28,313.9   26,943   30,368  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     2.1        6,800,811        306   22,224.9   21,153   23,936  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     1.5        4,843,355        102   47,483.9   46,592   48,897  tvmgen_default_fused_nn_max_pool2d_kernel0                                                          
+     1.2        3,968,793        102   38,909.7   37,441   40,896  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     1.2        3,866,304        102   37,904.9   36,320   40,352  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     0.7        2,167,915        204   10,627.0   10,048   12,993  tvmgen_default_fused_add_nn_relu_3_kernel0                                                          
+     0.6        2,057,998        102   20,176.5   19,360   21,536  tvmgen_default_fused_nn_adaptive_avg_pool2d_kernel0                                                 
+     0.6        1,941,962        102   19,038.8   18,593   21,856  tvmgen_default_fused_cast_layout_transform_kernel0                                                  
+     0.5        1,660,396        102   16,278.4   15,584   17,184  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     0.5        1,578,669        102   15,477.1   14,944   16,000  tvmgen_default_fused_add_nn_relu_cast_kernel0                                                       
+     0.5        1,566,918        102   15,361.9   14,912   17,632  _ZN7cutlass6KernelINS_4gemm6kernel4GemmINS1_11threadblock13MmaMultistageINS1_9GemmShapeILi64ELi64EL…
+     0.1          271,489        102    2,661.7    2,240    7,712  tvmgen_default_fused_nn_adaptive_avg_pool2d_kernel1                                                 
+     0.1          212,260        102    2,081.0    1,888    2,464  tvmgen_default_fused_layout_transform_reshape_squeeze_cast_kernel0                                  
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Operations  Average   Minimum  Maximum      Operation     
+ -------  ---------------  ----------  --------  -------  -------  ------------------
+    99.9        3,415,703         109  31,336.7      799  352,706  [CUDA memcpy HtoD]
+     0.1            1,888           1   1,888.0    1,888    1,888  [CUDA memcpy DtoH]
+
+
+
+CUDA Memory Operation Statistics (by size in KiB):
+
+   Total     Operations  Average  Minimum   Maximum       Operation     
+ ----------  ----------  -------  -------  ---------  ------------------
+ 54,568.203         109  500.626    0.125  4,704.000  [CUDA memcpy HtoD]
+     15.625           1   15.625   15.625     15.625  [CUDA memcpy DtoH]
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/resnet50/report4.qdrep"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/resnet50/report4.sqlite"
+
+

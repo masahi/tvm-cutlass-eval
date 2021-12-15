@@ -98,7 +98,7 @@ with torch.no_grad():
     trace = torch.jit.trace(model, inp)
     torch_res = model(inp)
 
-do_compile = True
+do_compile = False
 lib_path = "compile_cudnn.so"
 vmcode_path = "vmcode_cudnn.ro"
 tmp_dir = "../maskrcnn/tmp"

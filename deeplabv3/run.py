@@ -35,7 +35,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
         return rt_mod, dev, 1
     else:
-        mod = partition_for_cutlass(mod)
+        mod = partition_for_cutlass(mod, params)
         print(mod)
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "default"]})
         mod, num_cutlass_partition = tune_cutlass_kernels(
@@ -94,8 +94,8 @@ mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
 mod = ToMixedPrecision("float16")(mod)
 
 sm  = 80
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_unfused.so", precompiled=True)
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=True, use_cudnn=True)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused.so", precompiled=True)
+# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=True, use_cudnn=True)
 # assert num_partition > 0
 
 rt_mod.set_input(input_name, inp.numpy())

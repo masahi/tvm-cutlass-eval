@@ -43,7 +43,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
         return rt_mod, dev, 1
     else:
-        mod = partition_for_cutlass(mod)
+        mod = partition_for_cutlass(mod, params)
         print(mod)
         mod, num_cutlass_partition = tune_cutlass_kernels(
             mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
@@ -64,7 +64,7 @@ def convert_conv2d_layout(mod, desired_layouts):
 inp = torch.rand(8, 3, 750, 800)
 input_name = "input"
 
-precompiled = True
+precompiled = False
 
 detr = torch.hub.load("facebookresearch/detr", "detr_resnet50", pretrained=True).eval()
 model = TraceWrapper(detr.eval())
@@ -94,8 +94,8 @@ else:
     mod, params = None, None
 
 sm  = 80
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_unfused.so", precompiled=precompiled)
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=precompiled, use_cudnn=True)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused.so", precompiled=precompiled)
+# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=precompiled, use_cudnn=True)
 assert num_partition > 0
 
 rt_mod.set_input(input_name, inp.numpy())

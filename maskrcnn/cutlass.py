@@ -18,7 +18,8 @@ def convert_conv2d_layout(mod, desired_layouts):
 def profile_and_build_vm(
     mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
 ):
-    mod = partition_for_cutlass(mod)
+    mod = partition_for_cutlass(mod, params)
+    print(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
         mod, sm, profile_all=False, use_multiprocessing=True, tmp_dir=tmp_dir
     )
@@ -62,9 +63,9 @@ img = get_input(in_size)
 do_compile = True
 
 if do_compile:
-    with open("models/maskrcnn_fp32accum.json", "r") as fi:
+    with open("models/maskrcnn_fp16.json", "r") as fi:
         mod = tvm.ir.load_json(fi.read())
-    with open("models/maskrcnn_fp32accum.params", "rb") as fi:
+    with open("models/maskrcnn_fp16.params", "rb") as fi:
         params = relay.load_param_dict(fi.read())
 
     nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})

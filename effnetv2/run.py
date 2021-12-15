@@ -24,7 +24,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
         return rt_mod, dev, 1
     else:
-        mod = partition_for_cutlass(mod)
+        mod = partition_for_cutlass(mod, params)
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "default"]})
         print(mod)
         mod, num_cutlass_partition = tune_cutlass_kernels(
@@ -33,7 +33,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         with autotvm.apply_history_best("autotvm_log.txt"):
             with tvm.transform.PassContext(opt_level=3):
                 lib = relay.build(mod, target="cuda", params=params)
-        lib = build_cutlass_kernels(lib, sm, tmp_dir, lib_path)
+        lib = build_cutlass_kernels(lib, sm, tmp_dir, lib_path, use_fast_math=True)
         rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
         return rt_mod, dev, num_cutlass_partition
 
@@ -63,7 +63,7 @@ batch_size = 8
 img = np.tile(img, (batch_size, 1, 1, 1))
 
 sm  = 80
-precompiled = False
+precompiled = True
 input_name = "input_1:0"
 
 if not precompiled:
@@ -90,8 +90,8 @@ if not precompiled:
 else:
     mod, params = None, None
 
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_unfused.so", precompiled=precompiled)
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_fused.so", precompiled=precompiled)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_fused_fastmath.so", precompiled=precompiled)
+# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_unfused.so", precompiled=precompiled)
 # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_cudnn.so", precompiled=precompiled, use_cudnn=True)
 # assert num_partition > 0
 
