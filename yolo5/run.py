@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+import os
 from torch import nn
 import cv2
 import tvm
@@ -57,13 +58,13 @@ def profile_and_build_vm(
     mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
 ):
     mod = partition_for_cutlass(mod, params)
-    print(mod)
+    # print(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
         mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         vm_exec = relay.vm.compile(mod, target="cuda", params=params)
-    vm_exec = build_cutlass_kernels_vm(vm_exec, sm, tmp_dir, lib_path, vmcode_path)
+    vm_exec = build_cutlass_kernels_vm(vm_exec, sm, tmp_dir, lib_path, vmcode_path, use_fast_math=True)
     dev = tvm.device("cuda", 0)
     return VirtualMachine(vm_exec, dev), dev, num_cutlass_partition
 
@@ -98,9 +99,11 @@ with torch.no_grad():
     torch_res = model(inp)
 
 do_compile = False
+tmp_dir="../maskrcnn/tmp"
+lib_path="compile_yolo5.so"
+vmcode_path="vmcode_yolo5.ro"
 
 if do_compile:
-    import os
     if not os.path.exists("models/yolov5l_fp16.json"):
         mod, params = relay.frontend.from_pytorch(trace, [("input", inp.shape)])
         mod = ToMixedPrecision("float16")(mod)
@@ -121,13 +124,13 @@ if do_compile:
         mod,
         params,
         sm,
-        tmp_dir="../maskrcnn/tmp",
-        lib_path="compile_yolo5.so",
-        vmcode_path="vmcode_yolo5.ro",
+        vmcode_path=vmcode_path,
+        tmp_dir=tmp_dir,
+        lib_path=lib_path
     )
 else:
-    lib_path = "../maskrcnn/tmp/compile_yolo5.so"
-    vmcode_path = "../maskrcnn/tmp/vmcode_yolo5.ro"
+    lib_path = os.path.join(tmp_dir, lib_path)
+    vmcode_path = os.path.join(tmp_dir, vmcode_path)
     lib = tvm.runtime.load_module(lib_path)
     code = bytearray(open(vmcode_path, "rb").read())
     vm_exec = tvm.runtime.vm.Executable.load_exec(code, lib)

@@ -1,58 +1,56 @@
 WARNING: python and any of its children processes will be profiled.
 
 Collecting data...
-[[     32.402      187.04      156.05      429.46]
- [     423.18      186.47      511.92      417.62]
- [     140.24       191.9      215.46      408.35]
- [     4.2875      109.61      512.99      352.14]
- [   0.026764      259.18      44.823      412.52]
- [     86.185      224.22       94.94      244.55]
- [     180.44      228.19      189.86      247.91]
- [     173.14      274.42      215.56      368.69]
- [     172.39      274.85      215.96      369.85]
- [     140.45      191.73      216.01      407.57]
- [    0.17873      341.02      21.146      413.17]
- [      86.19      223.84       94.61      244.58]
- [    0.16775      120.53      20.989      153.98]
- [    0.50903      261.81      46.466      411.26]
- [     327.67      195.17      353.61      242.73]
- [    0.14038      120.89      21.185       154.1]
- [     192.63      270.05      214.26      338.16]
- [     5.1152      112.15      511.53      350.05]
- [     175.74      229.04      186.85      248.04]
- [     506.27      172.16         512      187.91]
- [       84.3         227       99.15      288.87]
- [    0.16017      332.32      20.665      413.28]
- [    0.29478      171.57       44.68      362.46]
- [     28.758      346.77      49.292       386.9]
- [    0.45841      257.53      46.092      412.02]
- [     307.19      196.78      349.51      249.47]
- [     421.04      3.9776      470.23      41.122]
- [     311.71     0.31129      329.14      18.964]
- [     85.986      225.13      97.283       258.2]
- [    0.66562      170.52      24.209      229.08]
- [    0.80018      222.65      44.031      387.62]
+[[     32.402      187.06      156.05      429.49]
+ [      423.1      186.56      512.02       417.7]
+ [     140.31      192.08      215.44      408.17]
+ [      4.275      109.59      512.98      352.13]
+ [    0.04024      259.18       44.91      412.52]
+ [     86.192      224.23      94.933      244.51]
+ [     180.46      228.19      189.86      247.91]
+ [     173.16       274.4      215.54      368.66]
+ [     172.33      275.02      215.97      369.78]
+ [     140.43       191.7      215.99      407.55]
+ [    0.17873      341.03      21.146      413.18]
+ [      86.19      223.85      94.623      244.55]
+ [    0.16619      120.54      20.987         154]
+ [    0.50159      261.64      46.523      411.42]
+ [     327.66      195.13      353.59      242.77]
+ [    0.14038       120.9      21.185      154.11]
+ [     192.63      270.12      214.26      338.07]
+ [     5.1152      111.91      511.53      350.29]
+ [     175.71      229.04      186.85      248.04]
+ [     506.27      172.16      512.01      187.91]
+ [     84.293      226.94      99.144      288.92]
+ [    0.16017      332.18      20.665      413.39]
+ [    0.30728      171.45      44.693       362.6]
+ [     307.26      196.76      349.39      249.51]
+ [     28.764      346.83      49.299      386.84]
+ [    0.45108      257.68      46.149      411.84]
+ [     421.03      3.9026      470.22      41.047]
+ [     311.69     0.31129      329.16      18.964]
+ [     85.986      225.14      97.283      258.21]
+ [    0.76854      222.06      44.088      388.26]
+ [    0.64062      170.48      24.184      229.12]
  [     208.52      85.241      226.03      113.03]
- [     173.54      271.62      215.96      369.63]
- [     0.3521      312.68      38.985      358.06]
- [     420.19        6.07      470.84      41.518]
- [     420.56      14.769      442.32      37.975]
- [     2.7001      264.25        43.7      340.68]
- [     141.68      242.11      193.87       380.6]
- [    0.82775      170.85      24.222      229.12]
+ [     173.58      271.62      215.93      369.63]
+ [    0.35835      312.71      38.992      358.02]
+ [     420.14        6.02      470.86      41.468]
+ [     2.6561       264.2      43.744      340.83]
+ [     420.56      14.762      442.32      37.969]
+ [     0.7921      170.85      24.233      229.12]
  [    0.22792      202.46      5.7158      265.38]
- [     28.787      346.95      49.294      386.64]
+ [     28.793      346.94        49.3      386.63]
  [    0.31259      171.13      23.712      268.38]
- [     143.61      287.72      191.34      338.49]
  [     507.81      203.68      511.97      218.71]
- [     420.81      14.644      441.93      37.569]
- [     140.45      191.73      216.01      407.57]
- [    0.08112      259.22      44.569      412.28]
- [     356.49      11.315      371.38      24.535]
- [    0.18809      276.37      29.337      381.63]
- [     76.669      335.83      96.669      387.32]
- [     420.65      5.3266       468.7      40.148]
- [     6.1181      105.13      506.48      188.22]]
+ [     420.82      14.637       441.9      37.563]
+ [     143.54       287.6      191.46      338.61]
+ [     140.43       191.7      215.99      407.55]
+ [    0.10612      259.25      44.594       412.3]
+ [     356.46      11.285      371.38      24.552]
+ [    0.21873      276.15      29.256       381.9]
+ [     76.669      335.81      96.669      387.31]
+ [     420.63      5.2363      468.75      40.139]]
 [[     32.392      187.12      156.12      429.37]
  [      423.3      186.98      511.84      417.16]
  [     140.26      191.89      215.48       408.3]
@@ -108,7 +106,7 @@ Collecting data...
  [     157.74      270.85      193.84      324.85]]
 Execution time summary:
  mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
-  28.9306      28.8721      29.6410      28.5857       0.2328   
+  25.7423      25.6589      26.4121      25.3956       0.2169   
                
 /home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/torch/_jit_internal.py:505: LightningDeprecationWarning: The `LightningModule.loaded_optimizer_states_dict` property is deprecated in v1.4 and will be removed in v1.6.
   item = getattr(mod, name)
@@ -133,31 +131,31 @@ Execution time summary:
 /home/masa/anaconda3/envs/torch-1.7/lib/python3.8/site-packages/yolort/models/transform.py:313: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
   / torch.tensor(s_orig, dtype=torch.float32, device=boxes.device)
 Processing events...
-Saving temporary "/tmp/nsys-report-4ffe-d16b-5ae6-48b1.qdstrm" file to disk...
+Saving temporary "/tmp/nsys-report-9428-07a0-14fc-2b34.qdstrm" file to disk...
 
 Creating final output files...
-Processing [0%                                                                ]Processing [1%                                                                ]Processing [0%                                                                ]Processing [4%                                                                ]Processing [===8%                                                             ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [==7%                                                              ]Processing [===8%                                                             ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [===9%                                                             ]Processing [===8%                                                             ]Processing [==7%                                                              ]Processing [===9%                                                             ]Processing [====11%                                                           ]Processing [=====13%                                                          ]Processing [=======16%                                                        ]Processing [========18%                                                       ]Processing [==========21%                                                     ]Processing [============23%                                                   ]Processing [==============26%                                                 ]Processing [===============28%                                                ]Processing [================30%                                               ]Processing [==================33%                                             ]Processing [====================35%                                           ]Processing [======================38%                                         ]Processing [=======================40%                                        ]Processing [=========================43%                                      ]Processing [==========================45%                                     ]Processing [============================48%                                   ]Processing [==============================50%                                 ]Processing [===============================52%                                ]Processing [=================================55%                              ]Processing [==================================57%                             ]Processing [====================================60%                           ]Processing [=====================================62%                          ]Processing [=======================================65%                        ]Processing [=========================================67%                      ]Processing [==========================================69%                     ]Processing [============================================72%                   ]Processing [=============================================74%                  ]Processing [===============================================77%                ]Processing [=================================================79%              ]Processing [==============================================================100%]
-Saved report file to "/tmp/nsys-report-4ffe-d16b-5ae6-48b1.qdrep"
-Exporting 73278 events: [1%                                                   ]Exporting 73278 events: [2%                                                   ]Exporting 73278 events: [3%                                                   ]Exporting 73278 events: [4%                                                   ]Exporting 73278 events: [5%                                                   ]Exporting 73278 events: [=6%                                                  ]Exporting 73278 events: [=7%                                                  ]Exporting 73278 events: [==8%                                                 ]Exporting 73278 events: [==9%                                                 ]Exporting 73278 events: [==10%                                                ]Exporting 73278 events: [==11%                                                ]Exporting 73278 events: [===12%                                               ]Exporting 73278 events: [===13%                                               ]Exporting 73278 events: [====14%                                              ]Exporting 73278 events: [====15%                                              ]Exporting 73278 events: [=====16%                                             ]Exporting 73278 events: [======17%                                            ]Exporting 73278 events: [======18%                                            ]Exporting 73278 events: [=======19%                                           ]Exporting 73278 events: [=======20%                                           ]Exporting 73278 events: [========21%                                          ]Exporting 73278 events: [========22%                                          ]Exporting 73278 events: [=========23%                                         ]Exporting 73278 events: [=========24%                                         ]Exporting 73278 events: [==========25%                                        ]Exporting 73278 events: [==========26%                                        ]Exporting 73278 events: [===========27%                                       ]Exporting 73278 events: [===========28%                                       ]Exporting 73278 events: [============29%                                      ]Exporting 73278 events: [============30%                                      ]Exporting 73278 events: [=============31%                                     ]Exporting 73278 events: [=============32%                                     ]Exporting 73278 events: [==============33%                                    ]Exporting 73278 events: [===============34%                                   ]Exporting 73278 events: [===============35%                                   ]Exporting 73278 events: [================36%                                  ]Exporting 73278 events: [================37%                                  ]Exporting 73278 events: [=================38%                                 ]Exporting 73278 events: [=================39%                                 ]Exporting 73278 events: [==================40%                                ]Exporting 73278 events: [==================41%                                ]Exporting 73278 events: [===================42%                               ]Exporting 73278 events: [===================43%                               ]Exporting 73278 events: [====================44%                              ]Exporting 73278 events: [====================45%                              ]Exporting 73278 events: [=====================46%                             ]Exporting 73278 events: [=====================47%                             ]Exporting 73278 events: [======================48%                            ]Exporting 73278 events: [======================49%                            ]Exporting 73278 events: [=======================50%                           ]Exporting 73278 events: [========================51%                          ]Exporting 73278 events: [========================52%                          ]Exporting 73278 events: [=========================53%                         ]Exporting 73278 events: [=========================54%                         ]Exporting 73278 events: [==========================55%                        ]Exporting 73278 events: [==========================56%                        ]Exporting 73278 events: [===========================57%                       ]Exporting 73278 events: [===========================58%                       ]Exporting 73278 events: [============================59%                      ]Exporting 73278 events: [============================60%                      ]Exporting 73278 events: [=============================61%                     ]Exporting 73278 events: [=============================62%                     ]Exporting 73278 events: [==============================63%                    ]Exporting 73278 events: [==============================64%                    ]Exporting 73278 events: [===============================65%                   ]Exporting 73278 events: [===============================66%                   ]Exporting 73278 events: [================================67%                  ]Exporting 73278 events: [=================================68%                 ]Exporting 73278 events: [=================================69%                 ]Exporting 73278 events: [==================================70%                ]Exporting 73278 events: [==================================71%                ]Exporting 73278 events: [===================================72%               ]Exporting 73278 events: [===================================73%               ]Exporting 73278 events: [====================================74%              ]Exporting 73278 events: [====================================75%              ]Exporting 73278 events: [=====================================76%             ]Exporting 73278 events: [=====================================77%             ]Exporting 73278 events: [======================================78%            ]Exporting 73278 events: [======================================79%            ]Exporting 73278 events: [=======================================80%           ]Exporting 73278 events: [=======================================81%           ]Exporting 73278 events: [========================================82%          ]Exporting 73278 events: [========================================83%          ]Exporting 73278 events: [=========================================84%         ]Exporting 73278 events: [==========================================85%        ]Exporting 73278 events: [==========================================86%        ]Exporting 73278 events: [===========================================87%       ]Exporting 73278 events: [===========================================88%       ]Exporting 73278 events: [============================================89%      ]Exporting 73278 events: [============================================90%      ]Exporting 73278 events: [=============================================91%     ]Exporting 73278 events: [=============================================92%     ]Exporting 73278 events: [==============================================93%    ]Exporting 73278 events: [==============================================94%    ]Exporting 73278 events: [===============================================95%   ]Exporting 73278 events: [===============================================96%   ]Exporting 73278 events: [================================================97%  ]Exporting 73278 events: [================================================98%  ]Exporting 73278 events: [=================================================99% ]Exporting 73278 events: [=================================================100%]
+Processing [0%                                                                ]Processing [2%                                                                ]Processing [=5%                                                               ]Processing [4%                                                                ]Processing [3%                                                                ]Processing [2%                                                                ]Processing [3%                                                                ]Processing [2%                                                                ]Processing [==7%                                                              ]Processing [=6%                                                               ]Processing [=5%                                                               ]Processing [===8%                                                             ]Processing [====11%                                                           ]Processing [======14%                                                         ]Processing [========17%                                                       ]Processing [==========20%                                                     ]Processing [============23%                                                   ]Processing [==============26%                                                 ]Processing [================29%                                               ]Processing [==================32%                                             ]Processing [====================35%                                           ]Processing [======================38%                                         ]Processing [========================41%                                       ]Processing [==========================44%                                     ]Processing [============================47%                                   ]Processing [==============================50%                                 ]Processing [===============================53%                                ]Processing [=================================56%                              ]Processing [===================================59%                            ]Processing [=====================================62%                          ]Processing [=======================================65%                        ]Processing [=========================================68%                      ]Processing [===========================================71%                    ]Processing [=============================================74%                  ]Processing [===============================================77%                ]Processing [=================================================80%              ]Processing [==============================================================100%]
+Saved report file to "/tmp/nsys-report-9428-07a0-14fc-2b34.qdrep"
+Exporting 59678 events: [1%                                                   ]Exporting 59678 events: [2%                                                   ]Exporting 59678 events: [3%                                                   ]Exporting 59678 events: [4%                                                   ]Exporting 59678 events: [5%                                                   ]Exporting 59678 events: [=6%                                                  ]Exporting 59678 events: [=7%                                                  ]Exporting 59678 events: [==8%                                                 ]Exporting 59678 events: [==9%                                                 ]Exporting 59678 events: [==10%                                                ]Exporting 59678 events: [==11%                                                ]Exporting 59678 events: [===12%                                               ]Exporting 59678 events: [===13%                                               ]Exporting 59678 events: [====14%                                              ]Exporting 59678 events: [====15%                                              ]Exporting 59678 events: [=====16%                                             ]Exporting 59678 events: [======17%                                            ]Exporting 59678 events: [======18%                                            ]Exporting 59678 events: [=======19%                                           ]Exporting 59678 events: [=======20%                                           ]Exporting 59678 events: [========21%                                          ]Exporting 59678 events: [========22%                                          ]Exporting 59678 events: [=========23%                                         ]Exporting 59678 events: [=========24%                                         ]Exporting 59678 events: [==========25%                                        ]Exporting 59678 events: [==========26%                                        ]Exporting 59678 events: [===========27%                                       ]Exporting 59678 events: [===========28%                                       ]Exporting 59678 events: [============29%                                      ]Exporting 59678 events: [============30%                                      ]Exporting 59678 events: [=============31%                                     ]Exporting 59678 events: [=============32%                                     ]Exporting 59678 events: [==============33%                                    ]Exporting 59678 events: [===============34%                                   ]Exporting 59678 events: [===============35%                                   ]Exporting 59678 events: [================36%                                  ]Exporting 59678 events: [================37%                                  ]Exporting 59678 events: [=================38%                                 ]Exporting 59678 events: [=================39%                                 ]Exporting 59678 events: [==================40%                                ]Exporting 59678 events: [==================41%                                ]Exporting 59678 events: [===================42%                               ]Exporting 59678 events: [===================43%                               ]Exporting 59678 events: [====================44%                              ]Exporting 59678 events: [====================45%                              ]Exporting 59678 events: [=====================46%                             ]Exporting 59678 events: [=====================47%                             ]Exporting 59678 events: [======================48%                            ]Exporting 59678 events: [======================49%                            ]Exporting 59678 events: [=======================50%                           ]Exporting 59678 events: [========================51%                          ]Exporting 59678 events: [========================52%                          ]Exporting 59678 events: [=========================53%                         ]Exporting 59678 events: [=========================54%                         ]Exporting 59678 events: [==========================55%                        ]Exporting 59678 events: [==========================56%                        ]Exporting 59678 events: [===========================57%                       ]Exporting 59678 events: [===========================58%                       ]Exporting 59678 events: [============================59%                      ]Exporting 59678 events: [============================60%                      ]Exporting 59678 events: [=============================61%                     ]Exporting 59678 events: [=============================62%                     ]Exporting 59678 events: [==============================63%                    ]Exporting 59678 events: [==============================64%                    ]Exporting 59678 events: [===============================65%                   ]Exporting 59678 events: [===============================66%                   ]Exporting 59678 events: [================================67%                  ]Exporting 59678 events: [=================================68%                 ]Exporting 59678 events: [=================================69%                 ]Exporting 59678 events: [==================================70%                ]Exporting 59678 events: [==================================71%                ]Exporting 59678 events: [===================================72%               ]Exporting 59678 events: [===================================73%               ]Exporting 59678 events: [====================================74%              ]Exporting 59678 events: [====================================75%              ]Exporting 59678 events: [=====================================76%             ]Exporting 59678 events: [=====================================77%             ]Exporting 59678 events: [======================================78%            ]Exporting 59678 events: [======================================79%            ]Exporting 59678 events: [=======================================80%           ]Exporting 59678 events: [=======================================81%           ]Exporting 59678 events: [========================================82%          ]Exporting 59678 events: [========================================83%          ]Exporting 59678 events: [=========================================84%         ]Exporting 59678 events: [==========================================85%        ]Exporting 59678 events: [==========================================86%        ]Exporting 59678 events: [===========================================87%       ]Exporting 59678 events: [===========================================88%       ]Exporting 59678 events: [============================================89%      ]Exporting 59678 events: [============================================90%      ]Exporting 59678 events: [=============================================91%     ]Exporting 59678 events: [=============================================92%     ]Exporting 59678 events: [==============================================93%    ]Exporting 59678 events: [==============================================94%    ]Exporting 59678 events: [===============================================95%   ]Exporting 59678 events: [===============================================96%   ]Exporting 59678 events: [================================================97%  ]Exporting 59678 events: [================================================98%  ]Exporting 59678 events: [=================================================99% ]Exporting 59678 events: [=================================================100%]
 
 Exported successfully to
-/tmp/nsys-report-4ffe-d16b-5ae6-48b1.sqlite
+/tmp/nsys-report-9428-07a0-14fc-2b34.sqlite
 
 
 CUDA API Statistics:
 
  Time(%)  Total Time (ns)  Num Calls    Average    Minimum    Maximum            Name         
  -------  ---------------  ---------  -----------  -------  -----------  ---------------------
-    87.7    2,717,768,839      1,042  2,608,223.5    2,532   26,192,381  cudaMemcpy           
-     9.2      284,522,510        469    606,657.8    6,920  280,127,420  cudaMemGetInfo       
-     1.2       38,217,741     18,666      2,047.5    1,613       21,995  cuLaunchKernel       
-     1.2       36,353,370     10,608      3,427.0    3,057       19,039  cudaLaunchKernel     
-     0.7       22,672,558     11,077      2,046.8      106    5,924,222  cudaMalloc           
-     0.0          391,240          1    391,240.0  391,240      391,240  cuModuleLoadData     
-     0.0          354,302          5     70,860.4    6,825      220,414  cudaFree             
-     0.0          239,298        202      1,184.6      512        2,754  cudaStreamSynchronize
-     0.0           52,500        365        143.8       76        3,137  cuGetProcAddress     
-     0.0            1,008          1      1,008.0    1,008        1,008  cuInit               
+    86.2    2,424,239,708      1,042  2,326,525.6    2,507   23,159,197  cudaMemcpy           
+    10.7      300,083,103        403    744,623.1    6,849  296,257,338  cudaMemGetInfo       
+     1.3       37,092,806     10,608      3,496.7    3,169       22,268  cudaLaunchKernel     
+     0.9       24,935,780     11,011      2,264.6      105   12,087,062  cudaMalloc           
+     0.9       24,785,308     11,934      2,076.9    1,650       20,964  cuLaunchKernel       
+     0.0          362,882          1    362,882.0  362,882      362,882  cuModuleLoadData     
+     0.0          362,134          5     72,426.8    7,246      216,235  cudaFree             
+     0.0          192,703        202        954.0      520        2,127  cudaStreamSynchronize
+     0.0           48,094        365        131.8       73          657  cuGetProcAddress     
+     0.0              888          1        888.0      888          888  cuInit               
 
 
 
@@ -165,84 +163,73 @@ CUDA Kernel Statistics:
 
  Time(%)  Total Time (ns)  Instances    Average     Minimum    Maximum                                                   Name                                                
  -------  ---------------  ---------  -----------  ---------  ---------  ----------------------------------------------------------------------------------------------------
-    29.2      816,232,916      5,406    150,986.5     35,488    446,371  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
-    12.1      339,019,465        102  3,323,720.2  3,257,108  3,477,557  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     6.5      183,090,353        816    224,375.4    219,201    240,130  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
-     5.8      161,102,860      1,428    112,817.1     65,184    456,515  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     4.2      117,142,599        612    191,409.5    130,112    261,282  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     3.5       98,296,854      1,326     74,130.4     72,897     78,176  vm_mod_fused_sigmoid_multiply_4_kernel0                                                             
-     3.3       91,397,373      2,346     38,958.8     37,664     43,584  vm_mod_fused_sigmoid_multiply_6_kernel0                                                             
-     3.2       89,598,608      1,632     54,901.1     40,097    261,474  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     2.6       73,575,467      2,142     34,349.0     10,912    231,522  vm_mod_fused_argwhere_kernel6                                                                       
-     2.1       57,559,716        408    141,077.7    139,809    145,889  vm_mod_fused_sigmoid_multiply_2_kernel0                                                             
-     2.0       56,397,015        204    276,456.0    274,434    279,010  vm_mod_fused_sigmoid_multiply_1_kernel0                                                             
-     2.0       56,039,024        102    549,402.2    545,347    554,723  vm_mod_fused_sigmoid_multiply_kernel0                                                               
-     1.9       54,039,369        102    529,797.7    518,211    547,364  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
-     1.9       52,859,315        510    103,645.7    101,825    108,513  vm_mod_fused_sigmoid_multiply_add_1_kernel0                                                         
-     1.5       43,142,371        306    140,988.1    139,873    147,169  vm_mod_fused_sigmoid_multiply_3_kernel0                                                             
-     1.5       43,093,152        816     52,810.2     51,745     57,376  vm_mod_fused_sigmoid_multiply_add_2_kernel0                                                         
-     1.4       40,354,776        204    197,817.5    196,225    200,258  vm_mod_fused_sigmoid_multiply_add_kernel0                                                           
-     1.4       39,800,662        204    195,101.3    193,921    196,961  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     1.3       35,577,682        204    174,400.4     84,832    270,242  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     1.2       34,600,654        102    339,222.1    337,826    342,178  vm_mod_fused_sigmoid_multiply_add_sigmoid_multiply_concatenate_kernel0                              
-     1.1       29,975,068        408     73,468.3     70,592     79,233  vm_mod_fused_sigmoid_multiply_5_kernel0                                                             
-     1.0       26,801,594        102    262,760.7    260,578    267,041  vm_mod_fused_image_resize2d_concatenate_1_kernel0                                                   
-     0.9       24,117,697      2,142     11,259.4      1,888     44,385  vm_mod_fused_argwhere_kernel4                                                                       
-     0.8       21,608,036        306     70,614.5     67,425     73,696  vm_mod_fused_nn_max_pool2d_kernel0                                                                  
-     0.7       20,111,040      1,224     16,430.6     15,424     19,648  vm_mod_fused_sigmoid_multiply_8_kernel0                                                             
-     0.6       17,864,401        102    175,141.2    171,873    182,785  vm_mod_fused_cast_split_squeeze_expand_dims_image_resize2d_take_squeeze_expand_dims_ima_59092353211…
-     0.6       17,565,480        102    172,210.6    171,104    173,633  vm_mod_fused_sigmoid_multiply_add_sigmoid_multiply_concatenate_1_kernel0                            
-     0.6       15,806,902        204     77,484.8     76,096     81,537  vm_mod_fused_sigmoid_multiply_sigmoid_multiply_concatenate_kernel0                                  
-     0.5       15,274,147        408     37,436.6     35,393     39,680  vm_mod_fused_sigmoid_multiply_7_kernel0                                                             
-     0.5       15,214,239        102    149,159.2    148,065    151,521  vm_mod_fused_sigmoid_multiply_sigmoid_multiply_concatenate_1_kernel0                                
-     0.5       14,608,888        102    143,224.4    140,705    156,961  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
-     0.5       13,477,618        102    132,133.5    130,368    134,785  vm_mod_fused_image_resize2d_concatenate_kernel0                                                     
-     0.4       11,559,625        102    113,329.7    111,169    118,721  vm_mod_fused_vision_non_max_suppression_kernel6                                                     
-     0.3        9,181,496        102     90,014.7     89,312     91,040  vm_mod_fused_sigmoid_multiply_add_sigmoid_multiply_concatenate_2_kernel0                            
-     0.3        7,578,185        102     74,295.9     73,696     75,617  vm_mod_fused_sigmoid_multiply_concatenate_kernel0                                                   
-     0.3        7,315,210        102     71,717.7     71,008     74,561  vm_mod_fused_concatenate_kernel0                                                                    
-     0.2        5,038,866        204     24,700.3     24,128     25,600  vm_mod_fused_sigmoid_multiply_add_3_kernel0                                                         
-     0.2        4,702,267        102     46,100.7     45,152     50,113  vm_mod_fused_sigmoid_multiply_add_sigmoid_multiply_concatenate_3_kernel0                            
-     0.2        4,472,832        102     43,851.3     43,488     44,384  vm_mod_fused_argwhere_kernel3                                                                       
-     0.1        4,106,617        102     40,261.0     39,776     41,376  vm_mod_fused_sigmoid_multiply_sigmoid_multiply_concatenate_2_kernel0                                
-     0.1        3,811,285        102     37,365.5     36,672     38,368  vm_mod_fused_sigmoid_multiply_concatenate_1_kernel0                                                 
-     0.1        3,303,020        102     32,382.5     31,872     33,216  vm_mod_fused_layout_transform_reshape_transpose_reshape_layout_transform_reshape_transp_14924555946…
-     0.1        3,120,592        102     30,594.0     30,144     31,840  vm_mod_fused_argwhere_kernel7                                                                       
-     0.1        2,984,701        306      9,753.9      6,272     14,784  vm_mod_fused_vision_non_max_suppression_kernel3                                                     
-     0.1        2,533,428        102     24,837.5     23,968     25,600  vm_mod_fused_argwhere_kernel2                                                                       
-     0.1        2,119,819        102     20,782.5     19,968     22,368  vm_mod_fused_strided_slice_strided_slice_multiply_kernel0                                           
-     0.1        1,516,940        102     14,872.0     14,464     19,296  vm_mod_fused_greater_kernel0                                                                        
-     0.0        1,152,485        102     11,298.9     10,975     11,808  vm_mod_fused_vision_non_max_suppression_kernel2                                                     
-     0.0        1,138,500        102     11,161.8     10,784     11,648  vm_mod_fused_argwhere_kernel0                                                                       
-     0.0        1,110,406        102     10,886.3     10,624     11,456  vm_mod_fused_argwhere_kernel1                                                                       
-     0.0          472,157        102      4,629.0      4,448      5,600  vm_mod_fused_strided_slice_strided_slice_multiply_cast_add_multiply_strided_slice_multi_16882570841…
-     0.0          392,645        102      3,849.5      3,712      4,224  vm_mod_fused_vision_non_max_suppression_kernel5                                                     
-     0.0          356,509        102      3,495.2      3,392      3,839  vm_mod_fused_max_kernel0                                                                            
-     0.0          324,059        102      3,177.0      3,039      3,584  vm_mod_fused_min_kernel0                                                                            
-     0.0          271,487        102      2,661.6      2,592      2,848  vm_mod_fused_cast_adv_index_kernel0                                                                 
-     0.0          250,726        102      2,458.1      2,368      2,752  vm_mod_fused_slice_like_where_greater_equal_where_kernel0                                           
-     0.0          245,763        102      2,409.4      2,272      3,040  vm_mod_fused_split_kernel0                                                                          
-     0.0          237,050        102      2,324.0      2,208      2,592  vm_mod_fused_adv_index_split_squeeze_multiply_squeeze_multiply_squeeze_multiply_squeeze_10028450566…
-     0.0          230,657        102      2,261.3      2,176      2,528  vm_mod_fused_dyn_strided_slice_kernel0                                                              
-     0.0          226,048        102      2,216.2      2,112      2,463  vm_mod_fused_expand_dims_cast_add_multiply_expand_dims_add_concatenate_expand_dims_kernel0          
-     0.0          220,708        102      2,163.8      2,080      2,400  vm_mod_fused_adv_index_1_kernel0                                                                    
-     0.0          220,129        102      2,158.1      2,080      2,496  vm_mod_fused_vision_non_max_suppression_kernel0                                                     
-     0.0          220,030        102      2,157.2      2,080      2,528  vm_mod_fused_adv_index_kernel0                                                                      
-     0.0          219,362        102      2,150.6      2,048      2,432  vm_mod_fused_cast_kernel0                                                                           
-     0.0          216,768        102      2,125.2      2,016      2,432  vm_mod_fused_vision_non_max_suppression_kernel1                                                     
-     0.0          215,736        102      2,115.1      2,016      2,368  vm_mod_fused_squeeze_2_kernel0                                                                      
-     0.0          214,497        102      2,102.9      2,016      2,208  vm_mod_fused_vision_non_max_suppression_kernel4                                                     
-     0.0          213,344        102      2,091.6      1,953      2,496  vm_mod_fused_split_kernel1                                                                          
-     0.0          212,643        102      2,084.7      1,952      2,336  vm_mod_fused_arange_kernel0                                                                         
-     0.0          212,383        102      2,082.2      1,985      2,432  vm_mod_fused_squeeze_cast_1_kernel0                                                                 
-     0.0          211,134        102      2,069.9      1,952      2,369  vm_mod_fused_squeeze_1_kernel0                                                                      
-     0.0          210,398        102      2,062.7      1,984      2,368  vm_mod_fused_squeeze_cast_kernel0                                                                   
-     0.0          208,286        102      2,042.0      1,951      2,432  vm_mod_fused_subtract_add_kernel0                                                                   
-     0.0          200,094        102      1,961.7      1,919      2,048  vm_mod_fused_strided_slice_kernel0                                                                  
-     0.0          188,002        102      1,843.2      1,728      2,143  vm_mod_fused_shape_of_kernel0                                                                       
-     0.0          187,779        102      1,841.0      1,728      2,176  vm_mod_fused_argwhere_kernel5                                                                       
-     0.0          187,778        102      1,841.0      1,760      2,080  vm_mod_fused_shape_of_1_kernel0                                                                     
-     0.0          187,497        102      1,838.2      1,760      2,080  vm_mod_fused_ndarray_size_equal_kernel0                                                             
+    37.6      931,748,973      5,610    166,087.2     41,888    452,451  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+    14.3      355,100,440        102  3,481,376.9  3,417,780  3,597,717  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     7.7      191,416,773        816    234,579.4    227,777    250,306  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     5.9      146,420,854      1,224    119,624.9     74,368    475,842  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     4.9      122,528,788        612    200,210.4    134,337    274,018  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     4.1      102,605,958      1,632     62,871.3     45,952    282,434  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     3.0       73,952,036      2,142     34,524.8     11,008    230,273  vm_mod_fused_argwhere_kernel6                                                                       
+     2.8       68,684,362        102    673,376.1    657,252    908,581  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock22ImplicitGemmMultista…
+     2.0       50,450,719        510     98,923.0     97,600    100,992  vm_mod_fused_add_1_kernel0                                                                          
+     1.7       41,343,672        816     50,666.3     49,568     54,337  vm_mod_fused_add_2_kernel0                                                                          
+     1.7       41,200,551        204    201,963.5    199,617    205,217  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     1.6       40,232,750        204    197,219.4    195,841    199,393  vm_mod_fused_add_kernel0                                                                            
+     1.4       35,584,544        204    174,434.0     85,633    267,873  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     1.3       33,399,166        102    327,442.8    325,026    331,874  vm_mod_fused_add_concatenate_kernel0                                                                
+     1.1       26,965,334        102    264,366.0    261,634    267,778  vm_mod_fused_image_resize2d_concatenate_1_kernel0                                                   
+     1.0       24,166,877      2,142     11,282.4      1,920     45,568  vm_mod_fused_argwhere_kernel4                                                                       
+     0.9       21,996,352        306     71,883.5     70,496     73,856  vm_mod_fused_nn_max_pool2d_kernel0                                                                  
+     0.8       20,968,982        306     68,526.1     65,409     73,217  vm_mod_fused_concatenate_1_kernel0                                                                  
+     0.7       17,905,933        102    175,548.4    172,898    183,201  vm_mod_fused_cast_split_squeeze_expand_dims_image_resize2d_take_squeeze_expand_dims_ima_59092353211…
+     0.7       16,994,075        102    166,608.6    165,825    168,864  vm_mod_fused_add_concatenate_1_kernel0                                                              
+     0.6       14,675,758        102    143,880.0    141,248    148,769  _ZN7cutlass6KernelINS_4conv6kernel23ImplicitGemmConvolutionINS1_11threadblock21ImplicitGemmPipeline…
+     0.6       13,644,711        102    133,771.7    131,937    135,873  vm_mod_fused_image_resize2d_concatenate_kernel0                                                     
+     0.5       13,551,407        102    132,856.9    132,000    134,561  vm_mod_fused_concatenate_2_kernel0                                                                  
+     0.5       11,453,856        102    112,292.7    110,017    116,513  vm_mod_fused_vision_non_max_suppression_kernel6                                                     
+     0.3        8,653,266        102     84,835.9     83,681     85,985  vm_mod_fused_add_concatenate_2_kernel0                                                              
+     0.3        7,337,160        102     71,932.9     71,329     72,609  vm_mod_fused_concatenate_kernel0                                                                    
+     0.3        6,946,857        204     34,053.2     31,872     37,920  vm_mod_fused_concatenate_3_kernel0                                                                  
+     0.2        4,721,602        204     23,145.1     22,752     23,936  vm_mod_fused_add_3_kernel0                                                                          
+     0.2        4,510,323        102     44,218.9     43,808     44,801  vm_mod_fused_argwhere_kernel3                                                                       
+     0.2        4,356,404        102     42,709.8     41,312     44,352  vm_mod_fused_add_concatenate_3_kernel0                                                              
+     0.1        3,323,283        102     32,581.2     32,032     35,489  vm_mod_fused_layout_transform_reshape_transpose_reshape_layout_transform_reshape_transp_14924555946…
+     0.1        3,142,097        102     30,804.9     30,368     34,209  vm_mod_fused_argwhere_kernel7                                                                       
+     0.1        3,001,100        306      9,807.5      6,304     14,561  vm_mod_fused_vision_non_max_suppression_kernel3                                                     
+     0.1        2,515,277        102     24,659.6     23,872     34,816  vm_mod_fused_argwhere_kernel2                                                                       
+     0.1        2,144,494        102     21,024.5     20,384     21,664  vm_mod_fused_strided_slice_strided_slice_multiply_kernel0                                           
+     0.1        1,511,142        102     14,815.1     14,496     15,328  vm_mod_fused_greater_kernel0                                                                        
+     0.0        1,159,589        102     11,368.5     11,104     11,840  vm_mod_fused_vision_non_max_suppression_kernel2                                                     
+     0.0        1,132,962        102     11,107.5     10,656     11,616  vm_mod_fused_argwhere_kernel0                                                                       
+     0.0        1,122,945        102     11,009.3     10,688     19,456  vm_mod_fused_argwhere_kernel1                                                                       
+     0.0          497,540        102      4,877.8      4,704      6,368  vm_mod_fused_strided_slice_strided_slice_multiply_cast_add_multiply_strided_slice_multi_16882570841…
+     0.0          391,583        102      3,839.0      3,680      4,096  vm_mod_fused_vision_non_max_suppression_kernel5                                                     
+     0.0          346,118        102      3,393.3      3,327      3,712  vm_mod_fused_max_kernel0                                                                            
+     0.0          321,385        102      3,150.8      3,008      3,488  vm_mod_fused_min_kernel0                                                                            
+     0.0          274,465        102      2,690.8      2,592      3,072  vm_mod_fused_cast_adv_index_kernel0                                                                 
+     0.0          252,163        102      2,472.2      2,400      2,784  vm_mod_fused_adv_index_split_squeeze_multiply_squeeze_multiply_squeeze_multiply_squeeze_10028450566…
+     0.0          250,113        102      2,452.1      2,368      2,625  vm_mod_fused_slice_like_where_greater_equal_where_kernel0                                           
+     0.0          237,699        102      2,330.4      2,240      2,656  vm_mod_fused_split_kernel0                                                                          
+     0.0          235,615        102      2,310.0      2,016      2,848  vm_mod_fused_squeeze_cast_kernel0                                                                   
+     0.0          231,330        102      2,267.9      2,208      2,528  vm_mod_fused_dyn_strided_slice_kernel0                                                              
+     0.0          229,377        102      2,248.8      2,112      2,592  vm_mod_fused_expand_dims_cast_add_multiply_expand_dims_add_concatenate_expand_dims_kernel0          
+     0.0          221,661        102      2,173.1      2,080      2,495  vm_mod_fused_adv_index_1_kernel0                                                                    
+     0.0          220,413        102      2,160.9      2,048      2,496  vm_mod_fused_vision_non_max_suppression_kernel0                                                     
+     0.0          220,129        102      2,158.1      2,079      2,400  vm_mod_fused_adv_index_kernel0                                                                      
+     0.0          219,652        102      2,153.5      2,049      2,368  vm_mod_fused_cast_kernel0                                                                           
+     0.0          217,252        102      2,129.9      2,015      2,464  vm_mod_fused_strided_slice_kernel0                                                                  
+     0.0          216,889        102      2,126.4      2,047      2,464  vm_mod_fused_vision_non_max_suppression_kernel4                                                     
+     0.0          216,639        102      2,123.9      2,016      2,368  vm_mod_fused_squeeze_2_kernel0                                                                      
+     0.0          215,396        102      2,111.7      1,984      2,465  vm_mod_fused_arange_kernel0                                                                         
+     0.0          214,247        102      2,100.5      1,984      2,464  vm_mod_fused_squeeze_1_kernel0                                                                      
+     0.0          212,642        102      2,084.7      1,984      2,240  vm_mod_fused_vision_non_max_suppression_kernel1                                                     
+     0.0          210,818        102      2,066.8      1,984      2,305  vm_mod_fused_squeeze_cast_1_kernel0                                                                 
+     0.0          210,623        102      2,064.9      1,983      2,336  vm_mod_fused_subtract_add_kernel0                                                                   
+     0.0          206,759        102      2,027.0      1,952      2,400  vm_mod_fused_split_kernel1                                                                          
+     0.0          189,444        102      1,857.3      1,728      2,176  vm_mod_fused_shape_of_kernel0                                                                       
+     0.0          188,806        102      1,851.0      1,728      2,016  vm_mod_fused_shape_of_1_kernel0                                                                     
+     0.0          188,633        102      1,849.3      1,759      2,080  vm_mod_fused_ndarray_size_equal_kernel0                                                             
+     0.0          188,255        102      1,845.6      1,760      1,920  vm_mod_fused_argwhere_kernel5                                                                       
 
 
 
@@ -250,8 +237,8 @@ CUDA Memory Operation Statistics (by time):
 
  Time(%)  Total Time (ns)  Operations  Average   Minimum   Maximum       Operation     
  -------  ---------------  ----------  --------  -------  ---------  ------------------
-    55.8        9,663,074         817  11,827.5      992    131,521  [CUDA memcpy DtoH]
-    44.2        7,660,720         225  34,047.6      799  2,039,885  [CUDA memcpy HtoD]
+    55.7        9,645,718         817  11,806.3    1,024    119,137  [CUDA memcpy DtoH]
+    44.3        7,685,522         225  34,157.9      768  2,035,147  [CUDA memcpy HtoD]
 
 
 
@@ -259,9 +246,9 @@ CUDA Memory Operation Statistics (by size in KiB):
 
     Total     Operations  Average  Minimum   Maximum        Operation     
  -----------  ----------  -------  -------  ----------  ------------------
- 200,815.803         817  245.797    0.001   1,968.750  [CUDA memcpy DtoH]
+ 200,815.771         817  245.797    0.001   1,968.750  [CUDA memcpy DtoH]
  115,954.349         225  515.353    0.001  24,576.000  [CUDA memcpy HtoD]
-Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report8.qdrep"
-Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report8.sqlite"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report9.qdrep"
+Report file moved to "/home/masa/projects/dev/tvm-cutlass-eval/yolo5/report9.sqlite"
 
 
