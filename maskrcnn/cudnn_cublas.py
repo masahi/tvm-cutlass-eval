@@ -17,8 +17,8 @@ def convert_conv2d_layout(mod, desired_layouts):
 
 def build_vm(mod, params, tmp_dir="./tmp_cudnn", lib_path="compile.so", vmcode_path="vmcode.ro"):
     with tvm.transform.PassContext(opt_level=3):
-        # vm_exec = relay.vm.compile(mod, target="cuda -libs=cudnn,cublas", params=params)
-        vm_exec = relay.vm.compile(mod, target="cuda", params=params)
+        vm_exec = relay.vm.compile(mod, target="cuda -libs=cudnn,cublas", params=params)
+        # vm_exec = relay.vm.compile(mod, target="cuda", params=params)
     code, lib = vm_exec.save()
     lib_path = os.path.join(tmp_dir, lib_path)
     vmcode_path = os.path.join(tmp_dir, vmcode_path)
@@ -31,7 +31,8 @@ def build_vm(mod, params, tmp_dir="./tmp_cudnn", lib_path="compile.so", vmcode_p
 
 def get_output_vm(vm, names, inputs):
     params = dict(zip(names, inputs))
-    return vm.invoke("main", **params)
+    vm.set_input("main", **{names[0]: inputs[0]})
+    return vm.run()
 
 
 in_size = 512
@@ -61,12 +62,9 @@ img = get_input(in_size)
 
 if True:
     with open("models/maskrcnn_fp16.json", "r") as fi:
-        mod = tvm.ir.load_json(fi.read())
+        nhwc_mod = tvm.ir.load_json(fi.read())
     with open("models/maskrcnn_fp16.params", "rb") as fi:
         params = relay.load_param_dict(fi.read())
-
-    nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "HWIO"]})
-
     sm = 80
     rt_mod, dev = build_vm(nhwc_mod, params)
 else:
@@ -80,4 +78,5 @@ else:
 
 
 out = get_output_vm(rt_mod, ["input0"], [img])
+print(out[0].shape)
 # print(rt_mod.benchmark(dev, number=1, repeat=100))

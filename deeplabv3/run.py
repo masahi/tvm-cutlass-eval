@@ -37,6 +37,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
     else:
         mod = partition_for_cutlass(mod, params)
         print(mod)
+        # return None
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "default"]})
         mod, num_cutlass_partition = tune_cutlass_kernels(
             mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
@@ -94,8 +95,8 @@ mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
 mod = ToMixedPrecision("float16")(mod)
 
 sm  = 80
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused.so", precompiled=True)
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=True, use_cudnn=True)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused_residual_block_not_heavy.so", precompiled=False)
+# # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=True, use_cudnn=True)
 # assert num_partition > 0
 
 rt_mod.set_input(input_name, inp.numpy())

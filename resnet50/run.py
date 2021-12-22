@@ -76,8 +76,8 @@ mod, params = relay.frontend.from_pytorch(scripted_model, shape_list)
 
 mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
 mod = ToMixedPrecision("float16")(mod)
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_unfused.so", precompiled=True)
-# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_cudnn.so", precompiled=False, use_cudnn=True)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_residual.so", precompiled=True)
+# # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_resnet50_cudnn.so", precompiled=False, use_cudnn=True)
 assert num_partition > 0
 
 rt_mod.set_input(input_name, img)

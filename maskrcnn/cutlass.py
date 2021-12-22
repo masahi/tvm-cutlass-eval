@@ -64,11 +64,11 @@ do_compile = True
 
 if do_compile:
     with open("models/maskrcnn_fp16.json", "r") as fi:
-        mod = tvm.ir.load_json(fi.read())
+        nhwc_mod = tvm.ir.load_json(fi.read())
     with open("models/maskrcnn_fp16.params", "rb") as fi:
         params = relay.load_param_dict(fi.read())
 
-    nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
+    # nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
     sm = 80
     rt_mod, dev, num_partition = profile_and_build_vm(nhwc_mod, params, sm)
 else:

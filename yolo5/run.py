@@ -58,13 +58,13 @@ def profile_and_build_vm(
     mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
 ):
     mod = partition_for_cutlass(mod, params)
-    # print(mod)
+    print(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
         mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         vm_exec = relay.vm.compile(mod, target="cuda", params=params)
-    vm_exec = build_cutlass_kernels_vm(vm_exec, sm, tmp_dir, lib_path, vmcode_path, use_fast_math=True)
+    vm_exec = build_cutlass_kernels_vm(vm_exec, sm, tmp_dir, lib_path, vmcode_path, use_fast_math=False)
     dev = tvm.device("cuda", 0)
     return VirtualMachine(vm_exec, dev), dev, num_cutlass_partition
 
@@ -100,8 +100,8 @@ with torch.no_grad():
 
 do_compile = False
 tmp_dir="../maskrcnn/tmp"
-lib_path="compile_yolo5.so"
-vmcode_path="vmcode_yolo5.ro"
+lib_path="compile_yolo5_residual_fusion.so"
+vmcode_path="vmcode_yolo5_residual_fusion.ro"
 
 if do_compile:
     if not os.path.exists("models/yolov5l_fp16.json"):

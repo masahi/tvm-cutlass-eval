@@ -64,7 +64,7 @@ def convert_conv2d_layout(mod, desired_layouts):
 inp = torch.rand(8, 3, 750, 800)
 input_name = "input"
 
-precompiled = False
+precompiled = True
 
 detr = torch.hub.load("facebookresearch/detr", "detr_resnet50", pretrained=True).eval()
 model = TraceWrapper(detr.eval())
@@ -79,12 +79,12 @@ if not precompiled:
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
         mod = ToMixedPrecision("float16")(mod)
 
-        os.makedirs("models", exist_ok=True)
-
         with open("models/detr_fp16.json", "w") as fo:
             fo.write(tvm.ir.save_json(mod))
         with open("models/detr_fp16.params", "wb") as fo:
             fo.write(relay.save_param_dict(params))
+
+        os.makedirs("models", exist_ok=True)
 
     with open("models/detr_fp16.json", "r") as fi:
         mod = tvm.ir.load_json(fi.read())
@@ -94,7 +94,7 @@ else:
     mod, params = None, None
 
 sm  = 80
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused.so", precompiled=precompiled)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused_residual.so", precompiled=precompiled)
 # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=precompiled, use_cudnn=True)
 assert num_partition > 0
 

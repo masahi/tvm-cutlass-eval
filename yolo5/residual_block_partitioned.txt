@@ -1,0 +1,1738 @@
+type List[A] {
+  Cons(A, List[A]),
+  Nil,
+}
+
+type Option[A] {
+  Some(A),
+  None,
+}
+
+type Tree[A] {
+  Rose(A, List[Tree[A]]),
+}
+
+type tensor_float16_t {
+  tensor_nil_float16,
+  tensor0_float16(float16),
+  tensor1_float16(Tensor[(?), float16]),
+  tensor2_float16(Tensor[(?, ?), float16]),
+  tensor3_float16(Tensor[(?, ?, ?), float16]),
+  tensor4_float16(Tensor[(?, ?, ?, ?), float16]),
+  tensor5_float16(Tensor[(?, ?, ?, ?, ?), float16]),
+  tensor6_float16(Tensor[(?, ?, ?, ?, ?, ?), float16]),
+}
+
+type tensor_float32_t {
+  tensor_nil_float32,
+  tensor0_float32(float32),
+  tensor1_float32(Tensor[(?), float32]),
+  tensor2_float32(Tensor[(?, ?), float32]),
+  tensor3_float32(Tensor[(?, ?, ?), float32]),
+  tensor4_float32(Tensor[(?, ?, ?, ?), float32]),
+  tensor5_float32(Tensor[(?, ?, ?, ?, ?), float32]),
+  tensor6_float32(Tensor[(?, ?, ?, ?, ?, ?), float32]),
+}
+
+type tensor_float64_t {
+  tensor_nil_float64,
+  tensor0_float64(float64),
+  tensor1_float64(Tensor[(?), float64]),
+  tensor2_float64(Tensor[(?, ?), float64]),
+  tensor3_float64(Tensor[(?, ?, ?), float64]),
+  tensor4_float64(Tensor[(?, ?, ?, ?), float64]),
+  tensor5_float64(Tensor[(?, ?, ?, ?, ?), float64]),
+  tensor6_float64(Tensor[(?, ?, ?, ?, ?, ?), float64]),
+}
+
+type tensor_int16_t {
+  tensor_nil_int16,
+  tensor0_int16(int16),
+  tensor1_int16(Tensor[(?), int16]),
+  tensor2_int16(Tensor[(?, ?), int16]),
+  tensor3_int16(Tensor[(?, ?, ?), int16]),
+  tensor4_int16(Tensor[(?, ?, ?, ?), int16]),
+  tensor5_int16(Tensor[(?, ?, ?, ?, ?), int16]),
+  tensor6_int16(Tensor[(?, ?, ?, ?, ?, ?), int16]),
+}
+
+type tensor_int32_t {
+  tensor_nil_int32,
+  tensor0_int32(int32),
+  tensor1_int32(Tensor[(?), int32]),
+  tensor2_int32(Tensor[(?, ?), int32]),
+  tensor3_int32(Tensor[(?, ?, ?), int32]),
+  tensor4_int32(Tensor[(?, ?, ?, ?), int32]),
+  tensor5_int32(Tensor[(?, ?, ?, ?, ?), int32]),
+  tensor6_int32(Tensor[(?, ?, ?, ?, ?, ?), int32]),
+}
+
+type tensor_int64_t {
+  tensor_nil_int64,
+  tensor0_int64(int64),
+  tensor1_int64(Tensor[(?), int64]),
+  tensor2_int64(Tensor[(?, ?), int64]),
+  tensor3_int64(Tensor[(?, ?, ?), int64]),
+  tensor4_int64(Tensor[(?, ?, ?, ?), int64]),
+  tensor5_int64(Tensor[(?, ?, ?, ?, ?), int64]),
+  tensor6_int64(Tensor[(?, ?, ?, ?, ?, ?), int64]),
+}
+
+type tensor_int8_t {
+  tensor_nil_int8,
+  tensor0_int8(int8),
+  tensor1_int8(Tensor[(?), int8]),
+  tensor2_int8(Tensor[(?, ?), int8]),
+  tensor3_int8(Tensor[(?, ?, ?), int8]),
+  tensor4_int8(Tensor[(?, ?, ?, ?), int8]),
+  tensor5_int8(Tensor[(?, ?, ?, ?, ?), int8]),
+  tensor6_int8(Tensor[(?, ?, ?, ?, ?, ?), int8]),
+}
+
+type tensor_uint16_t {
+  tensor_nil_uint16,
+  tensor0_uint16(uint16),
+  tensor1_uint16(Tensor[(?), uint16]),
+  tensor2_uint16(Tensor[(?, ?), uint16]),
+  tensor3_uint16(Tensor[(?, ?, ?), uint16]),
+  tensor4_uint16(Tensor[(?, ?, ?, ?), uint16]),
+  tensor5_uint16(Tensor[(?, ?, ?, ?, ?), uint16]),
+  tensor6_uint16(Tensor[(?, ?, ?, ?, ?, ?), uint16]),
+}
+
+type tensor_uint8_t {
+  tensor_nil_uint8,
+  tensor0_uint8(uint8),
+  tensor1_uint8(Tensor[(?), uint8]),
+  tensor2_uint8(Tensor[(?, ?), uint8]),
+  tensor3_uint8(Tensor[(?, ?, ?), uint8]),
+  tensor4_uint8(Tensor[(?, ?, ?, ?), uint8]),
+  tensor5_uint8(Tensor[(?, ?, ?, ?, ?), uint8]),
+  tensor6_uint8(Tensor[(?, ?, ?, ?, ?, ?), uint8]),
+}
+
+def @main(%input: Tensor[(8, 3, 512, 512), float32]) -> (Tensor[(?, 4), float32], Tensor[(?), float32], Tensor[(?), int64]) {
+  %0 = cast(%input, dtype="float16") /* ty=Tensor[(8, 3, 512, 512), float16] */;
+  %1 = split(%0, indices_or_sections=8) /* ty=(Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16], Tensor[(1, 3, 512, 512), float16]) */;
+  %2 = %1.0;
+  %3 = squeeze(%2, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %4 = expand_dims(%3, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %5 = image.resize2d(%4, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %6 = %1.1;
+  %7 = squeeze(%6, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %8 = expand_dims(%7, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %9 = image.resize2d(%8, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %10 = %1.2;
+  %11 = squeeze(%10, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %12 = expand_dims(%11, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %13 = image.resize2d(%12, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %14 = %1.3;
+  %15 = squeeze(%14, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %16 = expand_dims(%15, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %17 = image.resize2d(%16, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %18 = %1.4;
+  %19 = squeeze(%18, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %20 = expand_dims(%19, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %21 = image.resize2d(%20, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %22 = %1.5;
+  %23 = squeeze(%22, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %24 = expand_dims(%23, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %25 = image.resize2d(%24, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %26 = %1.6;
+  %27 = squeeze(%26, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %28 = expand_dims(%27, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %29 = image.resize2d(%28, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %30 = %1.7;
+  %31 = squeeze(%30, axis=[0]) /* ty=Tensor[(3, 512, 512), float16] */;
+  %32 = expand_dims(%31, axis=0) /* ty=Tensor[(1, 3, 512, 512), float16] */;
+  %33 = image.resize2d(%32, size=[640, 640], roi=[0f, 0f, 0f, 0f], rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(1, 3, 640, 640), float16] */;
+  %34 = take(%5, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %35 = take(%9, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %36 = take(%13, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %37 = take(%17, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %38 = take(%21, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %39 = take(%25, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %40 = take(%29, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %41 = take(%33, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(3, 640, 640), float16] */;
+  %42 = (%34, %35, %36, %37, %38, %39, %40, %41);
+  %43 = stack(%42) /* ty=Tensor[(8, 3, 640, 640), float16] */;
+  %44 = layout_transform(%43, src_layout="NCHW", dst_layout="NHWC") /* ty=Tensor[(8, 640, 640, 3), float16] */;
+  %45 = @tvmgen_default_cutlass_main_0(%44, meta[relay.Constant][0] /* ty=Tensor[(64, 6, 6, 3), float16] */, meta[relay.Constant][1] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 320, 320, 64), float16] */;
+  %46 = @tvmgen_default_cutlass_main_3(%45, meta[relay.Constant][2] /* ty=Tensor[(128, 3, 3, 64), float16] */, meta[relay.Constant][3] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+  %47 = @tvmgen_default_cutlass_main_9(%46, meta[relay.Constant][4] /* ty=Tensor[(64, 1, 1, 128), float16] */, meta[relay.Constant][5] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %48 = @tvmgen_default_cutlass_main_12(%47, meta[relay.Constant][6] /* ty=Tensor[(64, 1, 1, 64), float16] */, meta[relay.Constant][7] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %49 = @tvmgen_default_cutlass_main_15(%48, meta[relay.Constant][8] /* ty=Tensor[(64, 3, 3, 64), float16] */, meta[relay.Constant][9] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %50 = @tvmgen_default_cutlass_main_6(%46, meta[relay.Constant][4] /* ty=Tensor[(64, 1, 1, 128), float16] */, meta[relay.Constant][5] /* ty=Tensor[(64), float16] */, %49) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %51 = @tvmgen_default_cutlass_main_19(%50, meta[relay.Constant][10] /* ty=Tensor[(64, 1, 1, 64), float16] */, meta[relay.Constant][11] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %52 = @tvmgen_default_cutlass_main_22(%51, meta[relay.Constant][12] /* ty=Tensor[(64, 3, 3, 64), float16] */, meta[relay.Constant][13] /* ty=Tensor[(64), float16] */, %50) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %53 = @tvmgen_default_cutlass_main_26(%52, meta[relay.Constant][14] /* ty=Tensor[(64, 1, 1, 64), float16] */, meta[relay.Constant][15] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %54 = @tvmgen_default_cutlass_main_29(%53, meta[relay.Constant][16] /* ty=Tensor[(64, 3, 3, 64), float16] */, meta[relay.Constant][17] /* ty=Tensor[(64), float16] */, %52) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %55 = @tvmgen_default_cutlass_main_33(%46, meta[relay.Constant][18] /* ty=Tensor[(64, 1, 1, 128), float16] */, meta[relay.Constant][19] /* ty=Tensor[(64), float16] */) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+  %56 = (%54, %55);
+  %57 = concatenate(%56, axis=3) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+  %58 = @tvmgen_default_cutlass_main_36(%57, meta[relay.Constant][20] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][21] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+  %59 = @tvmgen_default_cutlass_main_39(%58, meta[relay.Constant][22] /* ty=Tensor[(256, 3, 3, 128), float16] */, meta[relay.Constant][23] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+  %60 = @tvmgen_default_cutlass_main_45(%59, meta[relay.Constant][24] /* ty=Tensor[(128, 1, 1, 256), float16] */, meta[relay.Constant][25] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %61 = @tvmgen_default_cutlass_main_48(%60, meta[relay.Constant][26] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][27] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %62 = @tvmgen_default_cutlass_main_51(%61, meta[relay.Constant][28] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][29] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %63 = @tvmgen_default_cutlass_main_42(%59, meta[relay.Constant][24] /* ty=Tensor[(128, 1, 1, 256), float16] */, meta[relay.Constant][25] /* ty=Tensor[(128), float16] */, %62) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %64 = @tvmgen_default_cutlass_main_55(%63, meta[relay.Constant][30] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][31] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %65 = @tvmgen_default_cutlass_main_58(%64, meta[relay.Constant][32] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][33] /* ty=Tensor[(128), float16] */, %63) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %66 = @tvmgen_default_cutlass_main_62(%65, meta[relay.Constant][34] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][35] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %67 = @tvmgen_default_cutlass_main_65(%66, meta[relay.Constant][36] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][37] /* ty=Tensor[(128), float16] */, %65) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %68 = @tvmgen_default_cutlass_main_69(%67, meta[relay.Constant][38] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][39] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %69 = @tvmgen_default_cutlass_main_72(%68, meta[relay.Constant][40] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][41] /* ty=Tensor[(128), float16] */, %67) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %70 = @tvmgen_default_cutlass_main_76(%69, meta[relay.Constant][42] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][43] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %71 = @tvmgen_default_cutlass_main_79(%70, meta[relay.Constant][44] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][45] /* ty=Tensor[(128), float16] */, %69) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %72 = @tvmgen_default_cutlass_main_83(%71, meta[relay.Constant][46] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][47] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %73 = @tvmgen_default_cutlass_main_86(%72, meta[relay.Constant][48] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][49] /* ty=Tensor[(128), float16] */, %71) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %74 = @tvmgen_default_cutlass_main_90(%59, meta[relay.Constant][50] /* ty=Tensor[(128, 1, 1, 256), float16] */, meta[relay.Constant][51] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %75 = (%73, %74);
+  %76 = concatenate(%75, axis=3) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+  %77 = @tvmgen_default_cutlass_main_93(%76, meta[relay.Constant][52] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][53] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+  %78 = @tvmgen_default_cutlass_main_96(%77, meta[relay.Constant][54] /* ty=Tensor[(512, 3, 3, 256), float16] */, meta[relay.Constant][55] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %79 = @tvmgen_default_cutlass_main_102(%78, meta[relay.Constant][56] /* ty=Tensor[(256, 1, 1, 512), float16] */, meta[relay.Constant][57] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %80 = @tvmgen_default_cutlass_main_105(%79, meta[relay.Constant][58] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][59] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %81 = @tvmgen_default_cutlass_main_108(%80, meta[relay.Constant][60] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][61] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %82 = @tvmgen_default_cutlass_main_99(%78, meta[relay.Constant][56] /* ty=Tensor[(256, 1, 1, 512), float16] */, meta[relay.Constant][57] /* ty=Tensor[(256), float16] */, %81) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %83 = @tvmgen_default_cutlass_main_112(%82, meta[relay.Constant][62] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][63] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %84 = @tvmgen_default_cutlass_main_115(%83, meta[relay.Constant][64] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][65] /* ty=Tensor[(256), float16] */, %82) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %85 = @tvmgen_default_cutlass_main_119(%84, meta[relay.Constant][66] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][67] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %86 = @tvmgen_default_cutlass_main_122(%85, meta[relay.Constant][68] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][69] /* ty=Tensor[(256), float16] */, %84) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %87 = @tvmgen_default_cutlass_main_126(%86, meta[relay.Constant][70] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][71] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %88 = @tvmgen_default_cutlass_main_129(%87, meta[relay.Constant][72] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][73] /* ty=Tensor[(256), float16] */, %86) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %89 = @tvmgen_default_cutlass_main_133(%88, meta[relay.Constant][74] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][75] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %90 = @tvmgen_default_cutlass_main_136(%89, meta[relay.Constant][76] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][77] /* ty=Tensor[(256), float16] */, %88) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %91 = @tvmgen_default_cutlass_main_140(%90, meta[relay.Constant][78] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][79] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %92 = @tvmgen_default_cutlass_main_143(%91, meta[relay.Constant][80] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][81] /* ty=Tensor[(256), float16] */, %90) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %93 = @tvmgen_default_cutlass_main_147(%92, meta[relay.Constant][82] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][83] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %94 = @tvmgen_default_cutlass_main_150(%93, meta[relay.Constant][84] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][85] /* ty=Tensor[(256), float16] */, %92) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %95 = @tvmgen_default_cutlass_main_154(%94, meta[relay.Constant][86] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][87] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %96 = @tvmgen_default_cutlass_main_157(%95, meta[relay.Constant][88] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][89] /* ty=Tensor[(256), float16] */, %94) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %97 = @tvmgen_default_cutlass_main_161(%96, meta[relay.Constant][90] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][91] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %98 = @tvmgen_default_cutlass_main_164(%97, meta[relay.Constant][92] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][93] /* ty=Tensor[(256), float16] */, %96) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %99 = @tvmgen_default_cutlass_main_168(%78, meta[relay.Constant][94] /* ty=Tensor[(256, 1, 1, 512), float16] */, meta[relay.Constant][95] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %100 = (%98, %99);
+  %101 = concatenate(%100, axis=3) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %102 = @tvmgen_default_cutlass_main_171(%101, meta[relay.Constant][96] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][97] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %103 = @tvmgen_default_cutlass_main_174(%102, meta[relay.Constant][98] /* ty=Tensor[(1024, 3, 3, 512), float16] */, meta[relay.Constant][99] /* ty=Tensor[(1024), float16] */) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %104 = @tvmgen_default_cutlass_main_180(%103, meta[relay.Constant][100] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][101] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %105 = @tvmgen_default_cutlass_main_183(%104, meta[relay.Constant][102] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][103] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %106 = @tvmgen_default_cutlass_main_186(%105, meta[relay.Constant][104] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][105] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %107 = @tvmgen_default_cutlass_main_177(%103, meta[relay.Constant][100] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][101] /* ty=Tensor[(512), float16] */, %106) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %108 = @tvmgen_default_cutlass_main_190(%107, meta[relay.Constant][106] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][107] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %109 = @tvmgen_default_cutlass_main_193(%108, meta[relay.Constant][108] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][109] /* ty=Tensor[(512), float16] */, %107) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %110 = @tvmgen_default_cutlass_main_197(%109, meta[relay.Constant][110] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][111] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %111 = @tvmgen_default_cutlass_main_200(%110, meta[relay.Constant][112] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][113] /* ty=Tensor[(512), float16] */, %109) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %112 = @tvmgen_default_cutlass_main_204(%103, meta[relay.Constant][114] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][115] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %113 = (%111, %112);
+  %114 = concatenate(%113, axis=3) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %115 = @tvmgen_default_cutlass_main_207(%114, meta[relay.Constant][116] /* ty=Tensor[(1024, 1, 1, 1024), float16] */, meta[relay.Constant][117] /* ty=Tensor[(1024), float16] */) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %116 = @tvmgen_default_cutlass_main_210(%115, meta[relay.Constant][118] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][119] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %117 = nn.max_pool2d(%116, pool_size=[5, 5], padding=[2, 2, 2, 2], layout="NHWC") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %118 = nn.max_pool2d(%117, pool_size=[5, 5], padding=[2, 2, 2, 2], layout="NHWC") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %119 = nn.max_pool2d(%118, pool_size=[5, 5], padding=[2, 2, 2, 2], layout="NHWC") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %120 = (%116, %117, %118, %119);
+  %121 = concatenate(%120, axis=3) /* ty=Tensor[(8, 20, 20, 2048), float16] */;
+  %122 = @tvmgen_default_cutlass_main_213(%121, meta[relay.Constant][120] /* ty=Tensor[(1024, 1, 1, 2048), float16] */, meta[relay.Constant][121] /* ty=Tensor[(1024), float16] */) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %123 = @tvmgen_default_cutlass_main_216(%122, meta[relay.Constant][122] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][123] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %124 = image.resize2d(%123, size=[40, 40], roi=[0f, 0f, 0f, 0f], layout="NHWC", method="nearest_neighbor", coordinate_transformation_mode="asymmetric", rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %125 = (%124, %102);
+  %126 = concatenate(%125, axis=3) /* ty=Tensor[(8, 40, 40, 1024), float16] */;
+  %127 = @tvmgen_default_cutlass_main_219(%126, meta[relay.Constant][124] /* ty=Tensor[(256, 1, 1, 1024), float16] */, meta[relay.Constant][125] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %128 = @tvmgen_default_cutlass_main_222(%127, meta[relay.Constant][126] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][127] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %129 = @tvmgen_default_cutlass_main_225(%128, meta[relay.Constant][128] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][129] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %130 = @tvmgen_default_cutlass_main_228(%129, meta[relay.Constant][130] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][131] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %131 = @tvmgen_default_cutlass_main_231(%130, meta[relay.Constant][132] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][133] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %132 = @tvmgen_default_cutlass_main_234(%131, meta[relay.Constant][134] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][135] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %133 = @tvmgen_default_cutlass_main_237(%132, meta[relay.Constant][136] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][137] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %134 = @tvmgen_default_cutlass_main_240(%126, meta[relay.Constant][138] /* ty=Tensor[(256, 1, 1, 1024), float16] */, meta[relay.Constant][139] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %135 = (%133, %134);
+  %136 = concatenate(%135, axis=3) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %137 = @tvmgen_default_cutlass_main_243(%136, meta[relay.Constant][140] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][141] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %138 = @tvmgen_default_cutlass_main_246(%137, meta[relay.Constant][142] /* ty=Tensor[(256, 1, 1, 512), float16] */, meta[relay.Constant][143] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %139 = image.resize2d(%138, size=[80, 80], roi=[0f, 0f, 0f, 0f], layout="NHWC", method="nearest_neighbor", coordinate_transformation_mode="asymmetric", rounding_method="", cubic_alpha=-0.75f) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+  %140 = (%139, %77);
+  %141 = concatenate(%140, axis=3) /* ty=Tensor[(8, 80, 80, 512), float16] */;
+  %142 = @tvmgen_default_cutlass_main_249(%141, meta[relay.Constant][144] /* ty=Tensor[(128, 1, 1, 512), float16] */, meta[relay.Constant][145] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %143 = @tvmgen_default_cutlass_main_252(%142, meta[relay.Constant][146] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][147] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %144 = @tvmgen_default_cutlass_main_255(%143, meta[relay.Constant][148] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][149] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %145 = @tvmgen_default_cutlass_main_258(%144, meta[relay.Constant][150] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][151] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %146 = @tvmgen_default_cutlass_main_261(%145, meta[relay.Constant][152] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][153] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %147 = @tvmgen_default_cutlass_main_264(%146, meta[relay.Constant][154] /* ty=Tensor[(128, 1, 1, 128), float16] */, meta[relay.Constant][155] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %148 = @tvmgen_default_cutlass_main_267(%147, meta[relay.Constant][156] /* ty=Tensor[(128, 3, 3, 128), float16] */, meta[relay.Constant][157] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %149 = @tvmgen_default_cutlass_main_270(%141, meta[relay.Constant][158] /* ty=Tensor[(128, 1, 1, 512), float16] */, meta[relay.Constant][159] /* ty=Tensor[(128), float16] */) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+  %150 = (%148, %149);
+  %151 = concatenate(%150, axis=3) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+  %152 = @tvmgen_default_cutlass_main_273(%151, meta[relay.Constant][160] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][161] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+  %153 = @tvmgen_default_cutlass_main_276(%152, meta[relay.Constant][162] /* ty=Tensor[(255, 1, 1, 256), float16] */, meta[relay.Constant][163] /* ty=Tensor[(1, 1, 1, 255), float16] */) /* ty=Tensor[(8, 80, 80, 255), float16] */;
+  %154 = layout_transform(%153, src_layout="NHWC", dst_layout="NCHW") /* ty=Tensor[(8, 255, 80, 80), float16] */;
+  %155 = reshape(%154, newshape=[8, 3, -1, 80, 80]) /* ty=Tensor[(8, 3, 85, 80, 80), float16] */;
+  %156 = transpose(%155, axes=[0, 1, 3, 4, 2]) /* ty=Tensor[(8, 3, 80, 80, 85), float16] */;
+  %157 = @tvmgen_default_cutlass_main_279(%152, meta[relay.Constant][164] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][165] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %158 = (%157, %138);
+  %159 = concatenate(%158, axis=3) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %160 = @tvmgen_default_cutlass_main_282(%159, meta[relay.Constant][166] /* ty=Tensor[(256, 1, 1, 512), float16] */, meta[relay.Constant][167] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %161 = @tvmgen_default_cutlass_main_285(%160, meta[relay.Constant][168] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][169] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %162 = @tvmgen_default_cutlass_main_288(%161, meta[relay.Constant][170] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][171] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %163 = @tvmgen_default_cutlass_main_291(%162, meta[relay.Constant][172] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][173] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %164 = @tvmgen_default_cutlass_main_294(%163, meta[relay.Constant][174] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][175] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %165 = @tvmgen_default_cutlass_main_297(%164, meta[relay.Constant][176] /* ty=Tensor[(256, 1, 1, 256), float16] */, meta[relay.Constant][177] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %166 = @tvmgen_default_cutlass_main_300(%165, meta[relay.Constant][178] /* ty=Tensor[(256, 3, 3, 256), float16] */, meta[relay.Constant][179] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %167 = @tvmgen_default_cutlass_main_303(%159, meta[relay.Constant][180] /* ty=Tensor[(256, 1, 1, 512), float16] */, meta[relay.Constant][181] /* ty=Tensor[(256), float16] */) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+  %168 = (%166, %167);
+  %169 = concatenate(%168, axis=3) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %170 = @tvmgen_default_cutlass_main_306(%169, meta[relay.Constant][182] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][183] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+  %171 = @tvmgen_default_cutlass_main_309(%170, meta[relay.Constant][184] /* ty=Tensor[(255, 1, 1, 512), float16] */, meta[relay.Constant][185] /* ty=Tensor[(1, 1, 1, 255), float16] */) /* ty=Tensor[(8, 40, 40, 255), float16] */;
+  %172 = layout_transform(%171, src_layout="NHWC", dst_layout="NCHW") /* ty=Tensor[(8, 255, 40, 40), float16] */;
+  %173 = reshape(%172, newshape=[8, 3, -1, 40, 40]) /* ty=Tensor[(8, 3, 85, 40, 40), float16] */;
+  %174 = transpose(%173, axes=[0, 1, 3, 4, 2]) /* ty=Tensor[(8, 3, 40, 40, 85), float16] */;
+  %175 = @tvmgen_default_cutlass_main_312(%170, meta[relay.Constant][186] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][187] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %176 = (%175, %123);
+  %177 = concatenate(%176, axis=3) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %178 = @tvmgen_default_cutlass_main_315(%177, meta[relay.Constant][188] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][189] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %179 = @tvmgen_default_cutlass_main_318(%178, meta[relay.Constant][190] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][191] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %180 = @tvmgen_default_cutlass_main_321(%179, meta[relay.Constant][192] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][193] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %181 = @tvmgen_default_cutlass_main_324(%180, meta[relay.Constant][194] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][195] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %182 = @tvmgen_default_cutlass_main_327(%181, meta[relay.Constant][196] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][197] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %183 = @tvmgen_default_cutlass_main_330(%182, meta[relay.Constant][198] /* ty=Tensor[(512, 1, 1, 512), float16] */, meta[relay.Constant][199] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %184 = @tvmgen_default_cutlass_main_333(%183, meta[relay.Constant][200] /* ty=Tensor[(512, 3, 3, 512), float16] */, meta[relay.Constant][201] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %185 = @tvmgen_default_cutlass_main_336(%177, meta[relay.Constant][202] /* ty=Tensor[(512, 1, 1, 1024), float16] */, meta[relay.Constant][203] /* ty=Tensor[(512), float16] */) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+  %186 = (%184, %185);
+  %187 = concatenate(%186, axis=3) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %188 = @tvmgen_default_cutlass_main_339(%187, meta[relay.Constant][204] /* ty=Tensor[(1024, 1, 1, 1024), float16] */, meta[relay.Constant][205] /* ty=Tensor[(1024), float16] */) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+  %189 = @tvmgen_default_cutlass_main_342(%188, meta[relay.Constant][206] /* ty=Tensor[(255, 1, 1, 1024), float16] */, meta[relay.Constant][207] /* ty=Tensor[(1, 1, 1, 255), float16] */) /* ty=Tensor[(8, 20, 20, 255), float16] */;
+  %190 = layout_transform(%189, src_layout="NHWC", dst_layout="NCHW") /* ty=Tensor[(8, 255, 20, 20), float16] */;
+  %191 = reshape(%190, newshape=[8, 3, -1, 20, 20]) /* ty=Tensor[(8, 3, 85, 20, 20), float16] */;
+  %192 = transpose(%191, axes=[0, 1, 3, 4, 2]) /* ty=Tensor[(8, 3, 20, 20, 85), float16] */;
+  %193 = reshape(%156, newshape=[8, -1, 85]) /* ty=Tensor[(8, 19200, 85), float16] */;
+  %194 = reshape(%174, newshape=[8, -1, 85]) /* ty=Tensor[(8, 4800, 85), float16] */;
+  %195 = reshape(%192, newshape=[8, -1, 85]) /* ty=Tensor[(8, 1200, 85), float16] */;
+  %196 = (%193, %194, %195);
+  %197 = concatenate(%196, axis=1) /* ty=Tensor[(8, 25200, 85), float16] */;
+  %198 = take(%197, 0 /* ty=int32 */, axis=0, mode="wrap") /* ty=Tensor[(25200, 85), float16] */;
+  %199 = sigmoid(%198) /* ty=Tensor[(25200, 85), float16] */;
+  %200 = strided_slice(%199, begin=[0, 0], end=[25200, 4], strides=[1, 1], axes=None) /* ty=Tensor[(25200, 4), float16] */;
+  %201 = strided_slice(%200, begin=[0, 0], end=[25200, 2], strides=[1, 1], axes=None) /* ty=Tensor[(25200, 2), float16] */;
+  %202 = multiply(%201, meta[relay.Constant][208] /* ty=float16 */) /* ty=Tensor[(25200, 2), float16] */;
+  %203 = cast(%202, dtype="float32") /* ty=Tensor[(25200, 2), float32] */;
+  %204 = add(%203, meta[relay.Constant][209] /* ty=Tensor[(25200, 2), float32] */) /* ty=Tensor[(25200, 2), float32] */;
+  %205 = strided_slice(%200, begin=[0, 2], end=[25200, 4], strides=[1, 1], axes=None) /* ty=Tensor[(25200, 2), float16] */;
+  %206 = multiply(%205, meta[relay.Constant][211] /* ty=float16 */) /* ty=Tensor[(25200, 2), float16] */;
+  %207 = cast(%206, dtype="float32") /* ty=Tensor[(25200, 2), float32] */;
+  %208 = power(%207, 2f /* ty=float32 */) /* ty=Tensor[(25200, 2), float32] */;
+  %209 = multiply(%204, meta[relay.Constant][210] /* ty=Tensor[(25200, 1), float32] */) /* ty=Tensor[(25200, 2), float32] */;
+  %210 = multiply(%208, meta[relay.Constant][212] /* ty=Tensor[(25200, 2), float32] */) /* ty=Tensor[(25200, 2), float32] */;
+  %211 = (%209, %210);
+  %212 = concatenate(%211, axis=1) /* ty=Tensor[(25200, 4), float32] */;
+  %213 = split(%212, indices_or_sections=4, axis=-1) /* ty=(Tensor[(25200, 1), float32], Tensor[(25200, 1), float32], Tensor[(25200, 1), float32], Tensor[(25200, 1), float32]) */;
+  %214 = %213.0;
+  %215 = %213.2;
+  %216 = squeeze(%215, axis=[-1]) /* ty=Tensor[(25200), float32] */;
+  %217 = squeeze(%214, axis=[-1]) /* ty=Tensor[(25200), float32] */;
+  %218 = multiply(%216, 0.5f /* ty=float32 */) /* ty=Tensor[(25200), float32] */;
+  %219 = %213.1;
+  %220 = %213.3;
+  %221 = squeeze(%220, axis=[-1]) /* ty=Tensor[(25200), float32] */;
+  %222 = squeeze(%219, axis=[-1]) /* ty=Tensor[(25200), float32] */;
+  %223 = multiply(%221, 0.5f /* ty=float32 */) /* ty=Tensor[(25200), float32] */;
+  %224 = multiply(%216, 0.5f /* ty=float32 */) /* ty=Tensor[(25200), float32] */;
+  %225 = multiply(%221, 0.5f /* ty=float32 */) /* ty=Tensor[(25200), float32] */;
+  %226 = subtract(%217, %218) /* ty=Tensor[(25200), float32] */;
+  %227 = subtract(%222, %223) /* ty=Tensor[(25200), float32] */;
+  %228 = add(%217, %224) /* ty=Tensor[(25200), float32] */;
+  %229 = add(%222, %225) /* ty=Tensor[(25200), float32] */;
+  %230 = (%226, %227, %228, %229);
+  %231 = strided_slice(%199, begin=[0, 5], end=[25200, 85], strides=[1, 1], axes=None) /* ty=Tensor[(25200, 80), float16] */;
+  %232 = strided_slice(%199, begin=[0, 4], end=[25200, 5], strides=[1, 1], axes=None) /* ty=Tensor[(25200, 1), float16] */;
+  %233 = multiply(%231, %232) /* ty=Tensor[(25200, 80), float16] */;
+  %234 = greater(%233, meta[relay.Constant][213] /* ty=float16 */) /* ty=Tensor[(25200, 80), bool] */;
+  %235 = argwhere(%234) /* ty=Tensor[(?, 2), int32] */;
+  %236 = split(%235, indices_or_sections=2, axis=1) /* ty=(Tensor[(?, 1), int32], Tensor[(?, 1), int32]) */;
+  %237 = %236.0;
+  %238 = squeeze(%237, axis=[1]) /* ty=Tensor[(?), int32] */;
+  %239 = stack(%230, axis=-1) /* ty=Tensor[(25200, 4), float32] */;
+  %240 = cast(%238, dtype="int64") /* ty=Tensor[(?), int64] */;
+  %241 = (%239, %240);
+  %242 = adv_index(%241) /* ty=Tensor[(?, 4), float32] */;
+  %243 = ndarray_size(%242, dtype="int32") /* ty=int32 */;
+  %244 = equal(%243, 0 /* ty=int32 */) /* ty=bool */;
+  %281 = if (%244) {
+    zeros(shape=[0], dtype="int64") /* ty=Tensor[(?), int64] */
+  } else {
+    %245 = %236.1;
+    %246 = squeeze(%245, axis=[1]) /* ty=Tensor[(?), int32] */;
+    %247 = cast(%233, dtype="float32") /* ty=Tensor[(25200, 80), float32] */;
+    %248 = cast(%246, dtype="int64") /* ty=Tensor[(?), int64] */;
+    %249 = (%247, %240, %248);
+    %250 = adv_index(%249) /* ty=Tensor[(?), float32] */;
+    %251 = min(%250) /* ty=float32 */;
+    %252 = subtract(%250, %251) /* ty=Tensor[(?), float32] */;
+    %253 = add(%252, 1f /* ty=float32 */) /* ty=Tensor[(?), float32] */;
+    %254 = max(%242) /* ty=float32 */;
+    %255 = cast(%248, dtype="float32") /* ty=Tensor[(?), float32] */;
+    %256 = add(%254, 1f /* ty=float32 */) /* ty=float32 */;
+    %257 = multiply(%255, %256) /* ty=Tensor[(?), float32] */;
+    %258 = expand_dims(%257, axis=1) /* ty=Tensor[(?, 1), float32] */;
+    %259 = expand_dims(%253, axis=-1) /* ty=Tensor[(?, 1), float32] */;
+    %260 = add(%242, %258) /* ty=Tensor[(?, 4), float32] */;
+    %261 = (%259, %260);
+    %262 = concatenate(%261, axis=-1) /* ty=Tensor[(?, 5), float32] */;
+    %263 = shape_of(%253, dtype="int32") /* ty=Tensor[(1), int32] */;
+    %264 = squeeze(%263) /* ty=int32 */;
+    %265 = arange(0 /* ty=int32 */, %264, 1 /* ty=int32 */, start=meta[relay.Constant][214], stop=meta[relay.Call][0], step=meta[relay.Constant][215], dtype="int32") /* ty=Tensor[(?), int32] */;
+    %266 = expand_dims(%262, axis=0) /* ty=Tensor[(1, ?, 5), float32] */;
+    %267 = expand_dims(%265, axis=0) /* ty=Tensor[(1, ?), int32] */;
+    %268 = vision.non_max_suppression(%266, %263, %267, -1 /* ty=int32 */, 0.45f /* ty=float32 */, force_suppress=True, coord_start=1, score_index=0, id_index=-1) /* ty=(Tensor[(1, ?), int32], Tensor[(1, 1), int32]) */;
+    %269 = %268.0;
+    %270 = squeeze(%269, axis=[0]) /* ty=Tensor[(?), int32] */;
+    %271 = shape_of(%270, dtype="int32") /* ty=Tensor[(1), int32] */;
+    %272 = cast_like(%271, meta[relay.Constant][217] /* ty=Tensor[(1), int32] */) /* ty=Tensor[(1), int32] */;
+    %273 = slice_like(%272, meta[relay.Constant][217] /* ty=Tensor[(1), int32] */, axes=None) /* ty=Tensor[(1), int32] */;
+    %274 = add(meta[relay.Constant][217] /* ty=Tensor[(1), int32] */, %273) /* ty=Tensor[(1), int32] */;
+    %275 = where(meta[relay.Constant][216] /* ty=Tensor[(1), bool] */, %274, meta[relay.Constant][217] /* ty=Tensor[(1), int32] */) /* ty=Tensor[(1), int32] */;
+    %276 = greater_equal(%275, %273) /* ty=Tensor[(1), bool] */;
+    %277 = %268.1;
+    %278 = where(%276, %273, %275) /* ty=Tensor[(1), int32] */;
+    %279 = squeeze(%277, axis=[1]) /* ty=Tensor[(1), int32] */;
+    %280 = dyn.strided_slice(%270, %278, %279, meta[relay.Constant][218] /* ty=Tensor[(1), int32] */, begin=None, end=None, strides=None, slice_mode="size", axes=None) /* ty=Tensor[(?), int32] */;
+    cast(%280, dtype="int64") /* ty=Tensor[(?), int64] */
+  };
+  %282 = strided_slice(%281, begin=[0], end=[300], strides=[1], axes=None) /* ty=Tensor[(?), int64] */;
+  %283 = (%242, %282);
+  %284 = adv_index(%283) /* ty=Tensor[(?, 4), float32] */;
+  %285 = split(%284, indices_or_sections=4, axis=1) /* ty=(Tensor[(?, 1), float32], Tensor[(?, 1), float32], Tensor[(?, 1), float32], Tensor[(?, 1), float32]) */;
+  %286 = %285.0;
+  %287 = squeeze(%286, axis=[1]) /* ty=Tensor[(?), float32] */;
+  %288 = %285.1;
+  %289 = squeeze(%288, axis=[1]) /* ty=Tensor[(?), float32] */;
+  %290 = %285.2;
+  %291 = squeeze(%290, axis=[1]) /* ty=Tensor[(?), float32] */;
+  %292 = %285.3;
+  %293 = squeeze(%292, axis=[1]) /* ty=Tensor[(?), float32] */;
+  %294 = multiply(%287, 0.8f /* ty=float32 */) /* ty=Tensor[(?), float32] */;
+  %295 = multiply(%289, 0.8f /* ty=float32 */) /* ty=Tensor[(?), float32] */;
+  %296 = multiply(%291, 0.8f /* ty=float32 */) /* ty=Tensor[(?), float32] */;
+  %297 = multiply(%293, 0.8f /* ty=float32 */) /* ty=Tensor[(?), float32] */;
+  %298 = (%294, %295, %296, %297);
+  %299 = (%250, %282);
+  %300 = (%248, %282);
+  %301 = stack(%298, axis=1) /* ty=Tensor[(?, 4), float32] */;
+  %302 = adv_index(%299) /* ty=Tensor[(?), float32] */;
+  %303 = adv_index(%300) /* ty=Tensor[(?), int64] */;
+  (%301, %302, %303)
+}
+
+def @tvmgen_default_cutlass_main_0(%cutlass_0_i0: Tensor[(8, 640, 640, 3), float16], %cutlass_0_i1: Tensor[(64, 6, 6, 3), float16], %cutlass_0_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_0", Primitive=1) -> Tensor[(8, 320, 320, 64), float16] {
+  %307 = fn (%FunctionVar_83_0: Tensor[(8, 640, 640, 3), float16], %FunctionVar_83_1: Tensor[(64, 6, 6, 3), float16], %FunctionVar_83_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 320, 320, 64), float16] {
+    %304 = nn.conv2d(%FunctionVar_83_0, %FunctionVar_83_1, strides=[2, 2], padding=[2, 2, 2, 2], channels=64, kernel_size=[6, 6], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 320, 320, 64), float16] */;
+    %305 = add(%304, %FunctionVar_83_2) /* ty=Tensor[(8, 320, 320, 64), float16] */;
+    %306 = sigmoid(%305) /* ty=Tensor[(8, 320, 320, 64), float16] */;
+    multiply(%305, %306) /* ty=Tensor[(8, 320, 320, 64), float16] */
+  };
+  %307(%cutlass_0_i0, %cutlass_0_i1, %cutlass_0_i2) /* ty=Tensor[(8, 320, 320, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_102(%cutlass_102_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_102_i1: Tensor[(256, 1, 1, 512), float16], %cutlass_102_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_102", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %311 = fn (%FunctionVar_62_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_62_1: Tensor[(256, 1, 1, 512), float16], %FunctionVar_62_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %308 = nn.conv2d(%FunctionVar_62_0, %FunctionVar_62_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %309 = add(%308, %FunctionVar_62_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %310 = sigmoid(%309) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%309, %310) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %311(%cutlass_102_i0, %cutlass_102_i1, %cutlass_102_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_105(%cutlass_105_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_105_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_105_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_105", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %315 = fn (%FunctionVar_61_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_61_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_61_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %312 = nn.conv2d(%FunctionVar_61_0, %FunctionVar_61_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %313 = add(%312, %FunctionVar_61_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %314 = sigmoid(%313) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%313, %314) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %315(%cutlass_105_i0, %cutlass_105_i1, %cutlass_105_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_108(%cutlass_108_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_108_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_108_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_108", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %319 = fn (%FunctionVar_60_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_60_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_60_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %316 = nn.conv2d(%FunctionVar_60_0, %FunctionVar_60_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %317 = add(%316, %FunctionVar_60_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %318 = sigmoid(%317) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%317, %318) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %319(%cutlass_108_i0, %cutlass_108_i1, %cutlass_108_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_112(%cutlass_112_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_112_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_112_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_112", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %323 = fn (%FunctionVar_59_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_59_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_59_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %320 = nn.conv2d(%FunctionVar_59_0, %FunctionVar_59_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %321 = add(%320, %FunctionVar_59_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %322 = sigmoid(%321) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%321, %322) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %323(%cutlass_112_i0, %cutlass_112_i1, %cutlass_112_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_115(%cutlass_115_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_115_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_115_i2: Tensor[(256), float16], %cutlass_115_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_115", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %328 = fn (%FunctionVar_10_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_10_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_10_2: Tensor[(256), float16], %FunctionVar_10_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %324 = nn.conv2d(%FunctionVar_10_0, %FunctionVar_10_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %325 = add(%324, %FunctionVar_10_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %326 = sigmoid(%325) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %327 = multiply(%325, %326) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_10_3, %327) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %328(%cutlass_115_i0, %cutlass_115_i1, %cutlass_115_i2, %cutlass_115_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_119(%cutlass_119_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_119_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_119_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_119", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %332 = fn (%FunctionVar_58_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_58_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_58_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %329 = nn.conv2d(%FunctionVar_58_0, %FunctionVar_58_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %330 = add(%329, %FunctionVar_58_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %331 = sigmoid(%330) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%330, %331) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %332(%cutlass_119_i0, %cutlass_119_i1, %cutlass_119_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_12(%cutlass_12_i0: Tensor[(8, 160, 160, 64), float16], %cutlass_12_i1: Tensor[(64, 1, 1, 64), float16], %cutlass_12_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_12", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %336 = fn (%FunctionVar_80_0: Tensor[(8, 160, 160, 64), float16], %FunctionVar_80_1: Tensor[(64, 1, 1, 64), float16], %FunctionVar_80_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 64), float16] {
+    %333 = nn.conv2d(%FunctionVar_80_0, %FunctionVar_80_1, padding=[0, 0, 0, 0], channels=64, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %334 = add(%333, %FunctionVar_80_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %335 = sigmoid(%334) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    multiply(%334, %335) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %336(%cutlass_12_i0, %cutlass_12_i1, %cutlass_12_i2) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_122(%cutlass_122_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_122_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_122_i2: Tensor[(256), float16], %cutlass_122_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_122", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %341 = fn (%FunctionVar_9_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_9_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_9_2: Tensor[(256), float16], %FunctionVar_9_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %337 = nn.conv2d(%FunctionVar_9_0, %FunctionVar_9_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %338 = add(%337, %FunctionVar_9_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %339 = sigmoid(%338) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %340 = multiply(%338, %339) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_9_3, %340) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %341(%cutlass_122_i0, %cutlass_122_i1, %cutlass_122_i2, %cutlass_122_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_126(%cutlass_126_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_126_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_126_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_126", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %345 = fn (%FunctionVar_57_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_57_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_57_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %342 = nn.conv2d(%FunctionVar_57_0, %FunctionVar_57_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %343 = add(%342, %FunctionVar_57_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %344 = sigmoid(%343) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%343, %344) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %345(%cutlass_126_i0, %cutlass_126_i1, %cutlass_126_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_129(%cutlass_129_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_129_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_129_i2: Tensor[(256), float16], %cutlass_129_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_129", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %350 = fn (%FunctionVar_8_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_8_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_8_2: Tensor[(256), float16], %FunctionVar_8_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %346 = nn.conv2d(%FunctionVar_8_0, %FunctionVar_8_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %347 = add(%346, %FunctionVar_8_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %348 = sigmoid(%347) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %349 = multiply(%347, %348) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_8_3, %349) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %350(%cutlass_129_i0, %cutlass_129_i1, %cutlass_129_i2, %cutlass_129_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_133(%cutlass_133_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_133_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_133_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_133", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %354 = fn (%FunctionVar_56_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_56_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_56_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %351 = nn.conv2d(%FunctionVar_56_0, %FunctionVar_56_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %352 = add(%351, %FunctionVar_56_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %353 = sigmoid(%352) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%352, %353) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %354(%cutlass_133_i0, %cutlass_133_i1, %cutlass_133_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_136(%cutlass_136_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_136_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_136_i2: Tensor[(256), float16], %cutlass_136_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_136", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %359 = fn (%FunctionVar_7_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_7_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_7_2: Tensor[(256), float16], %FunctionVar_7_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %355 = nn.conv2d(%FunctionVar_7_0, %FunctionVar_7_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %356 = add(%355, %FunctionVar_7_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %357 = sigmoid(%356) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %358 = multiply(%356, %357) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_7_3, %358) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %359(%cutlass_136_i0, %cutlass_136_i1, %cutlass_136_i2, %cutlass_136_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_140(%cutlass_140_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_140_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_140_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_140", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %363 = fn (%FunctionVar_55_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_55_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_55_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %360 = nn.conv2d(%FunctionVar_55_0, %FunctionVar_55_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %361 = add(%360, %FunctionVar_55_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %362 = sigmoid(%361) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%361, %362) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %363(%cutlass_140_i0, %cutlass_140_i1, %cutlass_140_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_143(%cutlass_143_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_143_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_143_i2: Tensor[(256), float16], %cutlass_143_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_143", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %368 = fn (%FunctionVar_6_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_6_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_6_2: Tensor[(256), float16], %FunctionVar_6_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %364 = nn.conv2d(%FunctionVar_6_0, %FunctionVar_6_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %365 = add(%364, %FunctionVar_6_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %366 = sigmoid(%365) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %367 = multiply(%365, %366) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_6_3, %367) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %368(%cutlass_143_i0, %cutlass_143_i1, %cutlass_143_i2, %cutlass_143_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_147(%cutlass_147_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_147_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_147_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_147", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %372 = fn (%FunctionVar_54_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_54_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_54_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %369 = nn.conv2d(%FunctionVar_54_0, %FunctionVar_54_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %370 = add(%369, %FunctionVar_54_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %371 = sigmoid(%370) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%370, %371) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %372(%cutlass_147_i0, %cutlass_147_i1, %cutlass_147_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_15(%cutlass_15_i0: Tensor[(8, 160, 160, 64), float16], %cutlass_15_i1: Tensor[(64, 3, 3, 64), float16], %cutlass_15_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_15", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %376 = fn (%FunctionVar_79_0: Tensor[(8, 160, 160, 64), float16], %FunctionVar_79_1: Tensor[(64, 3, 3, 64), float16], %FunctionVar_79_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 64), float16] {
+    %373 = nn.conv2d(%FunctionVar_79_0, %FunctionVar_79_1, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %374 = add(%373, %FunctionVar_79_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %375 = sigmoid(%374) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    multiply(%374, %375) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %376(%cutlass_15_i0, %cutlass_15_i1, %cutlass_15_i2) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_150(%cutlass_150_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_150_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_150_i2: Tensor[(256), float16], %cutlass_150_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_150", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %381 = fn (%FunctionVar_5_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_5_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_5_2: Tensor[(256), float16], %FunctionVar_5_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %377 = nn.conv2d(%FunctionVar_5_0, %FunctionVar_5_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %378 = add(%377, %FunctionVar_5_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %379 = sigmoid(%378) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %380 = multiply(%378, %379) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_5_3, %380) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %381(%cutlass_150_i0, %cutlass_150_i1, %cutlass_150_i2, %cutlass_150_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_154(%cutlass_154_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_154_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_154_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_154", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %385 = fn (%FunctionVar_53_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_53_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_53_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %382 = nn.conv2d(%FunctionVar_53_0, %FunctionVar_53_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %383 = add(%382, %FunctionVar_53_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %384 = sigmoid(%383) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%383, %384) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %385(%cutlass_154_i0, %cutlass_154_i1, %cutlass_154_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_157(%cutlass_157_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_157_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_157_i2: Tensor[(256), float16], %cutlass_157_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_157", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %390 = fn (%FunctionVar_4_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_4_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_4_2: Tensor[(256), float16], %FunctionVar_4_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %386 = nn.conv2d(%FunctionVar_4_0, %FunctionVar_4_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %387 = add(%386, %FunctionVar_4_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %388 = sigmoid(%387) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %389 = multiply(%387, %388) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_4_3, %389) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %390(%cutlass_157_i0, %cutlass_157_i1, %cutlass_157_i2, %cutlass_157_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_161(%cutlass_161_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_161_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_161_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_161", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %394 = fn (%FunctionVar_52_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_52_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_52_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %391 = nn.conv2d(%FunctionVar_52_0, %FunctionVar_52_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %392 = add(%391, %FunctionVar_52_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %393 = sigmoid(%392) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%392, %393) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %394(%cutlass_161_i0, %cutlass_161_i1, %cutlass_161_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_164(%cutlass_164_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_164_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_164_i2: Tensor[(256), float16], %cutlass_164_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_164", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %399 = fn (%FunctionVar_3_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_3_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_3_2: Tensor[(256), float16], %FunctionVar_3_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %395 = nn.conv2d(%FunctionVar_3_0, %FunctionVar_3_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %396 = add(%395, %FunctionVar_3_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %397 = sigmoid(%396) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %398 = multiply(%396, %397) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%FunctionVar_3_3, %398) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %399(%cutlass_164_i0, %cutlass_164_i1, %cutlass_164_i2, %cutlass_164_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_168(%cutlass_168_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_168_i1: Tensor[(256, 1, 1, 512), float16], %cutlass_168_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_168", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %403 = fn (%FunctionVar_51_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_51_1: Tensor[(256, 1, 1, 512), float16], %FunctionVar_51_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %400 = nn.conv2d(%FunctionVar_51_0, %FunctionVar_51_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %401 = add(%400, %FunctionVar_51_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %402 = sigmoid(%401) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%401, %402) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %403(%cutlass_168_i0, %cutlass_168_i1, %cutlass_168_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_171(%cutlass_171_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_171_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_171_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_171", Primitive=1) -> Tensor[(8, 40, 40, 512), float16] {
+  %407 = fn (%FunctionVar_50_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_50_1: Tensor[(512, 1, 1, 512), float16], %FunctionVar_50_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 512), float16] {
+    %404 = nn.conv2d(%FunctionVar_50_0, %FunctionVar_50_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %405 = add(%404, %FunctionVar_50_2) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %406 = sigmoid(%405) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    multiply(%405, %406) /* ty=Tensor[(8, 40, 40, 512), float16] */
+  };
+  %407(%cutlass_171_i0, %cutlass_171_i1, %cutlass_171_i2) /* ty=Tensor[(8, 40, 40, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_174(%cutlass_174_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_174_i1: Tensor[(1024, 3, 3, 512), float16], %cutlass_174_i2: Tensor[(1024), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_174", Primitive=1) -> Tensor[(8, 20, 20, 1024), float16] {
+  %411 = fn (%FunctionVar_49_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_49_1: Tensor[(1024, 3, 3, 512), float16], %FunctionVar_49_2: Tensor[(1024), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 1024), float16] {
+    %408 = nn.conv2d(%FunctionVar_49_0, %FunctionVar_49_1, strides=[2, 2], padding=[1, 1, 1, 1], channels=1024, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %409 = add(%408, %FunctionVar_49_2) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %410 = sigmoid(%409) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    multiply(%409, %410) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+  };
+  %411(%cutlass_174_i0, %cutlass_174_i1, %cutlass_174_i2) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+}
+
+def @tvmgen_default_cutlass_main_177(%cutlass_177_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_177_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_177_i2: Tensor[(512), float16], %cutlass_177_i3: Tensor[(8, 20, 20, 512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_177", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %416 = fn (%FunctionVar_2_0: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_2_1: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_2_2: Tensor[(512), float16], %FunctionVar_2_3: Tensor[(8, 20, 20, 512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 20, 20, 512), float16] {
+    %412 = nn.conv2d(%FunctionVar_2_0, %FunctionVar_2_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %413 = add(%412, %FunctionVar_2_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %414 = sigmoid(%413) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %415 = multiply(%413, %414) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    add(%415, %FunctionVar_2_3) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %416(%cutlass_177_i0, %cutlass_177_i1, %cutlass_177_i2, %cutlass_177_i3) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_180(%cutlass_180_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_180_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_180_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_180", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %420 = fn (%FunctionVar_48_0: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_48_1: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_48_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %417 = nn.conv2d(%FunctionVar_48_0, %FunctionVar_48_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %418 = add(%417, %FunctionVar_48_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %419 = sigmoid(%418) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%418, %419) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %420(%cutlass_180_i0, %cutlass_180_i1, %cutlass_180_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_183(%cutlass_183_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_183_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_183_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_183", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %424 = fn (%FunctionVar_47_0: Tensor[(8, 20, 20, 512), float16], %FunctionVar_47_1: Tensor[(512, 1, 1, 512), float16], %FunctionVar_47_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %421 = nn.conv2d(%FunctionVar_47_0, %FunctionVar_47_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %422 = add(%421, %FunctionVar_47_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %423 = sigmoid(%422) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%422, %423) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %424(%cutlass_183_i0, %cutlass_183_i1, %cutlass_183_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_186(%cutlass_186_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_186_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_186_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_186", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %428 = fn (%FunctionVar_46_0: Tensor[(8, 20, 20, 512), float16], %FunctionVar_46_1: Tensor[(512, 3, 3, 512), float16], %FunctionVar_46_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %425 = nn.conv2d(%FunctionVar_46_0, %FunctionVar_46_1, padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %426 = add(%425, %FunctionVar_46_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %427 = sigmoid(%426) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%426, %427) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %428(%cutlass_186_i0, %cutlass_186_i1, %cutlass_186_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_19(%cutlass_19_i0: Tensor[(8, 160, 160, 64), float16], %cutlass_19_i1: Tensor[(64, 1, 1, 64), float16], %cutlass_19_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_19", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %432 = fn (%FunctionVar_78_0: Tensor[(8, 160, 160, 64), float16], %FunctionVar_78_1: Tensor[(64, 1, 1, 64), float16], %FunctionVar_78_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 64), float16] {
+    %429 = nn.conv2d(%FunctionVar_78_0, %FunctionVar_78_1, padding=[0, 0, 0, 0], channels=64, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %430 = add(%429, %FunctionVar_78_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %431 = sigmoid(%430) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    multiply(%430, %431) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %432(%cutlass_19_i0, %cutlass_19_i1, %cutlass_19_i2) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_190(%cutlass_190_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_190_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_190_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_190", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %436 = fn (%FunctionVar_45_0: Tensor[(8, 20, 20, 512), float16], %FunctionVar_45_1: Tensor[(512, 1, 1, 512), float16], %FunctionVar_45_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %433 = nn.conv2d(%FunctionVar_45_0, %FunctionVar_45_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %434 = add(%433, %FunctionVar_45_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %435 = sigmoid(%434) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%434, %435) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %436(%cutlass_190_i0, %cutlass_190_i1, %cutlass_190_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_193(%cutlass_193_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_193_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_193_i2: Tensor[(512), float16], %cutlass_193_i3: Tensor[(8, 20, 20, 512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_193", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %441 = fn (%FunctionVar_1_0: Tensor[(8, 20, 20, 512), float16], %FunctionVar_1_1: Tensor[(512, 3, 3, 512), float16], %FunctionVar_1_2: Tensor[(512), float16], %FunctionVar_1_3: Tensor[(8, 20, 20, 512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 20, 20, 512), float16] {
+    %437 = nn.conv2d(%FunctionVar_1_0, %FunctionVar_1_1, padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %438 = add(%437, %FunctionVar_1_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %439 = sigmoid(%438) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %440 = multiply(%438, %439) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    add(%FunctionVar_1_3, %440) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %441(%cutlass_193_i0, %cutlass_193_i1, %cutlass_193_i2, %cutlass_193_i3) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_197(%cutlass_197_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_197_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_197_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_197", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %445 = fn (%FunctionVar_44_0: Tensor[(8, 20, 20, 512), float16], %FunctionVar_44_1: Tensor[(512, 1, 1, 512), float16], %FunctionVar_44_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %442 = nn.conv2d(%FunctionVar_44_0, %FunctionVar_44_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %443 = add(%442, %FunctionVar_44_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %444 = sigmoid(%443) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%443, %444) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %445(%cutlass_197_i0, %cutlass_197_i1, %cutlass_197_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_200(%cutlass_200_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_200_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_200_i2: Tensor[(512), float16], %cutlass_200_i3: Tensor[(8, 20, 20, 512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_200", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %450 = fn (%FunctionVar_0_0: Tensor[(8, 20, 20, 512), float16], %FunctionVar_0_1: Tensor[(512, 3, 3, 512), float16], %FunctionVar_0_2: Tensor[(512), float16], %FunctionVar_0_3: Tensor[(8, 20, 20, 512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 20, 20, 512), float16] {
+    %446 = nn.conv2d(%FunctionVar_0_0, %FunctionVar_0_1, padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %447 = add(%446, %FunctionVar_0_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %448 = sigmoid(%447) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %449 = multiply(%447, %448) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    add(%FunctionVar_0_3, %449) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %450(%cutlass_200_i0, %cutlass_200_i1, %cutlass_200_i2, %cutlass_200_i3) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_204(%cutlass_204_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_204_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_204_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_204", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %454 = fn (%FunctionVar_43_0: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_43_1: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_43_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %451 = nn.conv2d(%FunctionVar_43_0, %FunctionVar_43_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %452 = add(%451, %FunctionVar_43_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %453 = sigmoid(%452) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%452, %453) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %454(%cutlass_204_i0, %cutlass_204_i1, %cutlass_204_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_207(%cutlass_207_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_207_i1: Tensor[(1024, 1, 1, 1024), float16], %cutlass_207_i2: Tensor[(1024), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_207", Primitive=1) -> Tensor[(8, 20, 20, 1024), float16] {
+  %458 = fn (%FunctionVar_42_0: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_42_1: Tensor[(1024, 1, 1, 1024), float16], %FunctionVar_42_2: Tensor[(1024), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 1024), float16] {
+    %455 = nn.conv2d(%FunctionVar_42_0, %FunctionVar_42_1, padding=[0, 0, 0, 0], channels=1024, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %456 = add(%455, %FunctionVar_42_2) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %457 = sigmoid(%456) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    multiply(%456, %457) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+  };
+  %458(%cutlass_207_i0, %cutlass_207_i1, %cutlass_207_i2) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+}
+
+def @tvmgen_default_cutlass_main_210(%cutlass_210_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_210_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_210_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_210", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %462 = fn (%FunctionVar_41_0: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_41_1: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_41_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %459 = nn.conv2d(%FunctionVar_41_0, %FunctionVar_41_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %460 = add(%459, %FunctionVar_41_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %461 = sigmoid(%460) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%460, %461) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %462(%cutlass_210_i0, %cutlass_210_i1, %cutlass_210_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_213(%cutlass_213_i0: Tensor[(8, 20, 20, 2048), float16], %cutlass_213_i1: Tensor[(1024, 1, 1, 2048), float16], %cutlass_213_i2: Tensor[(1024), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_213", Primitive=1) -> Tensor[(8, 20, 20, 1024), float16] {
+  %466 = fn (%FunctionVar_40_0: Tensor[(8, 20, 20, 2048), float16], %FunctionVar_40_1: Tensor[(1024, 1, 1, 2048), float16], %FunctionVar_40_2: Tensor[(1024), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 1024), float16] {
+    %463 = nn.conv2d(%FunctionVar_40_0, %FunctionVar_40_1, padding=[0, 0, 0, 0], channels=1024, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %464 = add(%463, %FunctionVar_40_2) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %465 = sigmoid(%464) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    multiply(%464, %465) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+  };
+  %466(%cutlass_213_i0, %cutlass_213_i1, %cutlass_213_i2) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+}
+
+def @tvmgen_default_cutlass_main_216(%cutlass_216_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_216_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_216_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_216", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %470 = fn (%FunctionVar_39_0: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_39_1: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_39_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %467 = nn.conv2d(%FunctionVar_39_0, %FunctionVar_39_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %468 = add(%467, %FunctionVar_39_2) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %469 = sigmoid(%468) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%468, %469) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %470(%cutlass_216_i0, %cutlass_216_i1, %cutlass_216_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_219(%cutlass_219_i0: Tensor[(8, 40, 40, 1024), float16], %cutlass_219_i1: Tensor[(256, 1, 1, 1024), float16], %cutlass_219_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_219", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %474 = fn (%FunctionVar_38_0: Tensor[(8, 40, 40, 1024), float16], %FunctionVar_38_1: Tensor[(256, 1, 1, 1024), float16], %FunctionVar_38_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %471 = nn.conv2d(%FunctionVar_38_0, %FunctionVar_38_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %472 = add(%471, %FunctionVar_38_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %473 = sigmoid(%472) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%472, %473) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %474(%cutlass_219_i0, %cutlass_219_i1, %cutlass_219_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_22(%cutlass_22_i0: Tensor[(8, 160, 160, 64), float16], %cutlass_22_i1: Tensor[(64, 3, 3, 64), float16], %cutlass_22_i2: Tensor[(64), float16], %cutlass_22_i3: Tensor[(8, 160, 160, 64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_22", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %479 = fn (%FunctionVar_19_0: Tensor[(8, 160, 160, 64), float16], %FunctionVar_19_1: Tensor[(64, 3, 3, 64), float16], %FunctionVar_19_2: Tensor[(64), float16], %FunctionVar_19_3: Tensor[(8, 160, 160, 64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 160, 160, 64), float16] {
+    %475 = nn.conv2d(%FunctionVar_19_0, %FunctionVar_19_1, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %476 = add(%475, %FunctionVar_19_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %477 = sigmoid(%476) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %478 = multiply(%476, %477) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    add(%FunctionVar_19_3, %478) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %479(%cutlass_22_i0, %cutlass_22_i1, %cutlass_22_i2, %cutlass_22_i3) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_222(%cutlass_222_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_222_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_222_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_222", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %483 = fn (%FunctionVar_37_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_37_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_37_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %480 = nn.conv2d(%FunctionVar_37_0, %FunctionVar_37_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %481 = add(%480, %FunctionVar_37_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %482 = sigmoid(%481) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%481, %482) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %483(%cutlass_222_i0, %cutlass_222_i1, %cutlass_222_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_225(%cutlass_225_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_225_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_225_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_225", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %487 = fn (%FunctionVar_36_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_36_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_36_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %484 = nn.conv2d(%FunctionVar_36_0, %FunctionVar_36_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %485 = add(%484, %FunctionVar_36_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %486 = sigmoid(%485) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%485, %486) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %487(%cutlass_225_i0, %cutlass_225_i1, %cutlass_225_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_228(%cutlass_228_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_228_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_228_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_228", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %491 = fn (%FunctionVar_35_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_35_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_35_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %488 = nn.conv2d(%FunctionVar_35_0, %FunctionVar_35_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %489 = add(%488, %FunctionVar_35_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %490 = sigmoid(%489) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%489, %490) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %491(%cutlass_228_i0, %cutlass_228_i1, %cutlass_228_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_231(%cutlass_231_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_231_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_231_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_231", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %495 = fn (%FunctionVar_34_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_34_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_34_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %492 = nn.conv2d(%FunctionVar_34_0, %FunctionVar_34_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %493 = add(%492, %FunctionVar_34_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %494 = sigmoid(%493) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%493, %494) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %495(%cutlass_231_i0, %cutlass_231_i1, %cutlass_231_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_234(%cutlass_234_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_234_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_234_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_234", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %499 = fn (%FunctionVar_33_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_33_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_33_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %496 = nn.conv2d(%FunctionVar_33_0, %FunctionVar_33_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %497 = add(%496, %FunctionVar_33_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %498 = sigmoid(%497) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%497, %498) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %499(%cutlass_234_i0, %cutlass_234_i1, %cutlass_234_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_237(%cutlass_237_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_237_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_237_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_237", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %503 = fn (%FunctionVar_32_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_32_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_32_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %500 = nn.conv2d(%FunctionVar_32_0, %FunctionVar_32_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %501 = add(%500, %FunctionVar_32_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %502 = sigmoid(%501) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%501, %502) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %503(%cutlass_237_i0, %cutlass_237_i1, %cutlass_237_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_240(%cutlass_240_i0: Tensor[(8, 40, 40, 1024), float16], %cutlass_240_i1: Tensor[(256, 1, 1, 1024), float16], %cutlass_240_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_240", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %507 = fn (%FunctionVar_31_0: Tensor[(8, 40, 40, 1024), float16], %FunctionVar_31_1: Tensor[(256, 1, 1, 1024), float16], %FunctionVar_31_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %504 = nn.conv2d(%FunctionVar_31_0, %FunctionVar_31_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %505 = add(%504, %FunctionVar_31_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %506 = sigmoid(%505) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%505, %506) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %507(%cutlass_240_i0, %cutlass_240_i1, %cutlass_240_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_243(%cutlass_243_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_243_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_243_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_243", Primitive=1) -> Tensor[(8, 40, 40, 512), float16] {
+  %511 = fn (%FunctionVar_30_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_30_1: Tensor[(512, 1, 1, 512), float16], %FunctionVar_30_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 512), float16] {
+    %508 = nn.conv2d(%FunctionVar_30_0, %FunctionVar_30_1, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %509 = add(%508, %FunctionVar_30_2) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %510 = sigmoid(%509) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    multiply(%509, %510) /* ty=Tensor[(8, 40, 40, 512), float16] */
+  };
+  %511(%cutlass_243_i0, %cutlass_243_i1, %cutlass_243_i2) /* ty=Tensor[(8, 40, 40, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_246(%cutlass_246_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_246_i1: Tensor[(256, 1, 1, 512), float16], %cutlass_246_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_246", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %515 = fn (%FunctionVar_29_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_29_1: Tensor[(256, 1, 1, 512), float16], %FunctionVar_29_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %512 = nn.conv2d(%FunctionVar_29_0, %FunctionVar_29_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %513 = add(%512, %FunctionVar_29_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %514 = sigmoid(%513) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%513, %514) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %515(%cutlass_246_i0, %cutlass_246_i1, %cutlass_246_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_249(%cutlass_249_i0: Tensor[(8, 80, 80, 512), float16], %cutlass_249_i1: Tensor[(128, 1, 1, 512), float16], %cutlass_249_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_249", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %519 = fn (%FunctionVar_28_0: Tensor[(8, 80, 80, 512), float16], %FunctionVar_28_1: Tensor[(128, 1, 1, 512), float16], %FunctionVar_28_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %516 = nn.conv2d(%FunctionVar_28_0, %FunctionVar_28_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %517 = add(%516, %FunctionVar_28_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %518 = sigmoid(%517) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%517, %518) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %519(%cutlass_249_i0, %cutlass_249_i1, %cutlass_249_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_252(%cutlass_252_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_252_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_252_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_252", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %523 = fn (%FunctionVar_27_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_27_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_27_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %520 = nn.conv2d(%FunctionVar_27_0, %FunctionVar_27_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %521 = add(%520, %FunctionVar_27_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %522 = sigmoid(%521) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%521, %522) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %523(%cutlass_252_i0, %cutlass_252_i1, %cutlass_252_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_255(%cutlass_255_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_255_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_255_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_255", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %527 = fn (%FunctionVar_26_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_26_1: Tensor[(128, 3, 3, 128), float16], %FunctionVar_26_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %524 = nn.conv2d(%FunctionVar_26_0, %FunctionVar_26_1, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %525 = add(%524, %FunctionVar_26_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %526 = sigmoid(%525) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%525, %526) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %527(%cutlass_255_i0, %cutlass_255_i1, %cutlass_255_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_258(%cutlass_258_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_258_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_258_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_258", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %531 = fn (%FunctionVar_25_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_25_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_25_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %528 = nn.conv2d(%FunctionVar_25_0, %FunctionVar_25_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %529 = add(%528, %FunctionVar_25_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %530 = sigmoid(%529) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%529, %530) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %531(%cutlass_258_i0, %cutlass_258_i1, %cutlass_258_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_26(%cutlass_26_i0: Tensor[(8, 160, 160, 64), float16], %cutlass_26_i1: Tensor[(64, 1, 1, 64), float16], %cutlass_26_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_26", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %535 = fn (%FunctionVar_77_0: Tensor[(8, 160, 160, 64), float16], %FunctionVar_77_1: Tensor[(64, 1, 1, 64), float16], %FunctionVar_77_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 64), float16] {
+    %532 = nn.conv2d(%FunctionVar_77_0, %FunctionVar_77_1, padding=[0, 0, 0, 0], channels=64, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %533 = add(%532, %FunctionVar_77_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %534 = sigmoid(%533) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    multiply(%533, %534) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %535(%cutlass_26_i0, %cutlass_26_i1, %cutlass_26_i2) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_261(%cutlass_261_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_261_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_261_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_261", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %539 = fn (%FunctionVar_24_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_24_1: Tensor[(128, 3, 3, 128), float16], %FunctionVar_24_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %536 = nn.conv2d(%FunctionVar_24_0, %FunctionVar_24_1, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %537 = add(%536, %FunctionVar_24_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %538 = sigmoid(%537) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%537, %538) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %539(%cutlass_261_i0, %cutlass_261_i1, %cutlass_261_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_264(%cutlass_264_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_264_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_264_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_264", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %543 = fn (%FunctionVar_23_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_23_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_23_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %540 = nn.conv2d(%FunctionVar_23_0, %FunctionVar_23_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %541 = add(%540, %FunctionVar_23_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %542 = sigmoid(%541) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%541, %542) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %543(%cutlass_264_i0, %cutlass_264_i1, %cutlass_264_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_267(%cutlass_267_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_267_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_267_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_267", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %547 = fn (%FunctionVar_22_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_22_1: Tensor[(128, 3, 3, 128), float16], %FunctionVar_22_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %544 = nn.conv2d(%FunctionVar_22_0, %FunctionVar_22_1, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %545 = add(%544, %FunctionVar_22_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %546 = sigmoid(%545) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%545, %546) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %547(%cutlass_267_i0, %cutlass_267_i1, %cutlass_267_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_270(%cutlass_270_i0: Tensor[(8, 80, 80, 512), float16], %cutlass_270_i1: Tensor[(128, 1, 1, 512), float16], %cutlass_270_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_270", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %551 = fn (%FunctionVar_21_0: Tensor[(8, 80, 80, 512), float16], %FunctionVar_21_1: Tensor[(128, 1, 1, 512), float16], %FunctionVar_21_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %548 = nn.conv2d(%FunctionVar_21_0, %FunctionVar_21_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %549 = add(%548, %FunctionVar_21_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %550 = sigmoid(%549) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%549, %550) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %551(%cutlass_270_i0, %cutlass_270_i1, %cutlass_270_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_273(%cutlass_273_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_273_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_273_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_273", Primitive=1) -> Tensor[(8, 80, 80, 256), float16] {
+  %555 = fn (%FunctionVar_20_0: Tensor[(8, 80, 80, 256), float16], %FunctionVar_20_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_20_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 256), float16] {
+    %552 = nn.conv2d(%FunctionVar_20_0, %FunctionVar_20_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    %553 = add(%552, %FunctionVar_20_2) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    %554 = sigmoid(%553) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    multiply(%553, %554) /* ty=Tensor[(8, 80, 80, 256), float16] */
+  };
+  %555(%cutlass_273_i0, %cutlass_273_i1, %cutlass_273_i2) /* ty=Tensor[(8, 80, 80, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_276(%cutlass_276_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_276_i1: Tensor[(255, 1, 1, 256), float16], %cutlass_276_i2: Tensor[(1, 1, 1, 255), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_276", Primitive=1) -> Tensor[(8, 80, 80, 255), float16] {
+  %557 = fn (%FunctionVar_2_01: Tensor[(8, 80, 80, 256), float16], %FunctionVar_2_11: Tensor[(255, 1, 1, 256), float16], %FunctionVar_2_21: Tensor[(1, 1, 1, 255), float16], PartitionedFromPattern="nn.conv2d_add_", Composite="cutlass.conv2d_bias") -> Tensor[(8, 80, 80, 255), float16] {
+    %556 = nn.conv2d(%FunctionVar_2_01, %FunctionVar_2_11, padding=[0, 0, 0, 0], channels=255, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 255), float16] */;
+    add(%556, %FunctionVar_2_21) /* ty=Tensor[(8, 80, 80, 255), float16] */
+  };
+  %557(%cutlass_276_i0, %cutlass_276_i1, %cutlass_276_i2) /* ty=Tensor[(8, 80, 80, 255), float16] */
+}
+
+def @tvmgen_default_cutlass_main_279(%cutlass_279_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_279_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_279_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_279", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %561 = fn (%FunctionVar_19_01: Tensor[(8, 80, 80, 256), float16], %FunctionVar_19_11: Tensor[(256, 3, 3, 256), float16], %FunctionVar_19_21: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %558 = nn.conv2d(%FunctionVar_19_01, %FunctionVar_19_11, strides=[2, 2], padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %559 = add(%558, %FunctionVar_19_21) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %560 = sigmoid(%559) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%559, %560) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %561(%cutlass_279_i0, %cutlass_279_i1, %cutlass_279_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_282(%cutlass_282_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_282_i1: Tensor[(256, 1, 1, 512), float16], %cutlass_282_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_282", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %565 = fn (%FunctionVar_18_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_18_1: Tensor[(256, 1, 1, 512), float16], %FunctionVar_18_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %562 = nn.conv2d(%FunctionVar_18_0, %FunctionVar_18_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %563 = add(%562, %FunctionVar_18_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %564 = sigmoid(%563) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%563, %564) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %565(%cutlass_282_i0, %cutlass_282_i1, %cutlass_282_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_285(%cutlass_285_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_285_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_285_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_285", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %569 = fn (%FunctionVar_17_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_17_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_17_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %566 = nn.conv2d(%FunctionVar_17_0, %FunctionVar_17_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %567 = add(%566, %FunctionVar_17_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %568 = sigmoid(%567) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%567, %568) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %569(%cutlass_285_i0, %cutlass_285_i1, %cutlass_285_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_288(%cutlass_288_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_288_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_288_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_288", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %573 = fn (%FunctionVar_16_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_16_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_16_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %570 = nn.conv2d(%FunctionVar_16_0, %FunctionVar_16_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %571 = add(%570, %FunctionVar_16_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %572 = sigmoid(%571) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%571, %572) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %573(%cutlass_288_i0, %cutlass_288_i1, %cutlass_288_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_29(%cutlass_29_i0: Tensor[(8, 160, 160, 64), float16], %cutlass_29_i1: Tensor[(64, 3, 3, 64), float16], %cutlass_29_i2: Tensor[(64), float16], %cutlass_29_i3: Tensor[(8, 160, 160, 64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_29", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %578 = fn (%FunctionVar_18_01: Tensor[(8, 160, 160, 64), float16], %FunctionVar_18_11: Tensor[(64, 3, 3, 64), float16], %FunctionVar_18_21: Tensor[(64), float16], %FunctionVar_18_3: Tensor[(8, 160, 160, 64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 160, 160, 64), float16] {
+    %574 = nn.conv2d(%FunctionVar_18_01, %FunctionVar_18_11, padding=[1, 1, 1, 1], channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %575 = add(%574, %FunctionVar_18_21) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %576 = sigmoid(%575) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %577 = multiply(%575, %576) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    add(%FunctionVar_18_3, %577) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %578(%cutlass_29_i0, %cutlass_29_i1, %cutlass_29_i2, %cutlass_29_i3) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_291(%cutlass_291_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_291_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_291_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_291", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %582 = fn (%FunctionVar_15_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_15_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_15_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %579 = nn.conv2d(%FunctionVar_15_0, %FunctionVar_15_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %580 = add(%579, %FunctionVar_15_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %581 = sigmoid(%580) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%580, %581) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %582(%cutlass_291_i0, %cutlass_291_i1, %cutlass_291_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_294(%cutlass_294_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_294_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_294_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_294", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %586 = fn (%FunctionVar_14_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_14_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_14_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %583 = nn.conv2d(%FunctionVar_14_0, %FunctionVar_14_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %584 = add(%583, %FunctionVar_14_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %585 = sigmoid(%584) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%584, %585) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %586(%cutlass_294_i0, %cutlass_294_i1, %cutlass_294_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_297(%cutlass_297_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_297_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_297_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_297", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %590 = fn (%FunctionVar_13_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_13_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_13_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %587 = nn.conv2d(%FunctionVar_13_0, %FunctionVar_13_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %588 = add(%587, %FunctionVar_13_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %589 = sigmoid(%588) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%588, %589) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %590(%cutlass_297_i0, %cutlass_297_i1, %cutlass_297_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_3(%cutlass_3_i0: Tensor[(8, 320, 320, 64), float16], %cutlass_3_i1: Tensor[(128, 3, 3, 64), float16], %cutlass_3_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_3", Primitive=1) -> Tensor[(8, 160, 160, 128), float16] {
+  %594 = fn (%FunctionVar_82_0: Tensor[(8, 320, 320, 64), float16], %FunctionVar_82_1: Tensor[(128, 3, 3, 64), float16], %FunctionVar_82_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 128), float16] {
+    %591 = nn.conv2d(%FunctionVar_82_0, %FunctionVar_82_1, strides=[2, 2], padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 128), float16] */;
+    %592 = add(%591, %FunctionVar_82_2) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+    %593 = sigmoid(%592) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+    multiply(%592, %593) /* ty=Tensor[(8, 160, 160, 128), float16] */
+  };
+  %594(%cutlass_3_i0, %cutlass_3_i1, %cutlass_3_i2) /* ty=Tensor[(8, 160, 160, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_300(%cutlass_300_i0: Tensor[(8, 40, 40, 256), float16], %cutlass_300_i1: Tensor[(256, 3, 3, 256), float16], %cutlass_300_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_300", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %598 = fn (%FunctionVar_12_0: Tensor[(8, 40, 40, 256), float16], %FunctionVar_12_1: Tensor[(256, 3, 3, 256), float16], %FunctionVar_12_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %595 = nn.conv2d(%FunctionVar_12_0, %FunctionVar_12_1, padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %596 = add(%595, %FunctionVar_12_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %597 = sigmoid(%596) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%596, %597) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %598(%cutlass_300_i0, %cutlass_300_i1, %cutlass_300_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_303(%cutlass_303_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_303_i1: Tensor[(256, 1, 1, 512), float16], %cutlass_303_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_303", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %602 = fn (%FunctionVar_11_0: Tensor[(8, 40, 40, 512), float16], %FunctionVar_11_1: Tensor[(256, 1, 1, 512), float16], %FunctionVar_11_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 256), float16] {
+    %599 = nn.conv2d(%FunctionVar_11_0, %FunctionVar_11_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %600 = add(%599, %FunctionVar_11_2) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %601 = sigmoid(%600) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    multiply(%600, %601) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %602(%cutlass_303_i0, %cutlass_303_i1, %cutlass_303_i2) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_306(%cutlass_306_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_306_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_306_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_306", Primitive=1) -> Tensor[(8, 40, 40, 512), float16] {
+  %606 = fn (%FunctionVar_10_01: Tensor[(8, 40, 40, 512), float16], %FunctionVar_10_11: Tensor[(512, 1, 1, 512), float16], %FunctionVar_10_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 512), float16] {
+    %603 = nn.conv2d(%FunctionVar_10_01, %FunctionVar_10_11, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %604 = add(%603, %FunctionVar_10_21) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %605 = sigmoid(%604) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    multiply(%604, %605) /* ty=Tensor[(8, 40, 40, 512), float16] */
+  };
+  %606(%cutlass_306_i0, %cutlass_306_i1, %cutlass_306_i2) /* ty=Tensor[(8, 40, 40, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_309(%cutlass_309_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_309_i1: Tensor[(255, 1, 1, 512), float16], %cutlass_309_i2: Tensor[(1, 1, 1, 255), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_309", Primitive=1) -> Tensor[(8, 40, 40, 255), float16] {
+  %608 = fn (%FunctionVar_1_01: Tensor[(8, 40, 40, 512), float16], %FunctionVar_1_11: Tensor[(255, 1, 1, 512), float16], %FunctionVar_1_21: Tensor[(1, 1, 1, 255), float16], PartitionedFromPattern="nn.conv2d_add_", Composite="cutlass.conv2d_bias") -> Tensor[(8, 40, 40, 255), float16] {
+    %607 = nn.conv2d(%FunctionVar_1_01, %FunctionVar_1_11, padding=[0, 0, 0, 0], channels=255, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 255), float16] */;
+    add(%607, %FunctionVar_1_21) /* ty=Tensor[(8, 40, 40, 255), float16] */
+  };
+  %608(%cutlass_309_i0, %cutlass_309_i1, %cutlass_309_i2) /* ty=Tensor[(8, 40, 40, 255), float16] */
+}
+
+def @tvmgen_default_cutlass_main_312(%cutlass_312_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_312_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_312_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_312", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %612 = fn (%FunctionVar_9_01: Tensor[(8, 40, 40, 512), float16], %FunctionVar_9_11: Tensor[(512, 3, 3, 512), float16], %FunctionVar_9_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %609 = nn.conv2d(%FunctionVar_9_01, %FunctionVar_9_11, strides=[2, 2], padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %610 = add(%609, %FunctionVar_9_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %611 = sigmoid(%610) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%610, %611) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %612(%cutlass_312_i0, %cutlass_312_i1, %cutlass_312_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_315(%cutlass_315_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_315_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_315_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_315", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %616 = fn (%FunctionVar_8_01: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_8_11: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_8_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %613 = nn.conv2d(%FunctionVar_8_01, %FunctionVar_8_11, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %614 = add(%613, %FunctionVar_8_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %615 = sigmoid(%614) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%614, %615) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %616(%cutlass_315_i0, %cutlass_315_i1, %cutlass_315_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_318(%cutlass_318_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_318_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_318_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_318", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %620 = fn (%FunctionVar_7_01: Tensor[(8, 20, 20, 512), float16], %FunctionVar_7_11: Tensor[(512, 1, 1, 512), float16], %FunctionVar_7_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %617 = nn.conv2d(%FunctionVar_7_01, %FunctionVar_7_11, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %618 = add(%617, %FunctionVar_7_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %619 = sigmoid(%618) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%618, %619) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %620(%cutlass_318_i0, %cutlass_318_i1, %cutlass_318_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_321(%cutlass_321_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_321_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_321_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_321", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %624 = fn (%FunctionVar_6_01: Tensor[(8, 20, 20, 512), float16], %FunctionVar_6_11: Tensor[(512, 3, 3, 512), float16], %FunctionVar_6_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %621 = nn.conv2d(%FunctionVar_6_01, %FunctionVar_6_11, padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %622 = add(%621, %FunctionVar_6_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %623 = sigmoid(%622) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%622, %623) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %624(%cutlass_321_i0, %cutlass_321_i1, %cutlass_321_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_324(%cutlass_324_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_324_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_324_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_324", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %628 = fn (%FunctionVar_5_01: Tensor[(8, 20, 20, 512), float16], %FunctionVar_5_11: Tensor[(512, 1, 1, 512), float16], %FunctionVar_5_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %625 = nn.conv2d(%FunctionVar_5_01, %FunctionVar_5_11, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %626 = add(%625, %FunctionVar_5_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %627 = sigmoid(%626) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%626, %627) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %628(%cutlass_324_i0, %cutlass_324_i1, %cutlass_324_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_327(%cutlass_327_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_327_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_327_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_327", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %632 = fn (%FunctionVar_4_01: Tensor[(8, 20, 20, 512), float16], %FunctionVar_4_11: Tensor[(512, 3, 3, 512), float16], %FunctionVar_4_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %629 = nn.conv2d(%FunctionVar_4_01, %FunctionVar_4_11, padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %630 = add(%629, %FunctionVar_4_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %631 = sigmoid(%630) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%630, %631) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %632(%cutlass_327_i0, %cutlass_327_i1, %cutlass_327_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_33(%cutlass_33_i0: Tensor[(8, 160, 160, 128), float16], %cutlass_33_i1: Tensor[(64, 1, 1, 128), float16], %cutlass_33_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_33", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %636 = fn (%FunctionVar_76_0: Tensor[(8, 160, 160, 128), float16], %FunctionVar_76_1: Tensor[(64, 1, 1, 128), float16], %FunctionVar_76_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 64), float16] {
+    %633 = nn.conv2d(%FunctionVar_76_0, %FunctionVar_76_1, padding=[0, 0, 0, 0], channels=64, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %634 = add(%633, %FunctionVar_76_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %635 = sigmoid(%634) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    multiply(%634, %635) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %636(%cutlass_33_i0, %cutlass_33_i1, %cutlass_33_i2) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_330(%cutlass_330_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_330_i1: Tensor[(512, 1, 1, 512), float16], %cutlass_330_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_330", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %640 = fn (%FunctionVar_3_01: Tensor[(8, 20, 20, 512), float16], %FunctionVar_3_11: Tensor[(512, 1, 1, 512), float16], %FunctionVar_3_21: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %637 = nn.conv2d(%FunctionVar_3_01, %FunctionVar_3_11, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %638 = add(%637, %FunctionVar_3_21) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %639 = sigmoid(%638) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%638, %639) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %640(%cutlass_330_i0, %cutlass_330_i1, %cutlass_330_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_333(%cutlass_333_i0: Tensor[(8, 20, 20, 512), float16], %cutlass_333_i1: Tensor[(512, 3, 3, 512), float16], %cutlass_333_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_333", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %644 = fn (%FunctionVar_2_02: Tensor[(8, 20, 20, 512), float16], %FunctionVar_2_12: Tensor[(512, 3, 3, 512), float16], %FunctionVar_2_22: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %641 = nn.conv2d(%FunctionVar_2_02, %FunctionVar_2_12, padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %642 = add(%641, %FunctionVar_2_22) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %643 = sigmoid(%642) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%642, %643) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %644(%cutlass_333_i0, %cutlass_333_i1, %cutlass_333_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_336(%cutlass_336_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_336_i1: Tensor[(512, 1, 1, 1024), float16], %cutlass_336_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_336", Primitive=1) -> Tensor[(8, 20, 20, 512), float16] {
+  %648 = fn (%FunctionVar_1_02: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_1_12: Tensor[(512, 1, 1, 1024), float16], %FunctionVar_1_22: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 512), float16] {
+    %645 = nn.conv2d(%FunctionVar_1_02, %FunctionVar_1_12, padding=[0, 0, 0, 0], channels=512, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %646 = add(%645, %FunctionVar_1_22) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    %647 = sigmoid(%646) /* ty=Tensor[(8, 20, 20, 512), float16] */;
+    multiply(%646, %647) /* ty=Tensor[(8, 20, 20, 512), float16] */
+  };
+  %648(%cutlass_336_i0, %cutlass_336_i1, %cutlass_336_i2) /* ty=Tensor[(8, 20, 20, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_339(%cutlass_339_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_339_i1: Tensor[(1024, 1, 1, 1024), float16], %cutlass_339_i2: Tensor[(1024), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_339", Primitive=1) -> Tensor[(8, 20, 20, 1024), float16] {
+  %652 = fn (%FunctionVar_0_01: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_0_11: Tensor[(1024, 1, 1, 1024), float16], %FunctionVar_0_21: Tensor[(1024), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 20, 20, 1024), float16] {
+    %649 = nn.conv2d(%FunctionVar_0_01, %FunctionVar_0_11, padding=[0, 0, 0, 0], channels=1024, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %650 = add(%649, %FunctionVar_0_21) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    %651 = sigmoid(%650) /* ty=Tensor[(8, 20, 20, 1024), float16] */;
+    multiply(%650, %651) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+  };
+  %652(%cutlass_339_i0, %cutlass_339_i1, %cutlass_339_i2) /* ty=Tensor[(8, 20, 20, 1024), float16] */
+}
+
+def @tvmgen_default_cutlass_main_342(%cutlass_342_i0: Tensor[(8, 20, 20, 1024), float16], %cutlass_342_i1: Tensor[(255, 1, 1, 1024), float16], %cutlass_342_i2: Tensor[(1, 1, 1, 255), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_342", Primitive=1) -> Tensor[(8, 20, 20, 255), float16] {
+  %654 = fn (%FunctionVar_0_02: Tensor[(8, 20, 20, 1024), float16], %FunctionVar_0_12: Tensor[(255, 1, 1, 1024), float16], %FunctionVar_0_22: Tensor[(1, 1, 1, 255), float16], PartitionedFromPattern="nn.conv2d_add_", Composite="cutlass.conv2d_bias") -> Tensor[(8, 20, 20, 255), float16] {
+    %653 = nn.conv2d(%FunctionVar_0_02, %FunctionVar_0_12, padding=[0, 0, 0, 0], channels=255, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 20, 20, 255), float16] */;
+    add(%653, %FunctionVar_0_22) /* ty=Tensor[(8, 20, 20, 255), float16] */
+  };
+  %654(%cutlass_342_i0, %cutlass_342_i1, %cutlass_342_i2) /* ty=Tensor[(8, 20, 20, 255), float16] */
+}
+
+def @tvmgen_default_cutlass_main_36(%cutlass_36_i0: Tensor[(8, 160, 160, 128), float16], %cutlass_36_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_36_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_36", Primitive=1) -> Tensor[(8, 160, 160, 128), float16] {
+  %658 = fn (%FunctionVar_75_0: Tensor[(8, 160, 160, 128), float16], %FunctionVar_75_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_75_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 128), float16] {
+    %655 = nn.conv2d(%FunctionVar_75_0, %FunctionVar_75_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 128), float16] */;
+    %656 = add(%655, %FunctionVar_75_2) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+    %657 = sigmoid(%656) /* ty=Tensor[(8, 160, 160, 128), float16] */;
+    multiply(%656, %657) /* ty=Tensor[(8, 160, 160, 128), float16] */
+  };
+  %658(%cutlass_36_i0, %cutlass_36_i1, %cutlass_36_i2) /* ty=Tensor[(8, 160, 160, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_39(%cutlass_39_i0: Tensor[(8, 160, 160, 128), float16], %cutlass_39_i1: Tensor[(256, 3, 3, 128), float16], %cutlass_39_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_39", Primitive=1) -> Tensor[(8, 80, 80, 256), float16] {
+  %662 = fn (%FunctionVar_74_0: Tensor[(8, 160, 160, 128), float16], %FunctionVar_74_1: Tensor[(256, 3, 3, 128), float16], %FunctionVar_74_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 256), float16] {
+    %659 = nn.conv2d(%FunctionVar_74_0, %FunctionVar_74_1, strides=[2, 2], padding=[1, 1, 1, 1], channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    %660 = add(%659, %FunctionVar_74_2) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    %661 = sigmoid(%660) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    multiply(%660, %661) /* ty=Tensor[(8, 80, 80, 256), float16] */
+  };
+  %662(%cutlass_39_i0, %cutlass_39_i1, %cutlass_39_i2) /* ty=Tensor[(8, 80, 80, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_42(%cutlass_42_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_42_i1: Tensor[(128, 1, 1, 256), float16], %cutlass_42_i2: Tensor[(128), float16], %cutlass_42_i3: Tensor[(8, 80, 80, 128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_42", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %667 = fn (%FunctionVar_17_01: Tensor[(8, 80, 80, 256), float16], %FunctionVar_17_11: Tensor[(128, 1, 1, 256), float16], %FunctionVar_17_21: Tensor[(128), float16], %FunctionVar_17_3: Tensor[(8, 80, 80, 128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 80, 80, 128), float16] {
+    %663 = nn.conv2d(%FunctionVar_17_01, %FunctionVar_17_11, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %664 = add(%663, %FunctionVar_17_21) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %665 = sigmoid(%664) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %666 = multiply(%664, %665) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    add(%666, %FunctionVar_17_3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %667(%cutlass_42_i0, %cutlass_42_i1, %cutlass_42_i2, %cutlass_42_i3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_45(%cutlass_45_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_45_i1: Tensor[(128, 1, 1, 256), float16], %cutlass_45_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_45", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %671 = fn (%FunctionVar_73_0: Tensor[(8, 80, 80, 256), float16], %FunctionVar_73_1: Tensor[(128, 1, 1, 256), float16], %FunctionVar_73_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %668 = nn.conv2d(%FunctionVar_73_0, %FunctionVar_73_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %669 = add(%668, %FunctionVar_73_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %670 = sigmoid(%669) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%669, %670) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %671(%cutlass_45_i0, %cutlass_45_i1, %cutlass_45_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_48(%cutlass_48_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_48_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_48_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_48", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %675 = fn (%FunctionVar_72_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_72_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_72_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %672 = nn.conv2d(%FunctionVar_72_0, %FunctionVar_72_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %673 = add(%672, %FunctionVar_72_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %674 = sigmoid(%673) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%673, %674) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %675(%cutlass_48_i0, %cutlass_48_i1, %cutlass_48_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_51(%cutlass_51_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_51_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_51_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_51", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %679 = fn (%FunctionVar_71_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_71_1: Tensor[(128, 3, 3, 128), float16], %FunctionVar_71_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %676 = nn.conv2d(%FunctionVar_71_0, %FunctionVar_71_1, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %677 = add(%676, %FunctionVar_71_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %678 = sigmoid(%677) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%677, %678) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %679(%cutlass_51_i0, %cutlass_51_i1, %cutlass_51_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_55(%cutlass_55_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_55_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_55_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_55", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %683 = fn (%FunctionVar_70_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_70_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_70_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %680 = nn.conv2d(%FunctionVar_70_0, %FunctionVar_70_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %681 = add(%680, %FunctionVar_70_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %682 = sigmoid(%681) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%681, %682) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %683(%cutlass_55_i0, %cutlass_55_i1, %cutlass_55_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_58(%cutlass_58_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_58_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_58_i2: Tensor[(128), float16], %cutlass_58_i3: Tensor[(8, 80, 80, 128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_58", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %688 = fn (%FunctionVar_16_01: Tensor[(8, 80, 80, 128), float16], %FunctionVar_16_11: Tensor[(128, 3, 3, 128), float16], %FunctionVar_16_21: Tensor[(128), float16], %FunctionVar_16_3: Tensor[(8, 80, 80, 128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 80, 80, 128), float16] {
+    %684 = nn.conv2d(%FunctionVar_16_01, %FunctionVar_16_11, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %685 = add(%684, %FunctionVar_16_21) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %686 = sigmoid(%685) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %687 = multiply(%685, %686) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    add(%FunctionVar_16_3, %687) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %688(%cutlass_58_i0, %cutlass_58_i1, %cutlass_58_i2, %cutlass_58_i3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_6(%cutlass_6_i0: Tensor[(8, 160, 160, 128), float16], %cutlass_6_i1: Tensor[(64, 1, 1, 128), float16], %cutlass_6_i2: Tensor[(64), float16], %cutlass_6_i3: Tensor[(8, 160, 160, 64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_6", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %693 = fn (%FunctionVar_20_01: Tensor[(8, 160, 160, 128), float16], %FunctionVar_20_11: Tensor[(64, 1, 1, 128), float16], %FunctionVar_20_21: Tensor[(64), float16], %FunctionVar_20_3: Tensor[(8, 160, 160, 64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 160, 160, 64), float16] {
+    %689 = nn.conv2d(%FunctionVar_20_01, %FunctionVar_20_11, padding=[0, 0, 0, 0], channels=64, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %690 = add(%689, %FunctionVar_20_21) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %691 = sigmoid(%690) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %692 = multiply(%690, %691) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    add(%692, %FunctionVar_20_3) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %693(%cutlass_6_i0, %cutlass_6_i1, %cutlass_6_i2, %cutlass_6_i3) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_62(%cutlass_62_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_62_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_62_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_62", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %697 = fn (%FunctionVar_69_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_69_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_69_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %694 = nn.conv2d(%FunctionVar_69_0, %FunctionVar_69_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %695 = add(%694, %FunctionVar_69_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %696 = sigmoid(%695) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%695, %696) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %697(%cutlass_62_i0, %cutlass_62_i1, %cutlass_62_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_65(%cutlass_65_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_65_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_65_i2: Tensor[(128), float16], %cutlass_65_i3: Tensor[(8, 80, 80, 128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_65", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %702 = fn (%FunctionVar_15_01: Tensor[(8, 80, 80, 128), float16], %FunctionVar_15_11: Tensor[(128, 3, 3, 128), float16], %FunctionVar_15_21: Tensor[(128), float16], %FunctionVar_15_3: Tensor[(8, 80, 80, 128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 80, 80, 128), float16] {
+    %698 = nn.conv2d(%FunctionVar_15_01, %FunctionVar_15_11, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %699 = add(%698, %FunctionVar_15_21) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %700 = sigmoid(%699) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %701 = multiply(%699, %700) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    add(%FunctionVar_15_3, %701) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %702(%cutlass_65_i0, %cutlass_65_i1, %cutlass_65_i2, %cutlass_65_i3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_69(%cutlass_69_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_69_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_69_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_69", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %706 = fn (%FunctionVar_68_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_68_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_68_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %703 = nn.conv2d(%FunctionVar_68_0, %FunctionVar_68_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %704 = add(%703, %FunctionVar_68_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %705 = sigmoid(%704) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%704, %705) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %706(%cutlass_69_i0, %cutlass_69_i1, %cutlass_69_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_72(%cutlass_72_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_72_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_72_i2: Tensor[(128), float16], %cutlass_72_i3: Tensor[(8, 80, 80, 128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_72", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %711 = fn (%FunctionVar_14_01: Tensor[(8, 80, 80, 128), float16], %FunctionVar_14_11: Tensor[(128, 3, 3, 128), float16], %FunctionVar_14_21: Tensor[(128), float16], %FunctionVar_14_3: Tensor[(8, 80, 80, 128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 80, 80, 128), float16] {
+    %707 = nn.conv2d(%FunctionVar_14_01, %FunctionVar_14_11, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %708 = add(%707, %FunctionVar_14_21) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %709 = sigmoid(%708) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %710 = multiply(%708, %709) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    add(%FunctionVar_14_3, %710) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %711(%cutlass_72_i0, %cutlass_72_i1, %cutlass_72_i2, %cutlass_72_i3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_76(%cutlass_76_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_76_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_76_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_76", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %715 = fn (%FunctionVar_67_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_67_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_67_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %712 = nn.conv2d(%FunctionVar_67_0, %FunctionVar_67_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %713 = add(%712, %FunctionVar_67_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %714 = sigmoid(%713) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%713, %714) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %715(%cutlass_76_i0, %cutlass_76_i1, %cutlass_76_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_79(%cutlass_79_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_79_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_79_i2: Tensor[(128), float16], %cutlass_79_i3: Tensor[(8, 80, 80, 128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_79", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %720 = fn (%FunctionVar_13_01: Tensor[(8, 80, 80, 128), float16], %FunctionVar_13_11: Tensor[(128, 3, 3, 128), float16], %FunctionVar_13_21: Tensor[(128), float16], %FunctionVar_13_3: Tensor[(8, 80, 80, 128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 80, 80, 128), float16] {
+    %716 = nn.conv2d(%FunctionVar_13_01, %FunctionVar_13_11, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %717 = add(%716, %FunctionVar_13_21) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %718 = sigmoid(%717) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %719 = multiply(%717, %718) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    add(%FunctionVar_13_3, %719) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %720(%cutlass_79_i0, %cutlass_79_i1, %cutlass_79_i2, %cutlass_79_i3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_83(%cutlass_83_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_83_i1: Tensor[(128, 1, 1, 128), float16], %cutlass_83_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_83", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %724 = fn (%FunctionVar_66_0: Tensor[(8, 80, 80, 128), float16], %FunctionVar_66_1: Tensor[(128, 1, 1, 128), float16], %FunctionVar_66_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %721 = nn.conv2d(%FunctionVar_66_0, %FunctionVar_66_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %722 = add(%721, %FunctionVar_66_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %723 = sigmoid(%722) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%722, %723) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %724(%cutlass_83_i0, %cutlass_83_i1, %cutlass_83_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_86(%cutlass_86_i0: Tensor[(8, 80, 80, 128), float16], %cutlass_86_i1: Tensor[(128, 3, 3, 128), float16], %cutlass_86_i2: Tensor[(128), float16], %cutlass_86_i3: Tensor[(8, 80, 80, 128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_86", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %729 = fn (%FunctionVar_12_01: Tensor[(8, 80, 80, 128), float16], %FunctionVar_12_11: Tensor[(128, 3, 3, 128), float16], %FunctionVar_12_21: Tensor[(128), float16], %FunctionVar_12_3: Tensor[(8, 80, 80, 128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 80, 80, 128), float16] {
+    %725 = nn.conv2d(%FunctionVar_12_01, %FunctionVar_12_11, padding=[1, 1, 1, 1], channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %726 = add(%725, %FunctionVar_12_21) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %727 = sigmoid(%726) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %728 = multiply(%726, %727) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    add(%FunctionVar_12_3, %728) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %729(%cutlass_86_i0, %cutlass_86_i1, %cutlass_86_i2, %cutlass_86_i3) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_9(%cutlass_9_i0: Tensor[(8, 160, 160, 128), float16], %cutlass_9_i1: Tensor[(64, 1, 1, 128), float16], %cutlass_9_i2: Tensor[(64), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_9", Primitive=1) -> Tensor[(8, 160, 160, 64), float16] {
+  %733 = fn (%FunctionVar_81_0: Tensor[(8, 160, 160, 128), float16], %FunctionVar_81_1: Tensor[(64, 1, 1, 128), float16], %FunctionVar_81_2: Tensor[(64), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 160, 160, 64), float16] {
+    %730 = nn.conv2d(%FunctionVar_81_0, %FunctionVar_81_1, padding=[0, 0, 0, 0], channels=64, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %731 = add(%730, %FunctionVar_81_2) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    %732 = sigmoid(%731) /* ty=Tensor[(8, 160, 160, 64), float16] */;
+    multiply(%731, %732) /* ty=Tensor[(8, 160, 160, 64), float16] */
+  };
+  %733(%cutlass_9_i0, %cutlass_9_i1, %cutlass_9_i2) /* ty=Tensor[(8, 160, 160, 64), float16] */
+}
+
+def @tvmgen_default_cutlass_main_90(%cutlass_90_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_90_i1: Tensor[(128, 1, 1, 256), float16], %cutlass_90_i2: Tensor[(128), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_90", Primitive=1) -> Tensor[(8, 80, 80, 128), float16] {
+  %737 = fn (%FunctionVar_65_0: Tensor[(8, 80, 80, 256), float16], %FunctionVar_65_1: Tensor[(128, 1, 1, 256), float16], %FunctionVar_65_2: Tensor[(128), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 128), float16] {
+    %734 = nn.conv2d(%FunctionVar_65_0, %FunctionVar_65_1, padding=[0, 0, 0, 0], channels=128, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %735 = add(%734, %FunctionVar_65_2) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    %736 = sigmoid(%735) /* ty=Tensor[(8, 80, 80, 128), float16] */;
+    multiply(%735, %736) /* ty=Tensor[(8, 80, 80, 128), float16] */
+  };
+  %737(%cutlass_90_i0, %cutlass_90_i1, %cutlass_90_i2) /* ty=Tensor[(8, 80, 80, 128), float16] */
+}
+
+def @tvmgen_default_cutlass_main_93(%cutlass_93_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_93_i1: Tensor[(256, 1, 1, 256), float16], %cutlass_93_i2: Tensor[(256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_93", Primitive=1) -> Tensor[(8, 80, 80, 256), float16] {
+  %741 = fn (%FunctionVar_64_0: Tensor[(8, 80, 80, 256), float16], %FunctionVar_64_1: Tensor[(256, 1, 1, 256), float16], %FunctionVar_64_2: Tensor[(256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 80, 80, 256), float16] {
+    %738 = nn.conv2d(%FunctionVar_64_0, %FunctionVar_64_1, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    %739 = add(%738, %FunctionVar_64_2) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    %740 = sigmoid(%739) /* ty=Tensor[(8, 80, 80, 256), float16] */;
+    multiply(%739, %740) /* ty=Tensor[(8, 80, 80, 256), float16] */
+  };
+  %741(%cutlass_93_i0, %cutlass_93_i1, %cutlass_93_i2) /* ty=Tensor[(8, 80, 80, 256), float16] */
+}
+
+def @tvmgen_default_cutlass_main_96(%cutlass_96_i0: Tensor[(8, 80, 80, 256), float16], %cutlass_96_i1: Tensor[(512, 3, 3, 256), float16], %cutlass_96_i2: Tensor[(512), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_96", Primitive=1) -> Tensor[(8, 40, 40, 512), float16] {
+  %745 = fn (%FunctionVar_63_0: Tensor[(8, 80, 80, 256), float16], %FunctionVar_63_1: Tensor[(512, 3, 3, 256), float16], %FunctionVar_63_2: Tensor[(512), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_", Composite="cutlass.conv2d_bias_silu") -> Tensor[(8, 40, 40, 512), float16] {
+    %742 = nn.conv2d(%FunctionVar_63_0, %FunctionVar_63_1, strides=[2, 2], padding=[1, 1, 1, 1], channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %743 = add(%742, %FunctionVar_63_2) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    %744 = sigmoid(%743) /* ty=Tensor[(8, 40, 40, 512), float16] */;
+    multiply(%743, %744) /* ty=Tensor[(8, 40, 40, 512), float16] */
+  };
+  %745(%cutlass_96_i0, %cutlass_96_i1, %cutlass_96_i2) /* ty=Tensor[(8, 40, 40, 512), float16] */
+}
+
+def @tvmgen_default_cutlass_main_99(%cutlass_99_i0: Tensor[(8, 40, 40, 512), float16], %cutlass_99_i1: Tensor[(256, 1, 1, 512), float16], %cutlass_99_i2: Tensor[(256), float16], %cutlass_99_i3: Tensor[(8, 40, 40, 256), float16], Inline=1, Compiler="cutlass", global_symbol="tvmgen_default_cutlass_main_99", Primitive=1) -> Tensor[(8, 40, 40, 256), float16] {
+  %750 = fn (%FunctionVar_11_01: Tensor[(8, 40, 40, 512), float16], %FunctionVar_11_11: Tensor[(256, 1, 1, 512), float16], %FunctionVar_11_21: Tensor[(256), float16], %FunctionVar_11_3: Tensor[(8, 40, 40, 256), float16], PartitionedFromPattern="nn.conv2d_add_sigmoid_multiply_add_", Composite="cutlass.conv2d_bias_silu_residual_add") -> Tensor[(8, 40, 40, 256), float16] {
+    %746 = nn.conv2d(%FunctionVar_11_01, %FunctionVar_11_11, padding=[0, 0, 0, 0], channels=256, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="OHWI", out_dtype="float16") /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %747 = add(%746, %FunctionVar_11_21) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %748 = sigmoid(%747) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    %749 = multiply(%747, %748) /* ty=Tensor[(8, 40, 40, 256), float16] */;
+    add(%749, %FunctionVar_11_3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+  };
+  %750(%cutlass_99_i0, %cutlass_99_i1, %cutlass_99_i2, %cutlass_99_i3) /* ty=Tensor[(8, 40, 40, 256), float16] */
+}
+
+
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8 , 0.131635
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.259584
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align1 , 0.146924
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229891
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0633754
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0364749
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0633754
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.105554
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229014
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.186419
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0633754
+cutlass_tensorop_h1688fprop_optimized_64x64_32x2_nhwc_align2 , 0.194253
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0633754
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h1688fprop_optimized_128x256_32x2_nhwc_align1 , 0.262021
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.105554
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.166799
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229891
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.373709
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_64x64_32x2_nhwc_align2 , 0.194253
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.236124
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0364749
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0364749
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8 , 0.131635
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0364749
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.136581
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.100444
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8 , 0.131635
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229891
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229891
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.104468
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229891
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.0674714
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8 , 0.25602
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.110162
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.100444
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_64x64_32x2_nhwc_align2 , 0.194253
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8 , 0.25602
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0633754
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0364749
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.396331
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.136581
+cutlass_tensorop_h16816fprop_optimized_64x128_64x3_nhwc_align8 , 0.229891
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align1 , 3.17684
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.166799
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0645632
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.424786
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.104468
+cutlass_tensorop_h1688fprop_optimized_128x64_32x2_nhwc_align8 , 0.25602
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.110162
+cutlass_tensorop_h1688fprop_optimized_128x128_32x2_nhwc_align8 , 0.100444
+cutlass_tensorop_h1688fprop_optimized_64x128_32x2_nhwc_align8 , 0.0406909
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.193126
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.207176
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0364749
+cutlass_tensorop_h16816fprop_optimized_128x128_32x4_nhwc_align8 , 0.499836
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.0633754
+cutlass_tensorop_h1688fprop_optimized_128x256_32x2_nhwc_align1 , 0.0827494
+cutlass_tensorop_h16816fprop_optimized_128x128_32x3_nhwc_align8 , 0.104468
+[[     32.402      187.04      156.05      429.46]
+ [     423.17      186.48      511.91      417.63]
+ [     140.24      192.08      215.46      408.17]
+ [     3.8444      109.58      513.31      352.12]
+ [    0.04024      259.33       44.91      412.37]
+ [      86.19      224.22       94.96      244.55]
+ [     180.44      228.19      189.86      247.91]
+ [     173.17      274.42      215.55      368.68]
+ [     172.36      274.88      215.99      369.87]
+ [     140.43      191.73      215.99      407.57]
+ [    0.16049      341.04       21.19       413.2]
+ [      86.19      223.86       94.61      244.56]
+ [    0.16775      120.54      20.989         154]
+ [    0.50159      261.64      46.523      411.42]
+ [     327.66       195.1      353.59      242.75]
+ [    0.14038      120.89      21.185       154.1]
+ [     192.61      270.11      214.27      338.06]
+ [     175.73      229.03      186.86      248.06]
+ [     5.4697      112.15      511.13      350.05]
+ [     506.27      172.16      512.01      187.91]
+ [     84.315      226.97       99.11      288.94]
+ [    0.16017      332.25      20.665      413.35]
+ [    0.26256      171.32      44.737      362.73]
+ [      307.2      196.69      349.45      249.56]
+ [    0.46358      257.66      46.161      411.82]
+ [     28.764      346.81      49.299      386.87]
+ [     311.72     0.31129      329.15      18.964]
+ [     421.01      3.9026      470.26      41.047]
+ [     85.977      225.13      97.273       258.2]
+ [    0.66562      170.53      24.209      229.09]
+ [    0.75917      221.93      44.078      388.37]
+ [     208.52      85.241      226.01      113.03]
+ [     173.59      271.74      215.94      369.51]
+ [     0.3521      312.71      38.985      358.02]
+ [     420.12      6.0262       470.9      41.474]
+ [     420.56      14.795      442.31      37.961]
+ [     2.6404      264.29      43.728      340.71]
+ [    0.81525      170.85       24.21      229.12]
+ [    0.22792      202.49      5.7158      265.33]
+ [     28.793      346.94        49.3      386.63]
+ [    0.31259      171.13      23.712      268.38]
+ [     507.81      203.67      511.97       218.7]
+ [     143.57      287.65      191.48      338.59]
+ [     420.81      14.644      441.93      37.569]
+ [     140.43      191.73      215.99      407.57]
+ [   0.074736      259.25      44.625       412.3]
+ [     356.48      11.301      371.39      24.537]
+ [    0.21873      276.17      29.256      381.91]
+ [     76.669      335.83      96.669      387.32]
+ [      420.6      5.2363      468.72      40.139]
+ [     157.62       270.9      193.94      324.82]
+ [     6.1306      105.13      506.49      188.22]]
+[[     32.392      187.12      156.12      429.37]
+ [      423.3      186.98      511.84      417.16]
+ [     140.26      191.89      215.48       408.3]
+ [     3.8727      109.62      513.35      352.06]
+ [   0.040759      259.25      44.851      412.38]
+ [     86.191      224.24      94.943      244.52]
+ [     180.44      228.19      189.86      247.92]
+ [     173.14      274.34      215.57      368.72]
+ [     172.39      274.87      215.95      369.86]
+ [     140.48      191.64      215.95      407.65]
+ [    0.17117      341.03      21.168      413.16]
+ [     86.187      223.84      94.617      244.58]
+ [    0.16761      120.52      20.988      154.01]
+ [    0.49905      261.61      46.487      411.39]
+ [     327.65      195.15       353.6       242.8]
+ [     0.1587      120.89       21.18      154.12]
+ [     192.61      270.11      214.26      338.06]
+ [     5.3045      111.87      511.23      350.29]
+ [     175.72      229.04      186.86      248.05]
+ [     506.26      172.17      512.01      187.92]
+ [     84.288      226.96      99.153       288.9]
+ [    0.18565      332.25      20.642      413.33]
+ [    0.28359      171.31      44.803      362.71]
+ [     307.13      196.68      349.46       249.6]
+ [     28.779       346.8        49.3      386.88]
+ [    0.46166      257.55      46.085         412]
+ [     421.12      3.9897      470.14      41.076]
+ [     311.71     0.31575      329.15       18.96]
+ [    0.66613      170.52      24.186      229.08]
+ [     85.979      225.12       97.28      258.26]
+ [     173.63      271.68      215.87      369.57]
+ [    0.69164      220.57      44.074      389.82]
+ [     208.52      85.246      226.04      113.04]
+ [    0.35709      312.68      38.981      358.06]
+ [     420.19      6.0352      470.83      41.504]
+ [     420.57      14.784      442.32      37.982]
+ [     141.61      241.53      193.93      381.17]
+ [     2.5265      264.11      43.751      341.07]
+ [    0.81155      170.84      24.204      229.15]
+ [    0.22467       202.5      5.7227      265.35]
+ [     28.807      346.94      49.278      386.64]
+ [    0.29506      171.17      23.726      268.33]
+ [     143.61       287.6      191.35      338.58]
+ [     507.82      203.67      511.97       218.7]
+ [     420.81      14.646      441.93      37.588]
+ [     140.48      191.64      215.95      407.65]
+ [   0.079834      259.41      44.551      412.12]
+ [     356.49        11.3      371.38      24.533]
+ [    0.22693      276.07      29.297      382.01]
+ [     76.673      335.83      96.661      387.33]
+ [     420.62      5.2649      468.76      40.168]
+ [     6.4596      105.13      506.16      188.13]
+ [     157.74      270.85      193.84      324.85]]
+Execution time summary:
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)  
+  24.2364      24.1379      24.8916      23.9411       0.2200   
+               

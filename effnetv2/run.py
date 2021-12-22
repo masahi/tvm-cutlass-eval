@@ -27,13 +27,16 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         mod = partition_for_cutlass(mod, params)
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "default"]})
         print(mod)
+        # return None, None, None        
         mod, num_cutlass_partition = tune_cutlass_kernels(
-            mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
+            mod, sm, profile_all=False, use_multiprocessing=True, tmp_dir=tmp_dir
         )
+        # print(mod)
+        # return None, None, None
         with autotvm.apply_history_best("autotvm_log.txt"):
             with tvm.transform.PassContext(opt_level=3):
                 lib = relay.build(mod, target="cuda", params=params)
-        lib = build_cutlass_kernels(lib, sm, tmp_dir, lib_path, use_fast_math=True)
+        lib = build_cutlass_kernels(lib, sm, tmp_dir, lib_path, use_fast_math=False)
         rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
         return rt_mod, dev, num_cutlass_partition
 
@@ -59,11 +62,11 @@ img = my_preprocess(img)
 img = np.expand_dims(img, 0)
 img = np.transpose(img, (0, 2, 3, 1))
 
-batch_size = 8
+batch_size = 1
 img = np.tile(img, (batch_size, 1, 1, 1))
 
 sm  = 80
-precompiled = True
+precompiled = False
 input_name = "input_1:0"
 
 if not precompiled:
@@ -83,17 +86,21 @@ if not precompiled:
         with open("models/effnetv2.params", "wb") as fo:
             fo.write(relay.save_param_dict(params))
 
-    with open("models/effnetv2_fp16.json", "r") as fi:
+    # model_dir = "models/"
+    model_dir = "models_pad_folded/"
+    with open(model_dir + "effnetv2_fp16.json", "r") as fi:
         mod = tvm.ir.load_json(fi.read())
-    with open("models/effnetv2.params", "rb") as fi:
+    with open(model_dir + "effnetv2.params", "rb") as fi:
         params = relay.load_param_dict(fi.read())
+    # print(mod)
 else:
     mod, params = None, None
 
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_fused_fastmath.so", precompiled=precompiled)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_residual_fusion_batch1.so", precompiled=precompiled)
+# rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_fused.so", precompiled=precompiled)
 # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_unfused.so", precompiled=precompiled)
 # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_effnetv2_cudnn.so", precompiled=precompiled, use_cudnn=True)
-# assert num_partition > 0
+assert num_partition > 0
 
 rt_mod.set_input(input_name, img)
 rt_mod.run()
@@ -101,3 +108,9 @@ tvm_res = rt_mod.get_output(0).numpy()
 print(tvm_res[0])
 print("Evaluate inference time cost...")
 print(rt_mod.benchmark(dev, number=1, repeat=100))
+
+# import onnxruntime
+# ort_sess = onnxruntime.InferenceSession("model/effnetv2.onnx")
+# onnx_input_dict = {input_name: img.astype("float32")}
+# ort_output = ort_sess.run(None, onnx_input_dict)
+# print(ort_output[0][0])
