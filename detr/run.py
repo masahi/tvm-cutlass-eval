@@ -44,9 +44,8 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         return rt_mod, dev, 1
     else:
         mod = partition_for_cutlass(mod, params)
-        print(mod)
         mod, num_cutlass_partition = tune_cutlass_kernels(
-            mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
+            mod, sm, profile_all=True, tmp_dir=tmp_dir
         )
         with tvm.transform.PassContext(opt_level=3):
             lib = relay.build(mod, target="cuda", params=params)
@@ -64,7 +63,7 @@ def convert_conv2d_layout(mod, desired_layouts):
 inp = torch.rand(8, 3, 750, 800)
 input_name = "input"
 
-precompiled = True
+precompiled = False
 
 detr = torch.hub.load("facebookresearch/detr", "detr_resnet50", pretrained=True).eval()
 model = TraceWrapper(detr.eval())
