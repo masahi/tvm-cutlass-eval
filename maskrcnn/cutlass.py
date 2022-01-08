@@ -8,7 +8,6 @@ from tvm.relay.op.contrib.cutlass import partition_for_cutlass
 from tvm.contrib.cutlass import tune_cutlass_kernels, build_cutlass_kernels_vm
 from tvm.runtime.vm import VirtualMachine
 
-
 def convert_conv2d_layout(mod, desired_layouts):
     with tvm.transform.PassContext(opt_level=3):
         seq = tvm.transform.Sequential([relay.transform.ConvertLayout(desired_layouts)])
@@ -63,9 +62,9 @@ img = get_input(in_size)
 do_compile = True
 
 if do_compile:
-    with open("models/maskrcnn_fp16.json", "r") as fi:
+    with open("models/maskrcnn_fp32.json", "r") as fi:
         nhwc_mod = tvm.ir.load_json(fi.read())
-    with open("models/maskrcnn_fp16.params", "rb") as fi:
+    with open("models/maskrcnn_fp32.params", "rb") as fi:
         params = relay.load_param_dict(fi.read())
 
     # nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
@@ -82,4 +81,5 @@ else:
 
 out = get_output_vm(rt_mod, ["input0"], [img])
 print(out[0].numpy().shape)
+np.save("cutlass_out.npy", out[0].numpy())
 # print(rt_mod.benchmark(dev, number=1, repeat=1))

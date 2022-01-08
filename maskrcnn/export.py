@@ -44,7 +44,7 @@ class TraceWrapper(torch.nn.Module):
     def forward(self, inp):
         out = self.model(inp)
         return dict_to_tuple(out[0])
-        
+
     # def forward(self, images):
     #     original_image_sizes = []
     #     for img in images:
@@ -82,7 +82,7 @@ def convert_conv2d_layout(mod, desired_layouts):
         return seq(mod)
 
 
-model_func = torchvision.models.detection.fasterrcnn_resnet50_fpn
+model_func = torchvision.models.detection.maskrcnn_resnet50_fpn
 # model_func = torchvision.models.detection.fasterrcnn_mobilenet_v3_large_fpn
 model = TraceWrapper(model_func(pretrained=True, rpn_pre_nms_top_n_test=1000))
 
@@ -113,6 +113,11 @@ mod = rewrite_scatter_to_gather(mod, 4)
 # tvm_res = vm.run()
 # print(tvm_res[0].numpy().shape)
 
+# cutlass_out = np.load("cutlass_out.npy")
+# tvm.testing.assert_allclose(
+#     pt_res[0].cpu().numpy(), cutlass_out, rtol=1e-5, atol=1e-5
+# )
+# print("ok")
 # tvm.testing.assert_allclose(
 #     pt_res[0].cpu().numpy(), tvm_res[0].numpy(), rtol=1e-5, atol=1e-5
 # )
@@ -128,11 +133,11 @@ mod = rewrite_scatter_to_gather(mod, 4)
 # print("Num valid boxes:", np.sum(pt_res[1].cpu().numpy() >= score_threshold))
 
 with tvm.transform.PassContext(opt_level=3):
-    mod = ToMixedPrecision("float16")(mod)
+    # mod = ToMixedPrecision("float16")(mod)
     mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
     os.makedirs("models", exist_ok=True)
 
-    with open("models/maskrcnn_fp16.json", "w") as fo:
+    with open("models/maskrcnn_fp32.json", "w") as fo:
         fo.write(tvm.ir.save_json(mod))
-    with open("models/maskrcnn_fp16.params", "wb") as fo:
+    with open("models/maskrcnn_fp32.params", "wb") as fo:
         fo.write(relay.save_param_dict(params))
