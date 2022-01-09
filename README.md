@@ -11,4 +11,4 @@ deeplabv3_mobilenet_v3_large | (8, 3, 512, 512) | 10.3 | 9.16 | 9.68 (?) | 17.5 
 YOLOv5l         |  (8, 3, 512, 512)| 33.6 | 25.4 | 24.2 | 34.8 | N/A | N/A
 
 todo
-- maskrcnn strange result with cutlass and cudnn
+- maskrcnn fp16 strange result with cutlass and cudnn

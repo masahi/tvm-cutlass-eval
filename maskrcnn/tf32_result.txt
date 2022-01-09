@@ -1,0 +1,5 @@
+fasterrcnn
+
+cutlass
+ mean (ms)   median (ms)    max (ms)     min (ms)     std (ms)
+  28.7268      28.6157      30.4019      28.4983       0.4092

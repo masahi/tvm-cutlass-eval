@@ -59,13 +59,13 @@ def get_input(in_size):
 
 img = get_input(in_size)
 
-do_compile = True
+do_compile = False
 use_3xtf32 = False
 
 if do_compile:
-    with open("models/maskrcnn_fp32.json", "r") as fi:
+    with open("models_fasterrcnn/maskrcnn_fp32.json", "r") as fi:
         nhwc_mod = tvm.ir.load_json(fi.read())
-    with open("models/maskrcnn_fp32.params", "rb") as fi:
+    with open("models_fasterrcnn/maskrcnn_fp32.params", "rb") as fi:
         params = relay.load_param_dict(fi.read())
 
     # nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
