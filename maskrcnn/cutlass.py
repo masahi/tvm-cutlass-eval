@@ -15,12 +15,12 @@ def convert_conv2d_layout(mod, desired_layouts):
 
 
 def profile_and_build_vm(
-    mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
+    mod, params, sm, use_3xtf32=True, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
 ):
     mod = partition_for_cutlass(mod, params)
     print(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
-        mod, sm, profile_all=False, use_multiprocessing=True, tmp_dir=tmp_dir
+        mod, sm, use_3xtf32=use_3xtf32, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         vm_exec = relay.vm.compile(mod, target="cuda", params=params)
@@ -60,6 +60,7 @@ def get_input(in_size):
 img = get_input(in_size)
 
 do_compile = True
+use_3xtf32 = False
 
 if do_compile:
     with open("models/maskrcnn_fp32.json", "r") as fi:
@@ -69,7 +70,7 @@ if do_compile:
 
     # nhwc_mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
     sm = 80
-    rt_mod, dev, num_partition = profile_and_build_vm(nhwc_mod, params, sm)
+    rt_mod, dev, num_partition = profile_and_build_vm(nhwc_mod, params, sm, use_3xtf32)
 else:
     lib_path = "tmp/compile.so"
     vmcode_path = "tmp/vmcode.ro"
@@ -81,5 +82,4 @@ else:
 
 out = get_output_vm(rt_mod, ["input0"], [img])
 print(out[0].numpy().shape)
-np.save("cutlass_out.npy", out[0].numpy())
-# print(rt_mod.benchmark(dev, number=1, repeat=1))
+print(rt_mod.benchmark(dev, number=1, repeat=100))

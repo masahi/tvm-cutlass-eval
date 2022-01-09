@@ -94,6 +94,7 @@ with torch.no_grad():
     pt_res = model(inp)
     script_module = do_trace(model, inp)
 
+np.save("pt_out.npy", pt_res[0].cpu().numpy())
 input_name = "input0"
 shape_list = [(input_name, input_shape)]
 mod, params = relay.frontend.from_pytorch(script_module, shape_list)
