@@ -4,10 +4,10 @@ from tvm import relay
 import numpy as np
 from tvm.runtime.vm import VirtualMachine
 from tvm.relay.op.contrib.cutlass import partition_for_cutlass
+from tvm.contrib import cudnn
 from tvm.contrib.cutlass import (
     tune_cutlass_kernels,
     build_cutlass_kernels,
-    build_cutlass_kernels_vm,
 )
 
 import logging
@@ -31,15 +31,6 @@ def get_ref_rt_mod(mod, params, target="cuda"):
     return rt_mod, dev
 
 
-def get_ref_vm(mod, params, target="cuda"):
-    with tvm.transform.PassContext(opt_level=3):
-        vm_exec = relay.vm.compile(mod, target=target, params=params)
-        code, lib = vm_exec.save()
-    dev = tvm.device(target, 0)
-    vm_exec = tvm.runtime.vm.Executable.load_exec(code, lib)
-    return VirtualMachine(vm_exec, dev), dev
-
-
 def get_output(rt_mod, names, inputs):
     for name, inp in zip(names, inputs):
         rt_mod.set_input(name, inp)
@@ -47,15 +38,10 @@ def get_output(rt_mod, names, inputs):
     return rt_mod.get_output(0).asnumpy()
 
 
-def get_output_vm(vm, names, inputs):
-    params = dict(zip(names, inputs))
-    return vm.invoke("main", **params).numpy()
-
-
 def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so"):
     mod = partition_for_cutlass(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
-        mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
+        mod, sm, find_first_valid=False, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         lib = relay.build(mod, target="cuda", params=params)
@@ -65,29 +51,17 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so"):
     return rt_mod, dev, num_cutlass_partition
 
 
-def profile_and_build_vm(
-    mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", vmcode_path="vmcode.ro"
-):
-    mod = partition_for_cutlass(mod)
-    mod, num_cutlass_partition = tune_cutlass_kernels(mod, sm, tmp_dir=tmp_dir)
-    with tvm.transform.PassContext(opt_level=3):
-        vm_exec = relay.vm.compile(mod, target="cuda", params=params)
-    vm_exec = build_cutlass_kernels_vm(vm_exec, sm, tmp_dir, lib_path, vmcode_path)
-    dev = tvm.device("cuda", 0)
-    return VirtualMachine(vm_exec, dev), dev, num_cutlass_partition
-
-
 def convert_conv2d_layout(mod, desired_layouts):
     with tvm.transform.PassContext(opt_level=3):
         seq = tvm.transform.Sequential([relay.transform.ConvertLayout(desired_layouts)])
         return seq(mod)
 
 
-def verify_conv2d(
+def verify_conv2d_common(
     mod_nchw,
-    mod_ref,
-    d_shape,
-    w_shape,
+    input_names,
+    inputs,
+    params,
     sm=80,
     atol=1e-5,
     rtol=1e-5,
@@ -96,35 +70,22 @@ def verify_conv2d(
     if not has_cutlass():
         return
 
-    np_data = np.random.uniform(-1, 1, d_shape).astype("float16")
-    np_weight = np.random.uniform(-1, 1, w_shape).astype("float16")
+    mod_nhwc = convert_conv2d_layout(
+        mod_nchw,
+        {
+            "nn.conv2d": ["NHWC", "OHWI"],
+            "nn.conv2d_transpose": ["NHWC", "IHWO"],
+            "nn.conv2d_backward_weight": ["NHWC", "OHWI"],
+        },
+    )
 
-    params = {"weight": np_weight}
-
-    typ = relay.transform.InferType()(mod_nchw)["main"].body.checked_type
-    use_vm = any(isinstance(s, tvm.tir.Any) for s in typ.shape)
-
-    if use_vm:
-        rt_mod, dev, num_cutlass_partition = profile_and_build_vm(
-            convert_conv2d_layout(mod_nchw, {"nn.conv2d": ["NHWC", "OHWI"]}), params, sm
-        )
-        out = get_output_vm(rt_mod, ["data"], [np_data])
-    else:
-        rt_mod, dev, num_cutlass_partition = profile_and_build(
-            convert_conv2d_layout(mod_nchw, {"nn.conv2d": ["NHWC", "OHWI"]}),
-            params,
-            sm,
-        )
-        out = get_output(rt_mod, ["data"], [np_data])
+    rt_mod, dev, num_cutlass_partition = profile_and_build(mod_nhwc, params, sm)
+    out = get_output(rt_mod, input_names, inputs)
 
     assert num_cutlass_partition > 0
 
-    rt_mod_ref, _ = get_ref_rt_mod(
-        convert_conv2d_layout(mod_ref, {"nn.conv2d": ["NHWC", "OHWI"]}),
-        params,
-        target="cuda -libs=cudnn",
-    )
-    ref_out = get_output(rt_mod_ref, ["data"], [np_data])
+    rt_mod_ref, _ = get_ref_rt_mod(mod_nhwc, params, target="cuda -libs=cudnn",)
+    ref_out = get_output(rt_mod_ref, input_names, inputs)
 
     if run_benchmark:
         print("CUTLASS:", rt_mod.benchmark(dev, number=1, repeat=600))
@@ -135,6 +96,54 @@ def verify_conv2d(
 
     # np.testing.assert_allclose(out, ref_out, atol=atol, rtol=rtol)
     print(np.max(np.abs(out - ref_out)))
+
+
+def verify_conv2d(
+    mod_nchw, d_shape, w_shape, sm=80, atol=1e-5, rtol=1e-5, run_benchmark=False,
+):
+    np_data = np.random.uniform(-1, 1, d_shape).astype("float16")
+    np_weight = np.random.uniform(-1, 1, w_shape).astype("float16")
+    params = {"weight": np_weight}
+    input_names = ["data"]
+    inputs = [np_data]
+
+    return verify_conv2d_common(
+        mod_nchw,
+        input_names,
+        inputs,
+        params,
+        sm=sm,
+        atol=atol,
+        rtol=rtol,
+        run_benchmark=run_benchmark,
+    )
+
+
+def verify_conv2d_backward_weight(
+    expr_nchw,  # can be dynamic batch
+    grad_shape,
+    data_shape,
+    sm=80,
+    atol=1e-5,
+    rtol=1e-5,
+    run_benchmark=False,
+):
+    np_grad = np.random.uniform(-1, 1, grad_shape).astype("float16")
+    np_data = np.random.uniform(-1, 1, data_shape).astype("float16")
+    params = {}
+    input_names = ["grad", "data"]
+
+    return verify_conv2d_common(
+        expr_nchw,
+        input_names,
+        [np_grad, np_data],
+        params,
+        sm,
+        atol,
+        rtol,
+        run_benchmark=run_benchmark,
+    )
+
 
 def get_workloads():
     workloads = []
@@ -200,6 +209,116 @@ def test_conv2d():
 
         verify_conv2d(
             mod_nchw,
+            d_shape,
+            w_shape,
+            sm=80,
+            atol=1e-5,
+            rtol=1e-5,
+            run_benchmark=False,
+        )
+
+
+def get_conv2d_transpose_nchw(
+    d_shape,
+    w_shape,
+    padding,
+    strides,
+    out_dtype="float32",
+    data_dtype="float16",
+    weight_dtype="float16",
+):
+    data = relay.var("data", shape=d_shape, dtype=data_dtype)
+    weight = relay.var("weight", shape=w_shape, dtype=weight_dtype)
+    out_channel = w_shape[1]
+    return relay.nn.conv2d_transpose(
+        data=data,
+        weight=weight,
+        kernel_size=w_shape[2:],
+        channels=out_channel,
+        padding=padding,
+        strides=strides,
+        out_dtype=out_dtype,
+    )
+
+
+def test_conv2d_dgrad():
+    out_dtype = "float32"
+
+    for workload in get_workloads():
+        print(workload, end=",")
+        d_shape = (workload["n"], workload["c"], workload["h"], workload["w"])
+        w_shape = (workload["k"], workload["c"], workload["r"], workload["s"])
+        mod_nchw = get_conv2d_transpose_nchw(
+            d_shape,
+            w_shape,
+            (workload["pad_h"], workload["pad_w"]),
+            (workload["stride_h"], workload["stride_w"]),
+            out_dtype,
+        )
+
+        verify_conv2d(
+            mod_nchw,
+            d_shape,
+            w_shape,
+            sm=80,
+            atol=1e-5,
+            rtol=1e-5,
+            run_benchmark=False,
+        )
+
+
+def get_conv2d_backward_weight(
+    d_shape,
+    w_shape,
+    o_shape,
+    padding,
+    strides,
+    out_dtype="float32",
+    data_dtype="float16",
+    weight_dtype="float16",
+):
+    data = relay.var("data", shape=d_shape, dtype=data_dtype)
+    grad = relay.var("grad", shape=o_shape, dtype=weight_dtype)
+    out_channel = o_shape[1]
+    return relay.nn.conv2d_backward_weight(
+        grad=grad,
+        data=data,
+        kernel_size=w_shape[2:],
+        channels=out_channel,
+        padding=padding,
+        strides=strides,
+        out_dtype=out_dtype,
+    )
+
+
+def test_conv2d_wgrad():
+    out_dtype = "float32"
+
+    for workload in get_workloads():
+        print(workload, end=",")
+        d_shape = (workload["n"], workload["c"], workload["h"], workload["w"])
+        w_shape = (workload["k"], workload["c"], workload["r"], workload["s"])
+        o_shape = cudnn.conv_output_shape(
+            0,
+            (workload["pad_h"], workload["pad_w"]),
+            (workload["stride_h"], workload["stride_w"]),
+            (1, 1),
+            d_shape,
+            w_shape,
+            "float16",
+            "float32",
+        )
+
+        mod_nchw = get_conv2d_backward_weight(
+            d_shape,
+            w_shape,
+            o_shape,
+            (workload["pad_h"], workload["pad_w"]),
+            (workload["stride_h"], workload["stride_w"]),
+            out_dtype,
+        )
+
+        verify_conv2d_backward_weight(
             mod_nchw,
             d_shape,
             w_shape,

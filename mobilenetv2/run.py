@@ -29,7 +29,7 @@ def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so", p
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "default"]})
         print(mod)
         mod, num_cutlass_partition = tune_cutlass_kernels(
-            mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
+            mod, sm, find_first_valid=False, use_multiprocessing=True, tmp_dir=tmp_dir
         )
         with tvm.transform.PassContext(opt_level=3):
             lib = relay.build(mod, target="cuda", params=params)

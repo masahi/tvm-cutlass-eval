@@ -60,7 +60,7 @@ def profile_and_build_vm(
     mod = partition_for_cutlass(mod, params)
     print(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
-        mod, sm, profile_all=True, use_multiprocessing=True, tmp_dir=tmp_dir
+        mod, sm, find_first_valid=False, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         vm_exec = relay.vm.compile(mod, target="cuda", params=params)
