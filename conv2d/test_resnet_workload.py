@@ -24,7 +24,7 @@ def has_cutlass():
 
 
 def get_ref_rt_mod(mod, params, target="cuda"):
-    with tvm.transform.PassContext(opt_level=3):
+    with tvm.transform.PassContext(opt_level=3, disabled_pass=["Legalize"]):
         lib = relay.build(mod, target=target, params=params)
     dev = tvm.device(target, 0)
     rt_mod = tvm.contrib.graph_executor.GraphModule(lib["default"](dev))
@@ -41,7 +41,7 @@ def get_output(rt_mod, names, inputs):
 def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so"):
     mod = partition_for_cutlass(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
-        mod, sm, find_first_valid=False, use_multiprocessing=True, tmp_dir=tmp_dir
+        mod, sm, find_first_valid=True, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         lib = relay.build(mod, target="cuda", params=params)
@@ -78,13 +78,18 @@ def verify_conv2d_common(
             "nn.conv2d_backward_weight": ["NHWC", "OHWI"],
         },
     )
+    # print(relay.transform.InferType()(mod_nhwc))
 
     rt_mod, dev, num_cutlass_partition = profile_and_build(mod_nhwc, params, sm)
     out = get_output(rt_mod, input_names, inputs)
 
     assert num_cutlass_partition > 0
 
-    rt_mod_ref, _ = get_ref_rt_mod(mod_nhwc, params, target="cuda -libs=cudnn",)
+    rt_mod_ref, _ = get_ref_rt_mod(
+        mod_nhwc,
+        params,
+        target="cuda -libs=cudnn",
+    )
     ref_out = get_output(rt_mod_ref, input_names, inputs)
 
     if run_benchmark:
@@ -99,7 +104,13 @@ def verify_conv2d_common(
 
 
 def verify_conv2d(
-    mod_nchw, d_shape, w_shape, sm=80, atol=1e-5, rtol=1e-5, run_benchmark=False,
+    mod_nchw,
+    d_shape,
+    w_shape,
+    sm=80,
+    atol=1e-5,
+    rtol=1e-5,
+    run_benchmark=False,
 ):
     np_data = np.random.uniform(-1, 1, d_shape).astype("float16")
     np_weight = np.random.uniform(-1, 1, w_shape).astype("float16")
@@ -230,14 +241,16 @@ def get_conv2d_transpose_nchw(
     data = relay.var("data", shape=d_shape, dtype=data_dtype)
     weight = relay.var("weight", shape=w_shape, dtype=weight_dtype)
     out_channel = w_shape[1]
-    return relay.nn.conv2d_transpose(
-        data=data,
-        weight=weight,
-        kernel_size=w_shape[2:],
-        channels=out_channel,
-        padding=padding,
-        strides=strides,
-        out_dtype=out_dtype,
+    return tvm.IRModule.from_expr(
+        relay.nn.conv2d_transpose(
+            data=data,
+            weight=weight,
+            kernel_size=w_shape[2:],
+            channels=out_channel,
+            padding=padding,
+            strides=strides,
+            out_dtype=out_dtype,
+        )
     )
 
 
@@ -247,7 +260,7 @@ def test_conv2d_dgrad():
     for workload in get_workloads():
         print(workload, end=",")
         d_shape = (workload["n"], workload["c"], workload["h"], workload["w"])
-        w_shape = (workload["k"], workload["c"], workload["r"], workload["s"])
+        w_shape = (workload["c"], workload["k"], workload["r"], workload["s"])
         mod_nchw = get_conv2d_transpose_nchw(
             d_shape,
             w_shape,
@@ -280,14 +293,16 @@ def get_conv2d_backward_weight(
     data = relay.var("data", shape=d_shape, dtype=data_dtype)
     grad = relay.var("grad", shape=o_shape, dtype=weight_dtype)
     out_channel = o_shape[1]
-    return relay.nn.conv2d_backward_weight(
-        grad=grad,
-        data=data,
-        kernel_size=w_shape[2:],
-        channels=out_channel,
-        padding=padding,
-        strides=strides,
-        out_dtype=out_dtype,
+    return tvm.IRModule.from_expr(
+        relay.nn.conv2d_backward_weight(
+            grad=grad,
+            data=data,
+            kernel_size=w_shape[2:],
+            channels=out_channel,
+            padding=padding,
+            strides=strides,
+            out_dtype=out_dtype,
+        )
     )
 
 
@@ -320,8 +335,8 @@ def test_conv2d_wgrad():
 
         verify_conv2d_backward_weight(
             mod_nchw,
+            o_shape,
             d_shape,
-            w_shape,
             sm=80,
             atol=1e-5,
             rtol=1e-5,
@@ -329,4 +344,5 @@ def test_conv2d_wgrad():
         )
 
 
-test_conv2d()
+# test_conv2d()
+test_conv2d_dgrad()
