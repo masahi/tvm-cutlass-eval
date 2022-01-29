@@ -13,7 +13,7 @@ from tvm.contrib.cutlass import (
 
 import logging
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 
 def has_cublas():
@@ -71,7 +71,10 @@ def verify_conv2d_common(
     if not has_cutlass():
         return
 
-    print(relay.transform.InferType()(mod_nhwc))
+    # typ = relay.transform.InferType()(mod_nhwc)
+    # print("oshape:", typ["main"].body.checked_type.shape)
+    # # print(typ)
+    # return
 
     rt_mod, dev, num_cutlass_partition = profile_and_build(mod_nhwc, params, sm)
     out = get_output(rt_mod, input_names, inputs)
@@ -84,8 +87,11 @@ def verify_conv2d_common(
         target="cuda -libs=cudnn",
     )
 
-    print("CUTLASS:", rt_mod.benchmark(dev, number=1, repeat=600).mean)
-    print("cuDNN:", rt_mod_ref.benchmark(dev, number=1, repeat=600).mean)
+    ref_out = get_output(rt_mod_ref, input_names, inputs)
+
+    print("Max abs diff:", np.max(np.abs(out - ref_out)))
+    print("CUTLASS:", rt_mod.benchmark(dev, number=1, repeat=600).mean * 1000)
+    print("cuDNN:", rt_mod_ref.benchmark(dev, number=1, repeat=600).mean * 1000)
 
 
 def verify_conv2d(
@@ -167,7 +173,7 @@ def get_workloads():
     return workloads
 
 
-def get_conv2d_nchw(
+def get_conv2d_nhwc(
     d_shape, w_shape, pad_h, pad_w, stride_h, stride_w, out_dtype="float16"
 ):
     data = relay.var("data", shape=d_shape, dtype="float16")
@@ -177,11 +183,13 @@ def get_conv2d_nchw(
         relay.nn.conv2d(
             data=data,
             weight=weight,
-            kernel_size=(w_shape[2], w_shape[3]),
+            kernel_size=(w_shape[1], w_shape[2]),
             channels=out_channel,
             padding=(pad_h, pad_w),
             strides=(stride_h, stride_w),
             out_dtype=out_dtype,
+            data_layout="NHWC",
+            kernel_layout="OHWI",
         )
     )
 
@@ -191,9 +199,9 @@ def test_conv2d():
 
     for workload in get_workloads():
         print(workload, end=",")
-        d_shape = (workload["n"], workload["c"], workload["h"], workload["w"])
-        w_shape = (workload["k"], workload["c"], workload["r"], workload["s"])
-        mod_nchw = get_conv2d_nchw(
+        d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])
+        w_shape = (workload["k"], workload["r"], workload["s"], workload["c"])
+        mod_nchw = get_conv2d_nhwc(
             d_shape,
             w_shape,
             workload["pad_h"],
@@ -219,6 +227,7 @@ def get_conv2d_transpose_nhwc(
     w_shape,
     padding,
     strides,
+    output_padding,
     out_dtype="float16",
     data_dtype="float16",
     weight_dtype="float16",
@@ -234,6 +243,7 @@ def get_conv2d_transpose_nhwc(
             channels=out_channel,
             padding=padding,
             strides=strides,
+            output_padding=output_padding,
             out_dtype=out_dtype,
             data_layout="NHWC",
             kernel_layout="IHWO",
@@ -245,27 +255,34 @@ def test_conv2d_dgrad():
     out_dtype = "float16"
 
     for workload in get_workloads():
-        print(workload, end=",")
-        d_shape = (workload["n"], workload["h"], workload["w"], workload["k"])
+        # print(workload, end=",")
+        print(workload)
+        pad = (workload["pad_h"], workload["pad_w"])
+        stride = (workload["stride_h"], workload["stride_w"])
+        output_padding = (1, 1) if stride[0] > 1 else (0, 0)
+
+        d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])
         w_shape = (workload["k"], workload["r"], workload["s"], workload["c"])
+        o_shape = cudnn.conv_output_shape(1, pad, stride, (1, 1), d_shape, w_shape, "float16", out_dtype)
+
         mod_nchw = get_conv2d_transpose_nhwc(
-            d_shape,
+            o_shape,
             w_shape,
-            (workload["pad_h"], workload["pad_w"]),
-            (workload["stride_h"], workload["stride_w"]),
+            pad,
+            stride,
+            output_padding,
             out_dtype,
         )
 
         verify_conv2d(
             mod_nchw,
-            d_shape,
+            o_shape,
             w_shape,
             sm=80,
             atol=1e-5,
             rtol=1e-5,
             run_benchmark=True,
         )
-        break
 
 
 def get_conv2d_backward_weight(
@@ -333,5 +350,5 @@ def test_conv2d_wgrad():
         break
 
 
-# test_conv2d()
-test_conv2d_dgrad()
+test_conv2d()
+# test_conv2d_dgrad()
