@@ -3,6 +3,7 @@ import re
 from tvm import relay
 import numpy as np
 from tvm.runtime.vm import VirtualMachine
+from tvm.topi import testing
 from tvm.relay.op.contrib.cutlass import partition_for_cutlass
 from tvm.contrib import cudnn
 from tvm.contrib.cutlass import (
@@ -41,7 +42,7 @@ def get_output(rt_mod, names, inputs):
 def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so"):
     mod = partition_for_cutlass(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
-        mod, sm, find_first_valid=True, use_multiprocessing=True, tmp_dir=tmp_dir
+        mod, sm, find_first_valid=False, use_multiprocessing=True, tmp_dir=tmp_dir
     )
     with tvm.transform.PassContext(opt_level=3):
         lib = relay.build(mod, target="cuda", params=params)
@@ -78,7 +79,7 @@ def verify_conv2d_common(
             "nn.conv2d_backward_weight": ["NHWC", "OHWI"],
         },
     )
-    # print(relay.transform.InferType()(mod_nhwc))
+    print(relay.transform.InferType()(mod_nhwc))
 
     rt_mod, dev, num_cutlass_partition = profile_and_build(mod_nhwc, params, sm)
     out = get_output(rt_mod, input_names, inputs)
@@ -100,7 +101,13 @@ def verify_conv2d_common(
         )
 
     # np.testing.assert_allclose(out, ref_out, atol=atol, rtol=rtol)
+    # py_out = testing.conv2d_backward_weight_python(inputs[0], inputs[1], (1, 1), (1, 1), (0, 0))
     print(np.max(np.abs(out - ref_out)))
+    # print("cuDNN:",  rt_mod_ref.benchmark(dev, number=1, repeat=100))
+
+    # print(np.max(np.abs(out - py_out)))
+    # print(np.max(np.abs(ref_out - py_out)))
+
 
 
 def verify_conv2d(
@@ -255,7 +262,7 @@ def get_conv2d_transpose_nchw(
 
 
 def test_conv2d_dgrad():
-    out_dtype = "float32"
+    out_dtype = "float16"
 
     for workload in get_workloads():
         print(workload, end=",")
@@ -276,8 +283,9 @@ def test_conv2d_dgrad():
             sm=80,
             atol=1e-5,
             rtol=1e-5,
-            run_benchmark=False,
+            run_benchmark=True,
         )
+        return
 
 
 def get_conv2d_backward_weight(
@@ -342,6 +350,7 @@ def test_conv2d_wgrad():
             rtol=1e-5,
             run_benchmark=False,
         )
+        break
 
 
 # test_conv2d()

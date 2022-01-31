@@ -13,7 +13,7 @@ from tvm.contrib.cutlass import (
 
 import logging
 
-# logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 
 def has_cublas():
@@ -71,10 +71,9 @@ def verify_conv2d_common(
     if not has_cutlass():
         return
 
-    # typ = relay.transform.InferType()(mod_nhwc)
+    typ = relay.transform.InferType()(mod_nhwc)
+    # print(typ)
     # print("oshape:", typ["main"].body.checked_type.shape)
-    # # print(typ)
-    # return
 
     rt_mod, dev, num_cutlass_partition = profile_and_build(mod_nhwc, params, sm)
     out = get_output(rt_mod, input_names, inputs)
@@ -89,9 +88,10 @@ def verify_conv2d_common(
 
     ref_out = get_output(rt_mod_ref, input_names, inputs)
 
-    print("Max abs diff:", np.max(np.abs(out - ref_out)))
-    print("CUTLASS:", rt_mod.benchmark(dev, number=1, repeat=600).mean * 1000)
-    print("cuDNN:", rt_mod_ref.benchmark(dev, number=1, repeat=600).mean * 1000)
+    cutlass_time = rt_mod.benchmark(dev, number=1, repeat=600).mean * 1000
+    cudnn_time = rt_mod_ref.benchmark(dev, number=1, repeat=600).mean * 1000
+    return cutlass_time, cudnn_time
+    # print("Max and mean abs diff:", np.max(np.abs(out - ref_out)), np.mean(np.abs(out - ref_out)))
 
 
 def verify_conv2d(
@@ -256,7 +256,7 @@ def test_conv2d_dgrad():
 
     for workload in get_workloads():
         # print(workload, end=",")
-        print(workload)
+
         pad = (workload["pad_h"], workload["pad_w"])
         stride = (workload["stride_h"], workload["stride_w"])
         output_padding = (1, 1) if stride[0] > 1 else (0, 0)
@@ -274,7 +274,7 @@ def test_conv2d_dgrad():
             out_dtype,
         )
 
-        verify_conv2d(
+        cutlass_time, cudnn_time = verify_conv2d(
             mod_nchw,
             o_shape,
             w_shape,
@@ -283,6 +283,8 @@ def test_conv2d_dgrad():
             rtol=1e-5,
             run_benchmark=True,
         )
+
+        print(workload, ",", cutlass_time, ",", cudnn_time)
 
 
 def get_conv2d_backward_weight(
@@ -297,29 +299,32 @@ def get_conv2d_backward_weight(
 ):
     data = relay.var("data", shape=d_shape, dtype=data_dtype)
     grad = relay.var("grad", shape=o_shape, dtype=weight_dtype)
-    out_channel = o_shape[1]
+    out_channel = w_shape[0]
     return tvm.IRModule.from_expr(
         relay.nn.conv2d_backward_weight(
             grad=grad,
             data=data,
-            kernel_size=w_shape[2:],
+            kernel_size=w_shape[1:3],
             channels=out_channel,
             padding=padding,
             strides=strides,
             out_dtype=out_dtype,
+            grad_layout="NHWC",
+            data_layout="NHWC",
+            kernel_layout="OHWI",
         )
     )
 
 
 def test_conv2d_wgrad():
-    out_dtype = "float32"
+    out_dtype = "float16"
 
     for workload in get_workloads():
-        print(workload, end=",")
-        d_shape = (workload["n"], workload["c"], workload["h"], workload["w"])
-        w_shape = (workload["k"], workload["c"], workload["r"], workload["s"])
+        print(workload)
+        d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])
+        w_shape = (workload["k"], workload["r"], workload["s"], workload["c"])
         o_shape = cudnn.conv_output_shape(
-            0,
+            1,
             (workload["pad_h"], workload["pad_w"]),
             (workload["stride_h"], workload["stride_w"]),
             (1, 1),
@@ -347,8 +352,7 @@ def test_conv2d_wgrad():
             rtol=1e-5,
             run_benchmark=False,
         )
-        break
 
 
-test_conv2d()
-# test_conv2d_dgrad()
+# test_conv2d()
+test_conv2d_dgrad()

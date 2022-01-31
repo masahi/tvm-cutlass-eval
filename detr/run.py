@@ -64,7 +64,7 @@ def convert_conv2d_layout(mod, desired_layouts):
 inp = torch.rand(8, 3, 750, 800)
 input_name = "input"
 
-precompiled = True
+precompiled = False
 
 detr = torch.hub.load("facebookresearch/detr", "detr_resnet50", pretrained=True).eval()
 model = TraceWrapper(detr.eval())
@@ -74,7 +74,7 @@ with torch.no_grad():
     torch_res = model(inp)
 
 if not precompiled:
-    if not os.path.exists("models/detr_fp16.json"):
+    if True or not os.path.exists("models/detr_fp16.json"):
         mod, params = relay.frontend.from_pytorch(trace, [(input_name, inp.shape)])
         mod = convert_conv2d_layout(mod, {"nn.conv2d": ["NHWC", "OHWI"]})
         mod = ToMixedPrecision("float16")(mod)
@@ -94,7 +94,7 @@ else:
     mod, params = None, None
 
 sm  = 80
-rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused_residual.so", precompiled=precompiled)
+rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_fused_residual_0129.so", precompiled=precompiled)
 # rt_mod, dev, num_partition = profile_and_build(mod, params, sm, tmp_dir="../maskrcnn/tmp", lib_path="compile_cudnn.so", precompiled=precompiled, use_cudnn=True)
 assert num_partition > 0
 
