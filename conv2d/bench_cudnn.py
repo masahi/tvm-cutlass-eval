@@ -90,8 +90,9 @@ def verify_conv2d_common(
 
     cutlass_time = rt_mod.benchmark(dev, number=1, repeat=600).mean * 1000
     cudnn_time = rt_mod_ref.benchmark(dev, number=1, repeat=600).mean * 1000
+    print("Max and mean abs diff:", np.max(np.abs(out - ref_out)), np.mean(np.abs(out - ref_out)))
     return cutlass_time, cudnn_time
-    # print("Max and mean abs diff:", np.max(np.abs(out - ref_out)), np.mean(np.abs(out - ref_out)))
+
 
 
 def verify_conv2d(
@@ -320,7 +321,6 @@ def test_conv2d_wgrad():
     out_dtype = "float16"
 
     for workload in get_workloads():
-        print(workload)
         d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])
         w_shape = (workload["k"], workload["r"], workload["s"], workload["c"])
         o_shape = cudnn.conv_output_shape(
@@ -343,7 +343,7 @@ def test_conv2d_wgrad():
             out_dtype,
         )
 
-        verify_conv2d_backward_weight(
+        cutlass_time, cudnn_time = verify_conv2d_backward_weight(
             mod_nchw,
             o_shape,
             d_shape,
@@ -353,6 +353,8 @@ def test_conv2d_wgrad():
             run_benchmark=False,
         )
 
+        print(workload, ",", cutlass_time, ",", cudnn_time)
+
 
 # test_conv2d()
-test_conv2d_dgrad()
+test_conv2d_wgrad()
