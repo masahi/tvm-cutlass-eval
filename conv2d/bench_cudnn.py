@@ -39,10 +39,17 @@ def get_output(rt_mod, names, inputs):
     return rt_mod.get_output(0).asnumpy()
 
 
-def profile_and_build(mod, params, sm, tmp_dir="./tmp", lib_path="compile.so"):
+def profile_and_build(
+    mod, params, sm, split_k_slices=[1], tmp_dir="./tmp", lib_path="compile.so"
+):
     mod = partition_for_cutlass(mod)
     mod, num_cutlass_partition = tune_cutlass_kernels(
-        mod, sm, find_first_valid=False, use_multiprocessing=True, tmp_dir=tmp_dir
+        mod,
+        sm,
+        split_k_slices=split_k_slices,
+        find_first_valid=False,
+        use_multiprocessing=True,
+        tmp_dir=tmp_dir,
     )
     with tvm.transform.PassContext(opt_level=3):
         lib = relay.build(mod, target="cuda", params=params)
@@ -64,6 +71,7 @@ def verify_conv2d_common(
     inputs,
     params,
     sm=80,
+    split_k_slices=[1],
     atol=1e-5,
     rtol=1e-5,
     run_benchmark=False,
@@ -75,7 +83,9 @@ def verify_conv2d_common(
     # print(typ)
     # print("oshape:", typ["main"].body.checked_type.shape)
 
-    rt_mod, dev, num_cutlass_partition = profile_and_build(mod_nhwc, params, sm)
+    rt_mod, dev, num_cutlass_partition = profile_and_build(
+        mod_nhwc, params, sm, split_k_slices
+    )
     out = get_output(rt_mod, input_names, inputs)
 
     assert num_cutlass_partition > 0
@@ -90,9 +100,11 @@ def verify_conv2d_common(
 
     cutlass_time = rt_mod.benchmark(dev, number=1, repeat=600).mean * 1000
     cudnn_time = rt_mod_ref.benchmark(dev, number=1, repeat=600).mean * 1000
+    # cutlass_time = 0
+    # cudnn_time = 0
     print("Max and mean abs diff:", np.max(np.abs(out - ref_out)), np.mean(np.abs(out - ref_out)))
     return cutlass_time, cudnn_time
-
+    # return np.max(np.abs(out - ref_out)), np.mean(np.abs(out - ref_out))
 
 
 def verify_conv2d(
@@ -109,6 +121,7 @@ def verify_conv2d(
     params = {"weight": np_weight}
     input_names = ["data"]
     inputs = [np_data]
+    split_k_slices = [1]
 
     return verify_conv2d_common(
         mod_nchw,
@@ -127,6 +140,7 @@ def verify_conv2d_backward_weight(
     grad_shape,
     data_shape,
     sm=80,
+    split_k_slices=[1],
     atol=1e-5,
     rtol=1e-5,
     run_benchmark=False,
@@ -142,6 +156,7 @@ def verify_conv2d_backward_weight(
         [np_grad, np_data],
         params,
         sm,
+        split_k_slices,
         atol,
         rtol,
         run_benchmark=run_benchmark,
@@ -264,7 +279,9 @@ def test_conv2d_dgrad():
 
         d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])
         w_shape = (workload["k"], workload["r"], workload["s"], workload["c"])
-        o_shape = cudnn.conv_output_shape(1, pad, stride, (1, 1), d_shape, w_shape, "float16", out_dtype)
+        o_shape = cudnn.conv_output_shape(
+            1, pad, stride, (1, 1), d_shape, w_shape, "float16", out_dtype
+        )
 
         mod_nchw = get_conv2d_transpose_nhwc(
             o_shape,
@@ -319,6 +336,7 @@ def get_conv2d_backward_weight(
 
 def test_conv2d_wgrad():
     out_dtype = "float16"
+    split_k_slices = [4, 8, 16, 32, 64]
 
     for workload in get_workloads():
         d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])
@@ -348,12 +366,14 @@ def test_conv2d_wgrad():
             o_shape,
             d_shape,
             sm=80,
+            split_k_slices=split_k_slices,
             atol=1e-5,
             rtol=1e-5,
             run_benchmark=False,
         )
 
         print(workload, ",", cutlass_time, ",", cudnn_time)
+        return
 
 
 # test_conv2d()
