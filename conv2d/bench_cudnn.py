@@ -336,7 +336,7 @@ def get_conv2d_backward_weight(
 
 def test_conv2d_wgrad():
     out_dtype = "float16"
-    split_k_slices = [1, 4, 8, 16, 32, 48, 64]
+    split_k_slices = [1, 4, 8, 16, 32, 64]
 
     for workload in get_workloads():
         d_shape = (workload["n"], workload["h"], workload["w"], workload["c"])

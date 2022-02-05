@@ -1,57 +1,57 @@
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_64x64_32x10_nhwc_align8_splitk8 , 1.22276
-Max and mean abs diff: 0.5 0.01999
-{'n': 256, 'h': 56, 'w': 56, 'c': 64, 'k': 256, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.2669397216666667 , 1.3038224083333334
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk32 , 0.494502
-Max and mean abs diff: 0.5 0.00279
-{'n': 256, 'h': 56, 'w': 56, 'c': 64, 'k': 64, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.5225884183333332 , 0.6738095966666666
-cutlass_tensorop_f16_s1688wgrad_optimized_f16_64x64_32x2_nhwc_align8_splitk64 , 1.66762
-Max and mean abs diff: 1.0 0.02765
-{'n': 256, 'h': 56, 'w': 56, 'c': 64, 'k': 64, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 2.0789539849999996 , 2.037178718333333
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_64x64_64x5_nhwc_align8_splitk8 , 1.22474
-Max and mean abs diff: 1.0 0.02121
-{'n': 256, 'h': 56, 'w': 56, 'c': 256, 'k': 64, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.236037775 , 1.3057883216666666
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk16 , 1.36318
-Max and mean abs diff: 0.25 0.001442
-{'n': 256, 'h': 56, 'w': 56, 'c': 256, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 1.6966985516666666 , 1.5182157266666665
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk32 , 0.405094
-Max and mean abs diff: 0.25 0.0007195
-{'n': 256, 'h': 56, 'w': 56, 'c': 256, 'k': 128, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 0.5741517033333333 , 0.4782380633333334
-cutlass_tensorop_f16_s1688wgrad_optimized_f16_64x64_32x2_nhwc_align8_splitk16 , 1.64817
-Max and mean abs diff: 0.5 0.001716
-{'n': 256, 'h': 28, 'w': 28, 'c': 128, 'k': 128, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 2.060305103333333 , 1.7472121633333333
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk32 , 0.703644
-Max and mean abs diff: 0.25 0.002651
-{'n': 256, 'h': 28, 'w': 28, 'c': 128, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.0120297199999997 , 0.7756536666666666
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x128_32x3_nhwc_align8_splitk32 , 0.728303
-Max and mean abs diff: 0.25 0.002565
-{'n': 256, 'h': 28, 'w': 28, 'c': 512, 'k': 128, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.0372836500000002 , 0.7723824066666667
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk4 , 1.36234
-Max and mean abs diff: 0.25 0.0002658
-{'n': 256, 'h': 28, 'w': 28, 'c': 512, 'k': 1024, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 1.65950378 , 1.5030433833333332
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk16 , 0.354407
-Max and mean abs diff: 0.25 0.0001969
-{'n': 256, 'h': 28, 'w': 28, 'c': 512, 'k': 256, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 0.6516186716666666 , 0.4463253683333333
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8 , 1.79194
-Max and mean abs diff: 0.25 0.00386
-{'n': 256, 'h': 14, 'w': 14, 'c': 256, 'k': 256, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 1.8234499083333333 , 1.6872909566666663
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8 , 0.966605
-Max and mean abs diff: 0.25 0.003767
-{'n': 256, 'h': 14, 'w': 14, 'c': 256, 'k': 1024, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.0042779783333333 , 0.7618378683333333
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk8 , 0.687452
-Max and mean abs diff: 0.125 0.0003574
-{'n': 256, 'h': 14, 'w': 14, 'c': 1024, 'k': 256, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.00091711 , 0.7686999116666667
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8 , 1.34918
-Max and mean abs diff: 0.125 0.0078
-{'n': 256, 'h': 14, 'w': 14, 'c': 1024, 'k': 2048, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 1.3838215933333333 , 1.3809198183333333
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk4 , 0.353147
-Max and mean abs diff: 0.125 4.137e-05
-{'n': 256, 'h': 14, 'w': 14, 'c': 1024, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 0.6552133933333333 , 0.4375342433333333
-cutlass_tensorop_f16_s1688wgrad_optimized_f16_128x64_32x2_nhwc_align8 , 1.65891
-Max and mean abs diff: 0.125 0.0004127
-{'n': 256, 'h': 7, 'w': 7, 'c': 512, 'k': 512, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 1.729752343333333 , 1.6455109216666668
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8 , 0.729027
-Max and mean abs diff: 0.125 0.0004597
-{'n': 256, 'h': 7, 'w': 7, 'c': 512, 'k': 2048, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.7738721283333334 , 0.8049071716666667
-cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8 , 0.730798
-Max and mean abs diff: 0.125 0.0004644
-{'n': 256, 'h': 7, 'w': 7, 'c': 2048, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.7822829133333332 , 0.80382177
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk16 , 1.22796
+Max and mean abs diff: 0.5 0.002096
+{'n': 256, 'h': 56, 'w': 56, 'c': 64, 'k': 256, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.3343834083333332 , 1.309012655
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk32 , 0.49793
+Max and mean abs diff: 0.5 0.003473
+{'n': 256, 'h': 56, 'w': 56, 'c': 64, 'k': 64, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.5289414100000001 , 0.6740403033333333
+cutlass_tensorop_f16_s1688wgrad_optimized_f16_64x64_32x2_nhwc_align8_splitk64 , 1.6766
+Max and mean abs diff: 1.0 0.02838
+{'n': 256, 'h': 56, 'w': 56, 'c': 64, 'k': 64, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 2.086321305 , 2.0442812816666667
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_64x64_64x5_nhwc_align8_splitk8 , 1.22725
+Max and mean abs diff: 0.5 0.02
+{'n': 256, 'h': 56, 'w': 56, 'c': 256, 'k': 64, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.2359551283333332 , 1.3038124816666667
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk16 , 1.39743
+Max and mean abs diff: 0.5 0.001463
+{'n': 256, 'h': 56, 'w': 56, 'c': 256, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 1.6757187916666663 , 1.5253237400000002
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk32 , 0.41346
+Max and mean abs diff: 0.25 0.0007997
+{'n': 256, 'h': 56, 'w': 56, 'c': 256, 'k': 128, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 0.5947641316666666 , 0.47687302666666664
+cutlass_tensorop_f16_s1688wgrad_optimized_f16_64x64_32x2_nhwc_align8_splitk16 , 1.6577
+Max and mean abs diff: 0.5 0.001785
+{'n': 256, 'h': 28, 'w': 28, 'c': 128, 'k': 128, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 2.0544544566666665 , 1.7551480350000002
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk32 , 0.717814
+Max and mean abs diff: 0.5 0.002731
+{'n': 256, 'h': 28, 'w': 28, 'c': 128, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.0007360666666667 , 0.7753916366666667
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk16 , 0.736502
+Max and mean abs diff: 0.25 0.001426
+{'n': 256, 'h': 28, 'w': 28, 'c': 512, 'k': 128, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.9336500833333333 , 0.775960935
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk4 , 1.37405
+Max and mean abs diff: 0.25 0.0002623
+{'n': 256, 'h': 28, 'w': 28, 'c': 512, 'k': 1024, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 1.6642367483333333 , 1.5149292883333332
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8_splitk8 , 0.375532
+Max and mean abs diff: 0.125 0.0001293
+{'n': 256, 'h': 28, 'w': 28, 'c': 512, 'k': 256, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 0.584617455 , 0.4444405683333334
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8 , 1.79782
+Max and mean abs diff: 0.25 0.00383
+{'n': 256, 'h': 14, 'w': 14, 'c': 256, 'k': 256, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 1.8294653466666666 , 1.6753547283333332
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8 , 0.974645
+Max and mean abs diff: 0.25 0.003664
+{'n': 256, 'h': 14, 'w': 14, 'c': 256, 'k': 1024, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 1.002363873333333 , 0.7591764099999999
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk8 , 0.718008
+Max and mean abs diff: 0.25 0.0003874
+{'n': 256, 'h': 14, 'w': 14, 'c': 1024, 'k': 256, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.9979739649999999 , 0.7706835266666666
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8 , 1.35934
+Max and mean abs diff: 0.125 0.007782
+{'n': 256, 'h': 14, 'w': 14, 'c': 1024, 'k': 2048, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 1.39225185 , 1.3717954350000001
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_256x64_32x4_nhwc_align8_splitk4 , 0.379095
+Max and mean abs diff: 0.0625 4.05e-05
+{'n': 256, 'h': 14, 'w': 14, 'c': 1024, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 2, 'stride_w': 2} , 0.6567887849999999 , 0.441287355
+cutlass_tensorop_f16_s1688wgrad_optimized_f16_128x64_32x2_nhwc_align8 , 1.67184
+Max and mean abs diff: 0.125 0.00041
+{'n': 256, 'h': 7, 'w': 7, 'c': 512, 'k': 512, 'r': 3, 's': 3, 'pad_h': 1, 'pad_w': 1, 'stride_h': 1, 'stride_w': 1} , 1.7277225766666668 , 1.6647484733333335
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8 , 0.734065
+Max and mean abs diff: 0.125 0.0004678
+{'n': 256, 'h': 7, 'w': 7, 'c': 512, 'k': 2048, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.7969172733333334 , 0.8024134299999999
+cutlass_tensorop_f16_s16816wgrad_optimized_f16_128x64_32x6_nhwc_align8 , 0.734136
+Max and mean abs diff: 0.125 0.0004666
+{'n': 256, 'h': 7, 'w': 7, 'c': 2048, 'k': 512, 'r': 1, 's': 1, 'pad_h': 0, 'pad_w': 0, 'stride_h': 1, 'stride_w': 1} , 0.7729632116666667 , 0.8005631666666666
